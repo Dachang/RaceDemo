@@ -31,6 +31,10 @@ public class viewController : MonoBehaviour {
 	private int BACKBTN_MARGIN_UP;
 	private int BACKBTN_WIDTH;
 	private int BACKBTN_HEIGHT;
+	//UI texture bitmaps
+	/*private Texture2D compTextureOne;*/
+	//whether the car should rotate or not
+	private bool shouldCarRotate = true;
 	
 	void Start () 
 	{
@@ -38,13 +42,14 @@ public class viewController : MonoBehaviour {
 		screenHeight = Screen.height;
 		
 		currentCar = GameObject.Find("currentCar");
+		//compTextureOne = (Texture2D)(Resources.Load("texture1",typeof(Texture2D)));
 		loadChangePart();
 		setUIPosition();
 	}
 	
 	void Update () 
 	{
-		currentCar.transform.Rotate(new Vector3(0.0f, 0.5f, 0.0f));
+		rotateCar();
 	}
 	
 	void OnGUI()
@@ -84,6 +89,8 @@ public class viewController : MonoBehaviour {
 		{
 			changeMaterial(COLOR_WHITE);
 		}
+		//draw component Textures
+		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
 	}
 	
 	void loadChangePart()
@@ -156,7 +163,29 @@ public class viewController : MonoBehaviour {
 			break;
 		default:
 			break;
+		}	
+	}
+	
+	void rotateCar()
+	{
+		if(shouldCarRotate)
+		{
+			currentCar.transform.Rotate(new Vector3(0.0f, 0.5f, 0.0f));
 		}
-		
+		else
+		{
+			//drag components
+		}
+	}
+	
+	//public interfaces
+	public void pauseRotate()
+	{
+		shouldCarRotate = false;
+	}
+	
+	public void resumeRotate()
+	{
+		shouldCarRotate = true;
 	}
 }
