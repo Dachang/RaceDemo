@@ -35,6 +35,8 @@ public class viewController : MonoBehaviour {
 	/*private Texture2D compTextureOne;*/
 	//whether the car should rotate or not
 	private bool shouldCarRotate = true;
+	//transparent part
+	private GameObject[] otherParts = new GameObject[30];
 	
 	void Start () 
 	{
@@ -42,7 +44,15 @@ public class viewController : MonoBehaviour {
 		screenHeight = Screen.height;
 		
 		currentCar = GameObject.Find("currentCar");
-		//compTextureOne = (Texture2D)(Resources.Load("texture1",typeof(Texture2D)));
+		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
+		foreach(GameObject otherPart in otherParts)
+		{
+			otherPart.transform.renderer.material.SetColor("_Color", 
+					new Color(otherPart.transform.renderer.material.color.r,otherPart.transform.renderer.material.color.g,
+					otherPart.transform.renderer.material.color.b, 0.1f));
+			otherPart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
+		}
+		
 		loadChangePart();
 		setUIPosition();
 	}
