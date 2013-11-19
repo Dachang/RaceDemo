@@ -10,35 +10,42 @@ public class compBehaviour : MonoBehaviour {
 	//component types
 	private int COMP_ID;
 	private int TYPE_WHEEL = 0;
+	private int TYPE_BODY = 1;
 	
 	//original Position
 	private Vector3 originalPosition = new Vector3();
+	//original material
+	private Color originalColor;
 	//change part
 	private GameObject[] changeParts = new GameObject[10];
+	private GameObject[] changePartsBody = new GameObject[10];
 	//component drag distance
 	private float dragDistance = 3.5f;
+	//component has been set up?
+	private bool isCompSetUp = false;
 	
 	void Start()
 	{
 		changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+		changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
 		//Init with opacity
-		foreach(GameObject changePart in changeParts)
-		{
-			changePart.transform.renderer.material.SetColor("_Color", 
-						new Color(changePart.transform.renderer.material.color.r,changePart.transform.renderer.material.color.g,
-						changePart.transform.renderer.material.color.b, 0.1f));
-			changePart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
-		}
+		setTransparent();
+		initWithTransparent();
 		vc = (viewController)Camera.main.GetComponent(typeof(viewController));
 		originalPosition = this.transform.position;
+		originalColor = new Color(transform.renderer.material.color.r,transform.renderer.material.color.g,
+					transform.renderer.material.color.b, 1.0f);
 	}
 	
 	void Update()
 	{
 		if(this.tag == "wheel")
 		{
-			Debug.Log("this is wheel");
 			COMP_ID = TYPE_WHEEL;
+		}
+		else if(this.tag == "body")
+		{
+			COMP_ID = TYPE_BODY;
 		}
 	}
 	
@@ -47,6 +54,7 @@ public class compBehaviour : MonoBehaviour {
 	{
 		Debug.Log("dragging");
 		vc.pauseRotate();
+		judgePart(COMP_ID);
 		transform.position += Vector3.right * Time.deltaTime*Input.GetAxis("Mouse X") * dragSpeedX;
 		transform.position += Vector3.up * Time.deltaTime*Input.GetAxis("Mouse Y") * dragSpeedY;
 		//Debug.Log(transform.position);
@@ -54,46 +62,46 @@ public class compBehaviour : MonoBehaviour {
 		{
 			//hide component
 			renderer.enabled = false;
-			judgePart(COMP_ID);
+			setSolid();
+			isCompSetUp = true;
 		}
-	}
-	
-	void OnMouseDown()
-	{
-		//Debug.Log("on Clicking");
+		else
+		{
+			//resume component
+			renderer.enabled = true;
+			setTransparent();
+			isCompSetUp = false;
+		}
 	}
 	
 	void OnMouseUp()
 	{
 		Debug.Log("Mouse up");
 		vc.resumeRotate();
-		switch(COMP_ID)
-		{
-		case 0:
-			break;
-		default:
-			break;
-		}
+		if(isCompSetUp)
+			renderer.material.color = Color.green;
+		else
+			renderer.material.color = originalColor;
 		//resume component position
 		this.transform.position = originalPosition;
 		renderer.enabled = true;
 	}
-	
-	void OnMouseEnter()
-	{
-		//Debug.Log("Mouse Entering");
-	}
-	
+	//mouse leave
 	void OnMouseExit()
 	{
-		renderer.material.color = Color.white;
-		Debug.Log("Mouse leave");
+		if(!isCompSetUp)
+		{
+			renderer.material.color = originalColor;
+			Debug.Log("reset color");
+		}
 	}
-	
+	//mouse stay
 	void OnMouseOver()
 	{
-		renderer.material.color = Color.red;
-		Debug.Log("Mouse Stay");
+		if(!isCompSetUp)
+		{
+			renderer.material.color = Color.red;			
+		}
 	}
 	
 	//judge which part of the car response the component
@@ -102,16 +110,46 @@ public class compBehaviour : MonoBehaviour {
 		switch(comp_id)
 		{
 		case 0:
-			foreach(GameObject changePart in changeParts)
-			{
-				changePart.transform.renderer.material.SetColor("_Color", 
-					new Color(changePart.transform.renderer.material.color.r,changePart.transform.renderer.material.color.g,
-					changePart.transform.renderer.material.color.b, 1.0f));
-				changePart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
-			}
+			changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+			break;
+		case 1:
+			changeParts = GameObject.FindGameObjectsWithTag("changeBody");;
 			break;
 		default:
 			break;
 		}
+	}
+	
+	void setSolid()
+	{
+		foreach(GameObject changePart in changeParts)
+		{
+			changePart.transform.renderer.material.SetColor("_Color", 
+					new Color(changePart.transform.renderer.material.color.r,changePart.transform.renderer.material.color.g,
+					changePart.transform.renderer.material.color.b, 1.0f));
+			changePart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
+		}
+	}
+	
+	void setTransparent()
+	{
+		foreach(GameObject changePart in changeParts)
+		{
+			changePart.transform.renderer.material.SetColor("_Color", 
+					new Color(changePart.transform.renderer.material.color.r,changePart.transform.renderer.material.color.g,
+					changePart.transform.renderer.material.color.b, 0.1f));
+			changePart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
+		}
+	}
+	
+	void initWithTransparent()
+	{
+		foreach(GameObject changePartBody in changePartsBody)
+		{
+			changePartBody.transform.renderer.material.SetColor("_Color", 
+					new Color(changePartBody.transform.renderer.material.color.r,changePartBody.transform.renderer.material.color.g,
+					changePartBody.transform.renderer.material.color.b, 0.1f));
+			changePartBody.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
+		}		
 	}
 }
