@@ -2,28 +2,31 @@ using UnityEngine;
 using System.Collections;
 
 public class carBehaviour : MonoBehaviour {
-
+	
+	private int dragSpeedX = 100;
+	private viewController vc;
 	// Use this for initialization
 	void Start () 
 	{
+		vc = (viewController)Camera.main.GetComponent(typeof(viewController));
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit = new RaycastHit();
-			if(collider.Raycast(ray,out hit,200.0f))
-			{
-				Debug.Log("Paint");
-				renderer.material.SetColor("_Color",Color.blue);
-			}
-			else
-			{
-				Debug.Log("Click miss");
-			}
-		}
+		
+	}
+	
+	void OnMouseDrag()
+	{
+		Debug.Log("Is dragging car");
+		vc.pauseRotate();
+		this.transform.Rotate(Vector3.up*Time.deltaTime*Input.GetAxis("Mouse X")*dragSpeedX);
+		//transform.position += Vector3.up * Time.deltaTime*Input.GetAxis("Mouse Y") * dragSpeedY;
+	}
+	
+	void OnMouseUp()
+	{
+		vc.resumeRotate();
 	}
 }

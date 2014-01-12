@@ -37,24 +37,38 @@ public class viewController : MonoBehaviour {
 	private bool shouldCarRotate = true;
 	//transparent part
 	private GameObject[] otherParts = new GameObject[30];
+	//change part
+	private GameObject[] changeParts = new GameObject[10];
+	private GameObject[] changePartsBody = new GameObject[10];
+	private GameObject[] changePartsFrontWheel = new GameObject[10];
+	private GameObject[] changePartsBottom = new GameObject[10];
+	//materials
+	private Material[] wheelMaterials = new Material[10];
+	private Material[] frontWheelMaterials = new Material[10];
+	private Material[] bodyMaterials = new Material[10];
+	private Material[] bottomMaterials = new Material[10];
+	//components&scripts
+	private GameObject wheel;
+	private GameObject body;
+	private GameObject frontWheel;
+	private GameObject bottom;
+	private compBehaviour[] scriptList = new compBehaviour[10];
+	private compBehaviour cbWheel;
+	private compBehaviour cbBody;
+	private compBehaviour cbFrontWheel;
+	private compBehaviour cbBottom;
 	
 	void Start () 
 	{
 		screenWidth = Screen.width;
 		screenHeight = Screen.height;
 		
-		currentCar = GameObject.Find("currentCar");
+		currentCar = GameObject.Find("che001");
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
-		foreach(GameObject otherPart in otherParts)
-		{
-			otherPart.transform.renderer.material.SetColor("_Color", 
-					new Color(otherPart.transform.renderer.material.color.r,otherPart.transform.renderer.material.color.g,
-					otherPart.transform.renderer.material.color.b, 0.1f));
-			otherPart.renderer.material.shader = Shader.Find( "Transparent/Diffuse" );
-		}
-		
+		setTransparent();
 		loadChangePart();
 		setUIPosition();
+		findComponents();
 	}
 	
 	void Update () 
@@ -67,12 +81,23 @@ public class viewController : MonoBehaviour {
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-
+			cbWheel.isCompSetUp = false;
+			cbBody.isCompSetUp = false;
+			cbFrontWheel.isCompSetUp = false;
+			cbBottom.isCompSetUp = false;
+			cbWheel.resumeColor();
+			cbBody.resumeColor();
+			cbFrontWheel.resumeColor();
+			cbBottom.resumeColor();
+			setTransparent();
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
-
+			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
+			{
+				//load next scene
+			}
 		}
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
@@ -105,12 +130,12 @@ public class viewController : MonoBehaviour {
 	
 	void loadChangePart()
 	{
-		changeMaterials[0] = GameObject.Find("Audi_Q7-PART1").renderer.material;
-		changeMaterials[1] = GameObject.Find("Audi_Q7-PART2").renderer.material;
-		changeMaterials[2] = GameObject.Find("Audi_Q7-PART3").renderer.material;
-		changeMaterials[3] = GameObject.Find("Audi_Q7-PART4").renderer.material;
-		changeMaterials[4] = GameObject.Find("Audi_Q7-PART5").renderer.material;
-		changeMaterials[5] = GameObject.Find("Audi_Q7-PART6").renderer.material;
+		changeMaterials[0] = GameObject.FindGameObjectWithTag("changeWheel").renderer.material;
+		changeMaterials[1] = GameObject.FindGameObjectWithTag("changeBody").renderer.material;
+		changeMaterials[2] = GameObject.FindGameObjectWithTag("changeFrontWheel").renderer.material;
+		changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
+		//changeMaterials[4] = GameObject.Find("che001_zhuTi").renderer.material;
+		//changeMaterials[5] = GameObject.Find("che001_part06").renderer.material;
 	}
 	
 	void setUIPosition()
@@ -135,40 +160,46 @@ public class viewController : MonoBehaviour {
 		switch(materialID)
 		{
 		case 0:
-			GameObject.Find("Audi_Q7-PART1").renderer.material.SetColor("_Color",Color.red);
-			for(int i = 0; i<=5; i++)
+			//GameObject.Find("che001_part01").renderer.material.SetColor("_Color",Color.red);
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.red);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.red);
 			}
 			break;
 		case 1:
-			for(int i = 0; i<=5; i++)
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.black);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.black);
 			}
 			break;
 		case 2:
-			for(int i = 0; i<=5; i++)
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.yellow);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.yellow);
 			}
 			break;
 		case 3:
-			for(int i = 0; i<=5; i++)
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.grey);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.grey);
 			}
 			break;
 		case 4:
-			for(int i = 0; i<=5; i++)
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.magenta);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.magenta);
 			}
 			break;
 		case 5:
-			for(int i = 0; i<=5; i++)
+			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.white);
+				if(scriptList[i].isCompSetUp)
+					changeMaterials[i].SetColor("_Color",Color.white);
 			}
 			break;
 		default:
@@ -185,6 +216,76 @@ public class viewController : MonoBehaviour {
 		else
 		{
 			//drag components
+		}
+	}
+	
+	void findComponents()
+	{
+		//components
+		wheel = GameObject.FindGameObjectWithTag("wheel");
+		body = GameObject.FindGameObjectWithTag("body");
+		frontWheel = GameObject.FindGameObjectWithTag("frontWheel");
+		bottom = GameObject.FindGameObjectWithTag("bottom");
+		//scripts
+		cbWheel = (compBehaviour)wheel.GetComponent(typeof(compBehaviour));
+		cbBody = (compBehaviour)body.GetComponent(typeof(compBehaviour));
+		cbFrontWheel = (compBehaviour)frontWheel.GetComponent(typeof(compBehaviour));
+		cbBottom = (compBehaviour)bottom.GetComponent(typeof(compBehaviour));
+		scriptList[0] = cbWheel;
+		scriptList[1] = cbBody;
+		scriptList[2] = cbFrontWheel;
+		scriptList[3] = cbBottom;
+	}
+
+	void setTransparent()
+	{
+		changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+		changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
+		changePartsFrontWheel = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+		changePartsBottom = GameObject.FindGameObjectsWithTag("changeBottom");
+		foreach(GameObject changePart in changeParts)
+		{
+			wheelMaterials = changePart.renderer.materials;
+			foreach(Material wheelMaterial in wheelMaterials)
+			{
+				wheelMaterial.SetColor("_Color", 
+					new Color(wheelMaterial.color.r,wheelMaterial.color.g,
+					wheelMaterial.color.b, 0.1f));
+				wheelMaterial.shader = Shader.Find("Transparent/Diffuse");
+			}
+		}
+		foreach(GameObject changePartBody in changePartsBody)
+		{
+			bodyMaterials = changePartBody.renderer.materials;
+			foreach(Material bodyMaterial in bodyMaterials)
+			{
+				bodyMaterial.SetColor("_Color", 
+					new Color(bodyMaterial.color.r,bodyMaterial.color.g,
+					bodyMaterial.color.b, 0.1f));
+				bodyMaterial.shader = Shader.Find("Transparent/Diffuse");
+			}
+		}
+		foreach(GameObject changePartFrontWheel in changePartsFrontWheel)
+		{
+			frontWheelMaterials = changePartFrontWheel.renderer.materials;
+			foreach(Material frontWheelMaterial in frontWheelMaterials)
+			{
+				frontWheelMaterial.SetColor("_Color", 
+					new Color(frontWheelMaterial.color.r,frontWheelMaterial.color.g,
+					frontWheelMaterial.color.b, 0.1f));
+				frontWheelMaterial.shader = Shader.Find("Transparent/Diffuse");
+			}
+		}
+		foreach(GameObject changePartBottom in changePartsBottom)
+		{
+			bottomMaterials = changePartBottom.renderer.materials;
+			foreach(Material bottomMaterial in bottomMaterials)
+			{
+				bottomMaterial.SetColor("_Color", 
+					new Color(bottomMaterial.color.r,bottomMaterial.color.g,
+					bottomMaterial.color.b, 0.1f));
+				bottomMaterial.shader = Shader.Find("Transparent/Diffuse");
+			}
 		}
 	}
 	
