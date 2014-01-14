@@ -58,6 +58,7 @@ public class viewController : MonoBehaviour {
 	private compBehaviour cbFrontWheel;
 	private compBehaviour cbBottom;
 	
+
 	void Start () 
 	{
 		screenWidth = Screen.width;
@@ -65,6 +66,7 @@ public class viewController : MonoBehaviour {
 		
 		currentCar = GameObject.Find("che001");
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
+		
 		setTransparent();
 		loadChangePart();
 		setUIPosition();
@@ -97,6 +99,7 @@ public class viewController : MonoBehaviour {
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
 			{
 				//load next scene
+				Application.LoadLevel("RoadSelectScene");
 			}
 		}
 		//Material buttons
@@ -216,6 +219,17 @@ public class viewController : MonoBehaviour {
 		else
 		{
 			//drag components
+		}
+	}
+	
+	void dataPersist()
+	{
+		for(int i=0; i<10; i++)
+		{
+			DontDestroyOnLoad(changeParts[i]);
+			DontDestroyOnLoad(changePartsBody[i]);
+			DontDestroyOnLoad(changePartsFrontWheel[i]);
+			DontDestroyOnLoad(changePartsBottom[i]);
 		}
 	}
 	
