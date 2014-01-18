@@ -24,7 +24,7 @@ public class compBehaviour : MonoBehaviour {
 	private GameObject[] changePartsBody = new GameObject[10];
 	private GameObject[] changePartsFrontWheel = new GameObject[10];
 	//component drag distance
-	private float dragDistance = 3.5f;
+	private float dragDistance = 4.5f;
 	//component has been set up?
 	public bool isCompSetUp = false;
 	//change part materials
@@ -135,27 +135,27 @@ public class compBehaviour : MonoBehaviour {
 		switch(comp_id)
 		{
 		case 0:
-			if(currentCarID == 1)
+			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
-			else if(currentCarID == 2)
+			else if(currentCarID == 1)
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeWheel");
 			break;
 		case 1:
-			if(currentCarID == 1)
+			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeBody");
-			else if(currentCarID == 2)
+			else if(currentCarID == 1)
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeBody");
 			break;
 		case 2:
-			if(currentCarID == 1)
+			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
-			else if(currentCarID == 2)
+			else if(currentCarID == 1)
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeFrontWheel");
 			break;
 		case 3:
-			if(currentCarID == 1)
+			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
-			else if(currentCarID == 2)
+			else if(currentCarID == 1)
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeBottom");
 			break;
 		default:
