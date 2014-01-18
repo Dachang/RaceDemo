@@ -158,7 +158,7 @@ public class compBehaviour : MonoBehaviour {
 				changePartMaterial.SetColor("_Color", 
 					new Color(changePartMaterial.color.r,changePartMaterial.color.g,
 					changePartMaterial.color.b, 1.0f));
-				changePartMaterial.shader = Shader.Find("Transparent/Diffuse");
+				changePartMaterial.shader = Shader.Find("Diffuse");
 			}
 		}
 	}
