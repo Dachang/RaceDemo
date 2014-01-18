@@ -15,7 +15,7 @@ public class compBehaviour : MonoBehaviour {
 	private int TYPE_BOTTOM = 3;
 	
 	//original Position
-	private Vector3 originalPosition = new Vector3();
+	public Vector3 originalPosition = new Vector3();
 	//original material
 	private Material[] originalMaterials = new Material[10];
 	private Color originalColor;
@@ -29,6 +29,8 @@ public class compBehaviour : MonoBehaviour {
 	public bool isCompSetUp = false;
 	//change part materials
 	private Material[] changePartMaterials = new Material[10];
+	//current car ID
+	private int currentCarID;
 	
 	void Start()
 	{
@@ -46,22 +48,23 @@ public class compBehaviour : MonoBehaviour {
 	
 	void Update()
 	{
-		if(this.tag == "wheel")
+		if(this.tag == "wheel" || this.tag == "car2wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
-		else if(this.tag == "body")
+		else if(this.tag == "body" || this.tag == "car2body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
-		else if(this.tag == "frontWheel")
+		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
-		else if(this.tag == "bottom")
+		else if(this.tag == "bottom" || this.tag == "car2bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
+		currentCarID = vc.getCurrentCarID();
 	}
 	
 	//Mouse Behaviour
@@ -132,16 +135,28 @@ public class compBehaviour : MonoBehaviour {
 		switch(comp_id)
 		{
 		case 0:
-			changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+			if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("car2changeWheel");
 			break;
 		case 1:
-			changeParts = GameObject.FindGameObjectsWithTag("changeBody");;
+			if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("changeBody");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("car2changeBody");
 			break;
 		case 2:
-			changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+			if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("car2changeFrontWheel");
 			break;
 		case 3:
-			changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
+			if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("car2changeBottom");
 			break;
 		default:
 			break;

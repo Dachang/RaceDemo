@@ -42,7 +42,7 @@ public class viewController : MonoBehaviour {
 	private bool shouldCarRotate = true;
 	//transparent part
 	private GameObject[] otherParts = new GameObject[30];
-	//change part
+	//current change part
 	private GameObject[] changeParts = new GameObject[10];
 	private GameObject[] changePartsBody = new GameObject[10];
 	private GameObject[] changePartsFrontWheel = new GameObject[10];
@@ -52,7 +52,7 @@ public class viewController : MonoBehaviour {
 	private Material[] frontWheelMaterials = new Material[10];
 	private Material[] bodyMaterials = new Material[10];
 	private Material[] bottomMaterials = new Material[10];
-	//components&scripts
+	//current components&scripts
 	private GameObject wheel;
 	private GameObject body;
 	private GameObject frontWheel;
@@ -64,11 +64,20 @@ public class viewController : MonoBehaviour {
 	private compBehaviour cbBottom;
 	//parent Transform
 	private Transform pTransform;
+	private Transform pWheelTransform;
+	private Transform pBodyTransform;
+	private Transform pFrontWheelTransform;
+	private Transform pBottomTransform;
 	//current car ID
 	private int currentCarID;
 	//car list
 	private GameObject[] carList = new GameObject[10];
-
+	//component list
+	private GameObject[] wheelList = new GameObject[10];
+	private GameObject[] bodyList = new GameObject[10];
+	private GameObject[] frontWheelList = new GameObject[10];
+	private GameObject[] bottomList = new GameObject[10];
+	
 	void Start () 
 	{
 		screenWidth = Screen.width;
@@ -80,9 +89,9 @@ public class viewController : MonoBehaviour {
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
 		
 		initCarList();
-		setTransparent();
-		loadChangePart(currentCarID);
 		setUIPosition();
+		setTransparent(currentCarID);
+		loadChangePart(currentCarID);
 		findComponents(currentCarID);
 	}
 	
@@ -96,15 +105,8 @@ public class viewController : MonoBehaviour {
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-			cbWheel.isCompSetUp = false;
-			cbBody.isCompSetUp = false;
-			cbFrontWheel.isCompSetUp = false;
-			cbBottom.isCompSetUp = false;
-			cbWheel.resumeColor();
-			cbBody.resumeColor();
-			cbFrontWheel.resumeColor();
-			cbBottom.resumeColor();
-			setTransparent();
+			setResume();
+			setTransparent(currentCarID);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
@@ -145,7 +147,7 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
 		{
 			//prev model
-			if(currentCarID != 1)
+			if(currentCarID == 2)
 			{
 				currentCar.SetActive(false);
 				currentCar = carList[0];
@@ -153,12 +155,43 @@ public class viewController : MonoBehaviour {
 				currentCar.transform.rotation = pTransform.rotation;
 				currentCar.SetActive(true);
 				currentCarID = 1;
+				//change components
+				//wheel
+				wheel.SetActive(false);
+				wheel = wheelList[0];
+				wheel.transform.position = pWheelTransform.position;
+				wheel.transform.rotation = pWheelTransform.rotation;
+				wheel.SetActive(true);
+				//body
+				body.SetActive(false);
+				body = bodyList[0];
+				body.transform.position = pBodyTransform.position;
+				body.transform.rotation = pBodyTransform.rotation;
+				body.SetActive(true);
+				//frontWheel
+				frontWheel.SetActive(false);
+				frontWheel = frontWheelList[0];
+				frontWheel.transform.position = pFrontWheelTransform.position;
+				frontWheel.transform.rotation = pFrontWheelTransform.rotation;
+				frontWheel.SetActive(true);
+				//bottom
+				bottom.SetActive(false);
+				bottom = bottomList[0];
+				bottom.transform.position = pBottomTransform.position;
+				bottom.transform.rotation = pBottomTransform.rotation;
+				bottom.SetActive(true);
+				
+				setTransparent(currentCarID);
+				loadChangePart(currentCarID);
+				findComponents(currentCarID);
+				setResume();
 			}
+
 		}
 		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
 		{
 			//next model
-			if(currentCarID != 2)
+			if(currentCarID == 1)
 			{
 				currentCar.SetActive(false);
 				currentCar = carList[1];
@@ -166,14 +199,57 @@ public class viewController : MonoBehaviour {
 				currentCar.transform.rotation = pTransform.rotation;
 				currentCar.SetActive(true);
 				currentCarID = 2;
+				//change components
+				//wheel
+				wheel.SetActive(false);
+				wheel = wheelList[1];
+				wheel.transform.position = pWheelTransform.position;
+				wheel.transform.rotation = pWheelTransform.rotation;
+				wheel.SetActive(true);
+				//body
+				body.SetActive(false);
+				body = bodyList[1];
+				body.transform.position = pBodyTransform.position;
+				body.transform.rotation = pBodyTransform.rotation;
+				body.SetActive(true);
+				//frontWheel
+				frontWheel.SetActive(false);
+				frontWheel = frontWheelList[1];
+				frontWheel.transform.position = pFrontWheelTransform.position;
+				frontWheel.transform.rotation = pFrontWheelTransform.rotation;
+				frontWheel.SetActive(true);
+				//bottom
+				bottom.SetActive(false);
+				bottom = bottomList[1];
+				bottom.transform.position = pBottomTransform.position;
+				bottom.transform.rotation = pBottomTransform.rotation;
+				bottom.SetActive(true);
+				
+				setTransparent(currentCarID);
+				loadChangePart(currentCarID);
+				findComponents(currentCarID);
+				setResume();
 			}
 		}
 	}
 	
 	void initCarList()
 	{
+		//car
 		carList[0] = GameObject.Find("che001");
 		carList[1] = GameObject.Find("che002");
+		//wheel
+		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
+		wheelList[1] = GameObject.FindGameObjectWithTag("car2wheel");
+		//body
+		bodyList[0] = GameObject.FindGameObjectWithTag("body");
+		bodyList[1] = GameObject.FindGameObjectWithTag("car2body");
+		//frontWheel
+		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
+		frontWheelList[1] = GameObject.FindGameObjectWithTag("car2frontWheel");
+		//bottom
+		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
+		bottomList[1] = GameObject.FindGameObjectWithTag("car2bottom");
 	}
 	
 	void loadChangePart(int carID)
@@ -185,6 +261,12 @@ public class viewController : MonoBehaviour {
 			changeMaterials[1] = GameObject.FindGameObjectWithTag("changeBody").renderer.material;
 			changeMaterials[2] = GameObject.FindGameObjectWithTag("changeFrontWheel").renderer.material;
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
+			break;
+		case 2:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("car2changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("car2changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("car2changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("car2changeBottom").renderer.material;
 			break;
 		default:
 			break;
@@ -298,6 +380,17 @@ public class viewController : MonoBehaviour {
 			body = GameObject.FindGameObjectWithTag("body");
 			frontWheel = GameObject.FindGameObjectWithTag("frontWheel");
 			bottom = GameObject.FindGameObjectWithTag("bottom");
+			//transforms
+			pWheelTransform = wheel.transform;
+			pBodyTransform = body.transform;
+			pFrontWheelTransform = frontWheel.transform;
+			pBottomTransform = bottom.transform;
+			break;
+		case 2:
+			wheel = GameObject.FindGameObjectWithTag("car2wheel");
+			body = GameObject.FindGameObjectWithTag("car2body");
+			frontWheel = GameObject.FindGameObjectWithTag("car2frontWheel");
+			bottom = GameObject.FindGameObjectWithTag("car2bottom");
 			break;
 		default:
 			break;
@@ -307,18 +400,35 @@ public class viewController : MonoBehaviour {
 		cbBody = (compBehaviour)body.GetComponent(typeof(compBehaviour));
 		cbFrontWheel = (compBehaviour)frontWheel.GetComponent(typeof(compBehaviour));
 		cbBottom = (compBehaviour)bottom.GetComponent(typeof(compBehaviour));
+		cbWheel.originalPosition = pWheelTransform.position;
+		cbBody.originalPosition = pBodyTransform.position;
+		cbFrontWheel.originalPosition = pFrontWheelTransform.position;
+		cbBottom.originalPosition = pBottomTransform.position;
 		scriptList[0] = cbWheel;
 		scriptList[1] = cbBody;
 		scriptList[2] = cbFrontWheel;
 		scriptList[3] = cbBottom;
 	}
 
-	void setTransparent()
+	void setTransparent(int carID)
 	{
-		changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
-		changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
-		changePartsFrontWheel = GameObject.FindGameObjectsWithTag("changeFrontWheel");
-		changePartsBottom = GameObject.FindGameObjectsWithTag("changeBottom");
+		switch(carID)
+		{
+		case 1:
+			changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("changeBottom");
+			break;
+		case 2:
+			changeParts = GameObject.FindGameObjectsWithTag("car2changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("car2changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("car2changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("car2changeBottom");
+			break;
+		default:
+			break;
+		}
 		foreach(GameObject changePart in changeParts)
 		{
 			wheelMaterials = changePart.renderer.materials;
@@ -365,6 +475,18 @@ public class viewController : MonoBehaviour {
 		}
 	}
 	
+	void setResume()
+	{
+		cbWheel.isCompSetUp = false;
+		cbBody.isCompSetUp = false;
+		cbFrontWheel.isCompSetUp = false;
+		cbBottom.isCompSetUp = false;
+		cbWheel.resumeColor();
+		cbBody.resumeColor();
+		cbFrontWheel.resumeColor();
+		cbBottom.resumeColor();
+	}
+	
 	//public interfaces
 	public void pauseRotate()
 	{
@@ -374,5 +496,10 @@ public class viewController : MonoBehaviour {
 	public void resumeRotate()
 	{
 		shouldCarRotate = true;
+	}
+	
+	public int getCurrentCarID()
+	{
+		return currentCarID;
 	}
 }
