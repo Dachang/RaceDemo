@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class viewController : MonoBehaviour {
+public class paintViewController : MonoBehaviour {
 	
 	private GameObject currentCar;
 	private Material currentMaterial;
@@ -20,11 +20,9 @@ public class viewController : MonoBehaviour {
 	//UI Positions
 	private int MATBTNONE_MARGIN_LEFT;
 	private int MATBTNTWO_MARGIN_LEFT;
-	private int MATBTNTHREE_MARGIN_LEFT;
-	private int MATBTNFOUR_MARGIN_LEFT;
-	private int MATBTNFIVE_MARGIN_LEFT;
-	private int MATBTNSIX_MARGIN_LEFT;
-	private int MATBTN_MARGIN_UP;
+	private int MATBTNONE_MARGIN_UP;
+	private int MATBTNTWO_MARGIN_UP;
+	private int MATBTNTHREE_MARGIN_UP;
 	private int BUTTON_WIDTH;
 	private int BACKBTN_MARGIN_LEFT;
 	private int CONFIRMBTN_MARGIN_LEFT;
@@ -89,6 +87,9 @@ public class viewController : MonoBehaviour {
 	private GameObject[] bottomList = new GameObject[10];
 	private GameObject[] part5List = new GameObject[10];
 	private GameObject[] part6List = new GameObject[10];
+	//original colors
+	private Color[] originalColorList = new Color[10];
+	//private Color oWheelColor,oBodyColor,oFrontWheelColor,oBottomColor,oPart5Color,oPart6Color;
 	
 	void Start () 
 	{
@@ -102,9 +103,9 @@ public class viewController : MonoBehaviour {
 		
 		initCarList();
 		setUIPosition();
-		setTransparent(currentCarID);
+		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
-		findComponents(currentCarID);
+		//findComponents(currentCarID);
 	}
 	
 	void Update () 
@@ -118,7 +119,7 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
 			setResume();
-			setTransparent(currentCarID);
+			//setTransparent(currentCarID);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
@@ -130,30 +131,30 @@ public class viewController : MonoBehaviour {
 			}
 		}
 		//Material buttons
-//		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
-//		{
-//			changeMaterial(COLOR_RED);
-//		}
-//		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
-//		{
-//			changeMaterial(COLOR_BLACK);
-//		}
-//		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
-//		{
-//			changeMaterial(COLOR_YELLOW);
-//		}
-//		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
-//		{
-//			changeMaterial(COLOR_GREY);
-//		}
-//		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
-//		{
-//			changeMaterial(COLOR_MAGENTA);
-//		}
-//		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
-//		{
-//			changeMaterial(COLOR_WHITE);
-//		}
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
+		{
+			changeMaterial(COLOR_RED);
+		}
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
+		{
+			changeMaterial(COLOR_BLACK);
+		}
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
+		{
+			changeMaterial(COLOR_YELLOW);
+		}
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
+		{
+			changeMaterial(COLOR_GREY);
+		}
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
+		{
+			changeMaterial(COLOR_MAGENTA);
+		}
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
+		{
+			changeMaterial(COLOR_WHITE);
+		}
 		//draw component Textures
 		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
 //		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
@@ -260,6 +261,11 @@ public class viewController : MonoBehaviour {
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
 			changeMaterials[4] = GameObject.FindGameObjectWithTag("changePart5").renderer.material;
 			changeMaterials[5] = GameObject.FindGameObjectWithTag("changePart6").renderer.material;
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
 			break;
 		case 1:
 			changeMaterials[0] = GameObject.FindGameObjectWithTag("car2changeWheel").renderer.material;
@@ -274,13 +280,11 @@ public class viewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 240;
-		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 160;
-		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 80;
-		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 10;
-		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 90;
-		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 170;
-		MATBTN_MARGIN_UP = screenHeight - 90;
+		MATBTNONE_MARGIN_LEFT = screenWidth - 360;
+		MATBTNTWO_MARGIN_LEFT = screenWidth - 170;
+		MATBTNONE_MARGIN_UP = screenHeight/2 - 180;
+		MATBTNTWO_MARGIN_UP = screenHeight/2 - 10;
+		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 160;
 		BUTTON_WIDTH = 70;
 		BACKBTN_MARGIN_LEFT = screenWidth/2 + 300;
 		CONFIRMBTN_MARGIN_LEFT = screenWidth - 115;
@@ -302,43 +306,37 @@ public class viewController : MonoBehaviour {
 			//GameObject.Find("che001_part01").renderer.material.SetColor("_Color",Color.red);
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.red);
+				changeMaterials[i].SetColor("_Color",Color.red);
 			}
 			break;
 		case 1:
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.black);
+				changeMaterials[i].SetColor("_Color",Color.black);
 			}
 			break;
 		case 2:
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.yellow);
+				changeMaterials[i].SetColor("_Color",Color.yellow);
 			}
 			break;
 		case 3:
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.grey);
+				changeMaterials[i].SetColor("_Color",Color.grey);
 			}
 			break;
 		case 4:
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.magenta);
+				changeMaterials[i].SetColor("_Color",Color.magenta);
 			}
 			break;
 		case 5:
 			for(int i = 0; i<=5; i++)
 			{
-				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.white);
+				changeMaterials[i].SetColor("_Color",Color.white);
 			}
 			break;
 		default:
@@ -511,18 +509,10 @@ public class viewController : MonoBehaviour {
 	
 	void setResume()
 	{
-		cbWheel.isCompSetUp = false;
-		cbBody.isCompSetUp = false;
-		cbFrontWheel.isCompSetUp = false;
-		cbBottom.isCompSetUp = false;
-		cbPart5.isCompSetUp = false;
-		cbPart6.isCompSetUp = false;
-		cbWheel.resumeColor();
-		cbBody.resumeColor();
-		cbFrontWheel.resumeColor();
-		cbBottom.resumeColor();
-		cbPart5.resumeColor();
-		cbPart6.resumeColor();
+		for(int i=0; i<=5; i++)
+		{
+			changeMaterials[i].color = originalColorList[i];
+		}
 	}
 	
 	//public interfaces
