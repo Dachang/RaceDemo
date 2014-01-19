@@ -123,10 +123,10 @@ public class viewController : MonoBehaviour {
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
-			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
+			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp && cbPart5.isCompSetUp && cbPart6.isCompSetUp)
 			{
 				//load next scene
-				Application.LoadLevel("RoadSelectScene");
+				Application.LoadLevel("Scene2");
 			}
 		}
 		//Material buttons

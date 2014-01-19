@@ -113,7 +113,7 @@ public class compBehaviour : MonoBehaviour {
 		vc.resumeRotate();
 		if(isCompSetUp)
 		{
-			renderer.material.color = Color.green;
+			//renderer.material.color = Color.green;
 			isAbleToDrag = false;
 		}
 		else

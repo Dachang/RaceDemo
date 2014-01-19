@@ -7,6 +7,9 @@ public class carBehaviour : MonoBehaviour {
 	private int dragSpeedY = -100;
 	private paintViewController pvc;
 	private viewController vc;
+	
+	private bool isDraggingVertical = false;
+	private bool isDraggingHorizontal = false;
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,8 +32,16 @@ public class carBehaviour : MonoBehaviour {
 			pvc.pauseRotate();
 		else
 			vc.pauseRotate();
-		this.transform.Rotate(Vector3.up*Time.deltaTime*Input.GetAxis("Mouse X")*dragSpeedX);
-		this.transform.Rotate(Vector3.left*Time.deltaTime*Input.GetAxis("Mouse Y")*dragSpeedY);
+		if((Mathf.Abs(Input.GetAxis("Mouse X")) > Mathf.Abs(Input.GetAxis("Mouse Y"))) && !isDraggingVertical)
+		{
+			this.transform.Rotate(Vector3.up*Time.deltaTime*Input.GetAxis("Mouse X")*dragSpeedX);
+			isDraggingHorizontal = true;
+		}
+		else if((Mathf.Abs(Input.GetAxis("Mouse X")) < Mathf.Abs(Input.GetAxis("Mouse Y"))) && !isDraggingHorizontal)
+		{	
+			this.transform.Rotate(Vector3.back*Time.deltaTime*Input.GetAxis("Mouse Y")*dragSpeedY);
+			isDraggingVertical = true;
+		}
 	}
 	
 	void OnMouseUp()
@@ -39,5 +50,7 @@ public class carBehaviour : MonoBehaviour {
 			pvc.resumeRotate();
 		else
 			vc.resumeRotate();
+		isDraggingVertical = false;
+		isDraggingHorizontal = false;
 	}
 }
