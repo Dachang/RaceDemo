@@ -5,8 +5,8 @@ public class compBehaviour : MonoBehaviour {
 	
 	private viewController vc;
 	//drag speed
-	private int dragSpeedX = 10;
-	private int dragSpeedY = 10;
+	private int dragSpeedX = 6;
+	private int dragSpeedY = 6;
 	//component types
 	private int COMP_ID;
 	private int TYPE_WHEEL = 0;
@@ -24,13 +24,19 @@ public class compBehaviour : MonoBehaviour {
 	private GameObject[] changePartsBody = new GameObject[10];
 	private GameObject[] changePartsFrontWheel = new GameObject[10];
 	//component drag distance
-	private float dragDistance = 4.5f;
+	private float dragDistance = 4.2f;
 	//component has been set up?
 	public bool isCompSetUp = false;
+	//component can be dragged?
+	public bool isAbleToDrag = true;
 	//change part materials
 	private Material[] changePartMaterials = new Material[10];
 	//current car ID
 	private int currentCarID;
+	//Timer
+	private float startTime;
+	private bool countDownShouldStart = false;
+	public int resumeRotationTimeDuration = 30;
 	
 	void Start()
 	{
@@ -65,15 +71,16 @@ public class compBehaviour : MonoBehaviour {
 			COMP_ID = TYPE_BOTTOM;
 		}
 		currentCarID = vc.getCurrentCarID();
+		judgeManipulation();
 	}
 	
 	//Mouse Behaviour
 	void OnMouseDrag()
 	{
-		if(!isCompSetUp)
+		if(isAbleToDrag)
 		{
 			Debug.Log("dragging");
-			vc.pauseRotate();
+			//vc.pauseRotate();
 			judgePart(COMP_ID);
 			transform.position += Vector3.right * Time.deltaTime*Input.GetAxis("Mouse X") * dragSpeedX;
 			transform.position += Vector3.up * Time.deltaTime*Input.GetAxis("Mouse Y") * dragSpeedY;
@@ -98,10 +105,11 @@ public class compBehaviour : MonoBehaviour {
 	void OnMouseUp()
 	{
 		Debug.Log("Mouse up");
-		vc.resumeRotate();
+		//vc.resumeRotate();
 		if(isCompSetUp)
 		{
-			renderer.material.color = Color.green;
+			//renderer.material.color = Color.green;
+			isAbleToDrag = false;
 		}
 		else
 		{
@@ -191,6 +199,26 @@ public class compBehaviour : MonoBehaviour {
 				changePartMaterial.shader = Shader.Find("Transparent/Diffuse");
 			}
 		}
+	}
+	
+	void judgeManipulation()
+	{
+		if(Input.GetMouseButtonDown(0))
+		{
+			vc.pauseRotate();
+			countDownShouldStart = true;
+			startTime = Time.time;
+		}
+		if(countDownShouldStart)
+		{
+			float currentTime = Time.time - startTime;
+			int seconds = (int)(currentTime % 60);
+			if(seconds > resumeRotationTimeDuration)
+			{
+				vc.resumeRotate();
+				countDownShouldStart = false;
+			}
+		}	
 	}
 	
 	//public interface

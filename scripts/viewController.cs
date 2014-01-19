@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class viewController : MonoBehaviour {
 	
@@ -52,6 +53,7 @@ public class viewController : MonoBehaviour {
 	private Material[] frontWheelMaterials = new Material[10];
 	private Material[] bodyMaterials = new Material[10];
 	private Material[] bottomMaterials = new Material[10];
+	private Material[] mainPartMaterials = new Material[10];
 	//current components&scripts
 	private GameObject wheel;
 	private GameObject body;
@@ -77,6 +79,8 @@ public class viewController : MonoBehaviour {
 	private GameObject[] bodyList = new GameObject[10];
 	private GameObject[] frontWheelList = new GameObject[10];
 	private GameObject[] bottomList = new GameObject[10];
+	//Textures
+	private Texture textureColor1,textureColor2,textureColor3,textureColor4,textureColor5,textureColor6;
 	
 	void Start () 
 	{
@@ -90,6 +94,7 @@ public class viewController : MonoBehaviour {
 		
 		initCarList();
 		setUIPosition();
+		loadTexture(currentCarID);
 		setTransparent(currentCarID);
 		loadChangePart(currentCarID);
 		findComponents(currentCarID);
@@ -150,6 +155,7 @@ public class viewController : MonoBehaviour {
 			if(currentCarID > 0 && currentCarID <= 1)
 			{
 				switchCar(currentCarID-1);
+				resumeRotate();
 			}
 		}
 		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
@@ -158,6 +164,7 @@ public class viewController : MonoBehaviour {
 			if(currentCarID >= 0 && currentCarID < 1)
 			{
 				switchCar(currentCarID+1);
+				resumeRotate();
 			}
 		}
 	}
@@ -179,6 +186,25 @@ public class viewController : MonoBehaviour {
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
 		bottomList[1] = GameObject.FindGameObjectWithTag("car2bottom");
+	}
+	
+	void loadTexture(int carID)
+	{
+		switch(carID)
+		{
+		case 0:
+			break;
+		case 1:
+			textureColor1 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_hong_clr.jpg",typeof(Texture));
+			textureColor2 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_cheng_clr.jpg",typeof(Texture));
+			textureColor3 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_huang_clr.jpg",typeof(Texture));
+			textureColor4 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_lan_clr.jpg",typeof(Texture));
+			textureColor5 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_lv_clr.jpg",typeof(Texture));
+			textureColor6 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_zi_clr.jpg",typeof(Texture));
+			break;
+		default:
+			break;
+		}
 	}
 	
 	void switchCar(int carID)
@@ -215,6 +241,7 @@ public class viewController : MonoBehaviour {
 		bottom.transform.rotation = pBottomTransform.rotation;
 		bottom.SetActive(true);
 		
+		loadTexture(currentCarID);
 		setTransparent(currentCarID);
 		loadChangePart(currentCarID);
 		findComponents(currentCarID);
@@ -230,12 +257,15 @@ public class viewController : MonoBehaviour {
 			changeMaterials[1] = GameObject.FindGameObjectWithTag("changeBody").renderer.material;
 			changeMaterials[2] = GameObject.FindGameObjectWithTag("changeFrontWheel").renderer.material;
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("otherPart").renderer.material;
 			break;
 		case 1:
 			changeMaterials[0] = GameObject.FindGameObjectWithTag("car2changeWheel").renderer.material;
 			changeMaterials[1] = GameObject.FindGameObjectWithTag("car2changeBody").renderer.material;
 			changeMaterials[2] = GameObject.FindGameObjectWithTag("car2changeFrontWheel").renderer.material;
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("car2changeBottom").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("car2main").renderer.materials;
+			changeMaterials[4] = mainPartMaterials[0];
 			break;
 		default:
 			break;
@@ -257,11 +287,11 @@ public class viewController : MonoBehaviour {
 		BACKBTN_MARGIN_UP = screenHeight - 70;
 		BACKBTN_WIDTH = 94;
 		BACKBTN_HEIGHT = 36;
-		PREVBTN_MARGIN_LEFT = screenWidth/2 - 400;
-		PREVBTN_MARGIN_UP = screenHeight/2 - 135;
+		PREVBTN_MARGIN_LEFT = screenWidth/2 - 280;
+		PREVBTN_MARGIN_UP = screenHeight/2 - 105;
 		PREVBTN_WIDTH = 40;
 		PREVBTN_HEIGHT = 90;
-		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
+		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 260;
 	}
 	
 	void changeMaterial(int materialID)
@@ -275,13 +305,15 @@ public class viewController : MonoBehaviour {
 				if(scriptList[i].isCompSetUp)
 					changeMaterials[i].SetColor("_Color",Color.red);
 			}
+			changeMaterials[4].mainTexture = textureColor1;
 			break;
 		case 1:
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.black);
+					changeMaterials[i].SetColor("_Color",Color.white);
 			}
+			changeMaterials[4].mainTexture = textureColor2;
 			break;
 		case 2:
 			for(int i = 0; i<=3; i++)
@@ -289,27 +321,31 @@ public class viewController : MonoBehaviour {
 				if(scriptList[i].isCompSetUp)
 					changeMaterials[i].SetColor("_Color",Color.yellow);
 			}
+			changeMaterials[4].mainTexture = textureColor3;
 			break;
 		case 3:
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.grey);
+					changeMaterials[i].SetColor("_Color",Color.blue);
 			}
+			changeMaterials[4].mainTexture = textureColor4;
 			break;
 		case 4:
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.magenta);
+					changeMaterials[i].SetColor("_Color",Color.green);
 			}
+			changeMaterials[4].mainTexture = textureColor5;
 			break;
 		case 5:
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.white);
+					changeMaterials[i].SetColor("_Color",Color.magenta);
 			}
+			changeMaterials[4].mainTexture = textureColor6;
 			break;
 		default:
 			break;
@@ -450,6 +486,10 @@ public class viewController : MonoBehaviour {
 		cbBody.isCompSetUp = false;
 		cbFrontWheel.isCompSetUp = false;
 		cbBottom.isCompSetUp = false;
+		cbWheel.isAbleToDrag = true;
+		cbBody.isAbleToDrag = true;
+		cbFrontWheel.isAbleToDrag = true;
+		cbBottom.isAbleToDrag = true;
 		cbWheel.resumeColor();
 		cbBody.resumeColor();
 		cbFrontWheel.resumeColor();
