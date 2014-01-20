@@ -3,15 +3,22 @@ using System.Collections;
 
 public class scoreManager : MonoBehaviour {
 	
+	public GUISkin mySkin;
+	
 	private int score;
 	private string textScore;
+	
 	private float screenWidth;
 	private float screenHeight;
+	
+	private int roundNum;
+	private string textRoundNum;
 	
 	// Use this for initialization
 	void Start ()
 	{
 		score = 0;
+		roundNum = 1;
 		screenWidth = Screen.width;
 		screenHeight = Screen.height;
 	}
@@ -19,13 +26,26 @@ public class scoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		
 	}
 	
 	void OnGUI()
 	{
 		textScore = string.Format("Score:" + score.ToString());
+		if(roundNum == 1)
+		{
+			textRoundNum = string.Format("Round: 1 / 2");
+		}
+		else if(roundNum == 7)
+		{
+			textRoundNum = string.Format("Round: 2 / 2");
+		}
+		else if(roundNum == 13)
+		{
+			//Debug.Log("Overrrrrrrrrrrrrr");
+			//load Result Scene
+		}
 		GUI.Label (new Rect (screenWidth-150, 25, 200, 60), textScore);
+		GUI.Label (new Rect (20,25,500,60), textRoundNum);
 		GUI.skin.label.fontSize = 30;
 	}
 	
@@ -33,5 +53,10 @@ public class scoreManager : MonoBehaviour {
 	public void addScore()
 	{
 		score += 10;
+	}
+	
+	public void addRoundNum()
+	{
+		roundNum++;
 	}
 }
