@@ -38,6 +38,9 @@ public class compBehaviour : MonoBehaviour {
 	private bool countDownShouldStart = false;
 	public int resumeRotationTimeDuration = 30;
 	
+	private Vector3 screenPoint;
+	private Vector3 offset;
+	
 	void Start()
 	{
 		changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
@@ -82,8 +85,11 @@ public class compBehaviour : MonoBehaviour {
 			Debug.Log("dragging");
 			//vc.pauseRotate();
 			judgePart(COMP_ID);
-			transform.position += Vector3.right * Time.deltaTime*Input.GetAxis("Mouse X") * dragSpeedX;
-			transform.position += Vector3.up * Time.deltaTime*Input.GetAxis("Mouse Y") * dragSpeedY;
+			//smooth follow
+			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+			transform.position = curPosition;
+			
 			//Debug.Log(transform.position);
 			if(Mathf.Abs(transform.position.x - originalPosition.x) > dragDistance)
 			{
@@ -135,6 +141,13 @@ public class compBehaviour : MonoBehaviour {
 		{
 			renderer.material.color = Color.red;			
 		}
+	}
+	//mouse down
+	void OnMouseDown()
+	{
+		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+ 
+    	offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 	}
 	
 	//judge which part of the car response the component
