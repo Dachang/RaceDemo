@@ -92,6 +92,8 @@ public class paintViewController : MonoBehaviour {
 	private Color[] originalColorList = new Color[10];
 	//Textures
 	private Texture textureColor1,textureColor2,textureColor3,textureColor4,textureColor5,textureColor6;
+	//plane has chosen
+	private bool planeHasChosen = false;
 	
 	void Start () 
 	{
@@ -113,6 +115,12 @@ public class paintViewController : MonoBehaviour {
 	
 	void Update () 
 	{
+		if(!planeHasChosen)
+		{
+			switchCar(5);
+			currentCarID = 5;
+			planeHasChosen = true;
+		}
 		rotateCar();
 	}
 	
@@ -182,7 +190,11 @@ public class paintViewController : MonoBehaviour {
 	{
 		//car
 		carList[0] = GameObject.Find("feiji003");
-		//carList[1] = GameObject.Find("che002");
+		carList[1] = GameObject.Find("feiJi004");
+		carList[2] = GameObject.Find("feiJi005");
+		carList[3] = GameObject.Find("feiJi008");
+		carList[4] = GameObject.Find("feiJi010");
+		carList[5] = GameObject.Find("feiJi011");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		//wheelList[1] = GameObject.FindGameObjectWithTag("car2wheel");
@@ -214,6 +226,44 @@ public class paintViewController : MonoBehaviour {
 			textureColor6 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_zi",typeof(Texture));
 			break;
 		case 1:
+			textureColor1 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_hong",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_cheng",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_huang",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_lan",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_lv",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_zi",typeof(Texture));
+			break;
+		case 2:
+			textureColor1 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_hong",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_cheng",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_huang",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_lan",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_lv",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_zi",typeof(Texture));
+			break;
+		case 3:
+			textureColor1 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_hong",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_cheng",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_huang",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_lan",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_lv",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_zi",typeof(Texture));
+			break;
+		case 4:
+			textureColor1 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_hong",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_cheng",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_huang",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_lan",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_lv",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_zi",typeof(Texture));
+			break;
+		case 5:
+			textureColor1 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_hong",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_cheng",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_huang",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_lan",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_lv",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_zi",typeof(Texture));
 			break;
 		default:
 			break;
@@ -230,46 +280,46 @@ public class paintViewController : MonoBehaviour {
 		currentCarID = carID;
 		//change components
 		//wheel
-		wheel.SetActive(false);
-		wheel = wheelList[carID];
-		wheel.transform.position = pWheelTransform.position;
-		wheel.transform.rotation = pWheelTransform.rotation;
-		wheel.SetActive(true);
-		//body
-		body.SetActive(false);
-		body = bodyList[carID];
-		body.transform.position = pBodyTransform.position;
-		body.transform.rotation = pBodyTransform.rotation;
-		body.SetActive(true);
-		//frontWheel
-		frontWheel.SetActive(false);
-		frontWheel = frontWheelList[carID];
-		frontWheel.transform.position = pFrontWheelTransform.position;
-		frontWheel.transform.rotation = pFrontWheelTransform.rotation;
-		frontWheel.SetActive(true);
-		//bottom
-		bottom.SetActive(false);
-		bottom = bottomList[carID];
-		bottom.transform.position = pBottomTransform.position;
-		bottom.transform.rotation = pBottomTransform.rotation;
-		bottom.SetActive(true);
-		//part5
-		part5.SetActive(false);
-		part5 = part5List[carID];
-		part5.transform.position = pPart5Transfrom.position;
-		part5.transform.rotation = pPart5Transfrom.rotation;
-		part5.SetActive(true);
-		//part6
-		part6.SetActive(false);
-		part6 = part6List[carID];
-		part6.transform.position = pPart6Transform.position;
-		part6.transform.rotation = pPart6Transform.rotation;
-		part6.SetActive(true);
+//		wheel.SetActive(false);
+//		wheel = wheelList[carID];
+//		wheel.transform.position = pWheelTransform.position;
+//		wheel.transform.rotation = pWheelTransform.rotation;
+//		wheel.SetActive(true);
+//		//body
+//		body.SetActive(false);
+//		body = bodyList[carID];
+//		body.transform.position = pBodyTransform.position;
+//		body.transform.rotation = pBodyTransform.rotation;
+//		body.SetActive(true);
+//		//frontWheel
+//		frontWheel.SetActive(false);
+//		frontWheel = frontWheelList[carID];
+//		frontWheel.transform.position = pFrontWheelTransform.position;
+//		frontWheel.transform.rotation = pFrontWheelTransform.rotation;
+//		frontWheel.SetActive(true);
+//		//bottom
+//		bottom.SetActive(false);
+//		bottom = bottomList[carID];
+//		bottom.transform.position = pBottomTransform.position;
+//		bottom.transform.rotation = pBottomTransform.rotation;
+//		bottom.SetActive(true);
+//		//part5
+//		part5.SetActive(false);
+//		part5 = part5List[carID];
+//		part5.transform.position = pPart5Transfrom.position;
+//		part5.transform.rotation = pPart5Transfrom.rotation;
+//		part5.SetActive(true);
+//		//part6
+//		part6.SetActive(false);
+//		part6 = part6List[carID];
+//		part6.transform.position = pPart6Transform.position;
+//		part6.transform.rotation = pPart6Transform.rotation;
+//		part6.SetActive(true);
 		
 		loadTexture(currentCarID);
-		setTransparent(currentCarID);
+		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
-		findComponents(currentCarID);
+		//findComponents(currentCarID);
 		setResume();
 	}
 	
@@ -293,10 +343,79 @@ public class paintViewController : MonoBehaviour {
 			}
 			break;
 		case 1:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("car2changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("car2changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("car2changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("car2changeBottom").renderer.material;
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f2changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f2changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f2changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f2changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f2changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f2changePart6").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("f2main").renderer.materials;
+			changeMaterials[6] = mainPartMaterials[0];
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
+			break;
+		case 2:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f3changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f3changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f3changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f3changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f3changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f3changePart6").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("f3main").renderer.materials;
+			changeMaterials[6] = mainPartMaterials[0];
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
+			break;
+		case 3:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f4changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f4changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f4changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f4changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f4changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f4changePart6").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("f4main").renderer.materials;
+			changeMaterials[6] = mainPartMaterials[1];
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
+			break;
+		case 4:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f5changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f5changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f5changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f5changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f5changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f5changePart6").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("f5main").renderer.materials;
+			changeMaterials[6] = mainPartMaterials[0];
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
+			break;
+		case 5:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f6changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f6changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f6changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f6changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f6changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f6changePart6").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("f6main").renderer.materials;
+			changeMaterials[6] = mainPartMaterials[0];
+			//mark original color
+			for(int i=0; i<=5; i++)
+			{
+				originalColorList[i] = new Color(changeMaterials[i].color.r,changeMaterials[i].color.g,changeMaterials[i].color.b,1.0f);
+			}
 			break;
 		default:
 			break;
@@ -352,7 +471,7 @@ public class paintViewController : MonoBehaviour {
 		case 3:
 			for(int i = 0; i<=5; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.grey);
+				changeMaterials[i].SetColor("_Color",Color.blue);
 			}
 			changeMaterials[6].mainTexture = textureColor4;
 			break;
@@ -544,6 +663,7 @@ public class paintViewController : MonoBehaviour {
 		{
 			changeMaterials[i].color = originalColorList[i];
 		}
+		changeMaterials[6].mainTexture = textureColor4;
 	}
 	
 	//public interfaces
