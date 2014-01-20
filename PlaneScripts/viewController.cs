@@ -113,8 +113,8 @@ public class viewController : MonoBehaviour {
 	{
 		if(!planeHasChosen)
 		{
-			switchCar(3);
-			currentCarID = 3;
+			switchCar(5);
+			currentCarID = 5;
 			planeHasChosen = true;
 		}
 		rotateCar();
@@ -146,36 +146,50 @@ public class viewController : MonoBehaviour {
 		carList[1] = GameObject.Find("feiJi004");
 		carList[2] = GameObject.Find("feiJi005");
 		carList[3] = GameObject.Find("feiJi008");
+		carList[4] = GameObject.Find("feiJi010");
+		carList[5] = GameObject.Find("feiJi011");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		wheelList[1] = GameObject.FindGameObjectWithTag("f2wheel");
 		wheelList[2] = GameObject.FindGameObjectWithTag("f3wheel");
 		wheelList[3] = GameObject.FindGameObjectWithTag("f4wheel");
+		wheelList[4] = GameObject.FindGameObjectWithTag("f5wheel");
+		wheelList[5] = GameObject.FindGameObjectWithTag("f6wheel");
 		//body
 		bodyList[0] = GameObject.FindGameObjectWithTag("body");
 		bodyList[1] = GameObject.FindGameObjectWithTag("f2body");
 		bodyList[2] = GameObject.FindGameObjectWithTag("f3body");
 		bodyList[3] = GameObject.FindGameObjectWithTag("f4body");
+		bodyList[4] = GameObject.FindGameObjectWithTag("f5body");
+		bodyList[5] = GameObject.FindGameObjectWithTag("f6body");
 		//frontWheel
 		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
 		frontWheelList[1] = GameObject.FindGameObjectWithTag("f2frontWheel");
 		frontWheelList[2] = GameObject.FindGameObjectWithTag("f3frontWheel");
 		frontWheelList[3] = GameObject.FindGameObjectWithTag("f4frontWheel");
+		frontWheelList[4] = GameObject.FindGameObjectWithTag("f5frontWheel");
+		frontWheelList[5] = GameObject.FindGameObjectWithTag("f6frontWheel");
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
 		bottomList[1] = GameObject.FindGameObjectWithTag("f2bottom");
 		bottomList[2] = GameObject.FindGameObjectWithTag("f3bottom");
 		bottomList[3] = GameObject.FindGameObjectWithTag("f4bottom");
+		bottomList[4] = GameObject.FindGameObjectWithTag("f5bottom");
+		bottomList[5] = GameObject.FindGameObjectWithTag("f6bottom");
 		//part5
 		part5List[0] = GameObject.FindGameObjectWithTag("part5");
 		part5List[1] = GameObject.FindGameObjectWithTag("f2part5");
 		part5List[2] = GameObject.FindGameObjectWithTag("f3part5");
 		part5List[3] = GameObject.FindGameObjectWithTag("f4part5");
+		part5List[4] = GameObject.FindGameObjectWithTag("f5part5");
+		part5List[5] = GameObject.FindGameObjectWithTag("f6part5");
 		//part6
 		part6List[0] = GameObject.FindGameObjectWithTag("part6");
 		part6List[1] = GameObject.FindGameObjectWithTag("f2part6");
 		part6List[2] = GameObject.FindGameObjectWithTag("f3part6");
 		part6List[3] = GameObject.FindGameObjectWithTag("f4part6");
+		part6List[4] = GameObject.FindGameObjectWithTag("f5part6");
+		part6List[5] = GameObject.FindGameObjectWithTag("f6part6");
 	}
 		
 	void switchCar(int carID)
@@ -265,6 +279,22 @@ public class viewController : MonoBehaviour {
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("f4changeBottom").renderer.material;
 			changeMaterials[4] = GameObject.FindGameObjectWithTag("f4changePart5").renderer.material;
 			changeMaterials[5] = GameObject.FindGameObjectWithTag("f4changePart6").renderer.material;
+			break;
+		case 4:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f5changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f5changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f5changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f5changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f5changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f5changePart6").renderer.material;
+			break;
+		case 5:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("f6changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("f6changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("f6changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("f6changeBottom").renderer.material;
+			changeMaterials[4] = GameObject.FindGameObjectWithTag("f6changePart5").renderer.material;
+			changeMaterials[5] = GameObject.FindGameObjectWithTag("f6changePart6").renderer.material;
 			break;
 		default:
 			break;
@@ -412,6 +442,22 @@ public class viewController : MonoBehaviour {
 			part5 = GameObject.FindGameObjectWithTag("f4part5");
 			part6 = GameObject.FindGameObjectWithTag("f4part6");
 			break;
+		case 4:
+			wheel = GameObject.FindGameObjectWithTag("f5wheel");
+			body = GameObject.FindGameObjectWithTag("f5body");
+			frontWheel = GameObject.FindGameObjectWithTag("f5frontWheel");
+			bottom = GameObject.FindGameObjectWithTag("f5bottom");
+			part5 = GameObject.FindGameObjectWithTag("f5part5");
+			part6 = GameObject.FindGameObjectWithTag("f5part6");
+			break;
+		case 5:
+			wheel = GameObject.FindGameObjectWithTag("f6wheel");
+			body = GameObject.FindGameObjectWithTag("f6body");
+			frontWheel = GameObject.FindGameObjectWithTag("f6frontWheel");
+			bottom = GameObject.FindGameObjectWithTag("f6bottom");
+			part5 = GameObject.FindGameObjectWithTag("f6part5");
+			part6 = GameObject.FindGameObjectWithTag("f6part6");
+			break;
 		default:
 			break;
 		}
@@ -472,6 +518,22 @@ public class viewController : MonoBehaviour {
 			changePartsBottom = GameObject.FindGameObjectsWithTag("f4changeBottom");
 			changePartsPart5 = GameObject.FindGameObjectsWithTag("f4changePart5");
 			changePartsPart6 = GameObject.FindGameObjectsWithTag("f4changePart6");
+			break;
+		case 4:
+			changeParts = GameObject.FindGameObjectsWithTag("f5changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("f5changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f5changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("f5changeBottom");
+			changePartsPart5 = GameObject.FindGameObjectsWithTag("f5changePart5");
+			changePartsPart6 = GameObject.FindGameObjectsWithTag("f5changePart6");
+			break;
+		case 5:
+			changeParts = GameObject.FindGameObjectsWithTag("f6changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("f6changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f6changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("f6changeBottom");
+			changePartsPart5 = GameObject.FindGameObjectsWithTag("f6changePart5");
+			changePartsPart6 = GameObject.FindGameObjectsWithTag("f6changePart6");
 			break;
 		default:
 			break;
