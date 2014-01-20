@@ -30,11 +30,18 @@ public class compBehaviour : MonoBehaviour {
 	//component has been set up?
 	public bool isCompSetUp = false;
 	//component can be dragged?
-	private bool isAbleToDrag = true;
+	public bool isAbleToDrag = true;
 	//change part materials
 	private Material[] changePartMaterials = new Material[10];
 	//current car ID
 	private int currentCarID;
+	//Timer
+	private float startTime;
+	private bool countDownShouldStart = false;
+	public int resumeRotationTimeDuration = 30;
+	//smooth follow buffer
+	private Vector3 screenPoint;
+	private Vector3 offset;
 	
 	void Start()
 	{
@@ -52,31 +59,33 @@ public class compBehaviour : MonoBehaviour {
 	
 	void Update()
 	{
-		if(this.tag == "wheel" || this.tag == "car2wheel")
+		if(this.tag == "wheel" || this.tag == "f2wheel" || this.tag == "f3wheel" || this.tag == "f4wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
-		else if(this.tag == "body" || this.tag == "car2body")
+		else if(this.tag == "body" || this.tag == "f2body" || this.tag == "f3body" || this.tag == "f4body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
-		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel")
+		else if(this.tag == "frontWheel" || this.tag == "f2frontWheel" || this.tag == "f3frontWheel" || this.tag == "f4frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
-		else if(this.tag == "bottom" || this.tag == "car2bottom")
+		else if(this.tag == "bottom" || this.tag == "f2bottom" || this.tag == "f3bottom" || this.tag == "f4bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
-		else if(this.tag == "part5")
+		else if(this.tag == "part5" || this.tag == "f2part5" || this.tag == "f3part5"|| this.tag == "f4part5")
 		{
 			COMP_ID = TYPE_PART5;
 		}
-		else if(this.tag == "part6")
+		else if(this.tag == "part6" || this.tag == "f2part6" || this.tag == "f3part6" || this.tag == "f4part6")
 		{
 			COMP_ID = TYPE_PART6;
 		}
 		currentCarID = vc.getCurrentCarID();
+		judgeManipulation();
+		judgeDragDistance(COMP_ID);
 	}
 	
 	//Mouse Behaviour
@@ -85,17 +94,21 @@ public class compBehaviour : MonoBehaviour {
 		if(isAbleToDrag)
 		{
 			Debug.Log("dragging");
-			vc.pauseRotate();
+			//vc.pauseRotate();
 			judgePart(COMP_ID);
-			transform.position += Vector3.right * Time.deltaTime*Input.GetAxis("Mouse X") * dragSpeedX;
-			transform.position += Vector3.up * Time.deltaTime*Input.GetAxis("Mouse Y") * dragSpeedY;
-			//Debug.Log(transform.position);
+			
+		    //smooth follow
+			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+			transform.position = curPosition;
+			
 			if(Mathf.Abs(transform.position.x - originalPosition.x) > dragDistance)
 			{
 				//hide component
 				renderer.enabled = false;
 				setSolid();
 				isCompSetUp = true;
+				renderer.material.color = originalColor;
 			}
 			else
 			{
@@ -110,7 +123,7 @@ public class compBehaviour : MonoBehaviour {
 	void OnMouseUp()
 	{
 		Debug.Log("Mouse up");
-		vc.resumeRotate();
+		//vc.resumeRotate();
 		if(isCompSetUp)
 		{
 			//renderer.material.color = Color.green;
@@ -141,6 +154,13 @@ public class compBehaviour : MonoBehaviour {
 			renderer.material.color = Color.red;			
 		}
 	}
+	//mouse down
+	void OnMouseDown()
+	{
+		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+     	offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3
+			(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+	}
 	
 	//judge which part of the car response the component
 	void judgePart(int comp_id)
@@ -151,40 +171,148 @@ public class compBehaviour : MonoBehaviour {
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changeWheel");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeWheel");
 			break;
 		case 1:
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeBody");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changeBody");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeBody");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeBody");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeBody");
 			break;
 		case 2:
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changeFrontWheel");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeFrontWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeFrontWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeFrontWheel");
 			break;
 		case 3:
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changeBottom");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeBottom");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeBottom");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeBottom");
 			break;
 		case 4:
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changePart5");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changePart5");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changePart5");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changePart5");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changePart5");
 			break;
 		case 5:
 			if(currentCarID == 0)
 				changeParts = GameObject.FindGameObjectsWithTag("changePart6");
 			else if(currentCarID == 1)
-				changeParts = GameObject.FindGameObjectsWithTag("car2changePart6");
+				changeParts = GameObject.FindGameObjectsWithTag("f2changePart6");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changePart6");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changePart6");
 			break;
 		default:
 			break;
+		}
+	}
+	
+	void judgeManipulation()
+	{
+		if(Input.GetMouseButtonDown(0))
+		{
+			vc.pauseRotate();
+			countDownShouldStart = true;
+			startTime = Time.time;
+		}
+		if(countDownShouldStart)
+		{
+			float currentTime = Time.time - startTime;
+			int seconds = (int)(currentTime % 60);
+			if(seconds > resumeRotationTimeDuration)
+			{
+				vc.resumeRotate();
+				countDownShouldStart = false;
+			}
+		}	
+	}
+	
+	void judgeDragDistance(int comp_id)
+	{
+		if(currentCarID == 0)
+		{
+			switch(comp_id)
+			{
+			case 0:
+				dragDistance = 80f;
+				break;
+			case 1:
+				dragDistance = 150f;
+				break;
+			case 2:
+				dragDistance = 80f;
+				break;
+			case 3:
+				dragDistance = 180f;
+				break;
+			case 4:
+				dragDistance = 70f;
+				break;
+			case 5:
+				dragDistance = 180f;
+				break;
+			default:
+				break;
+			}
+		}
+		else if(currentCarID == 1)
+		{
+			switch(comp_id)
+			{
+			case 0:
+				dragDistance = 110f;
+				break;
+			case 1:
+				dragDistance = 140f;
+				break;
+			case 2:
+				dragDistance = 150f;
+				break;
+			case 3:
+				dragDistance = 180f;
+				break;
+			case 4:
+				dragDistance = 120f;
+				break;
+			case 5:
+				dragDistance = 190f;
+				break;
+			default:
+				break;
+			}
+		}
+		else if(currentCarID == 2)
+		{
+			//add
+		}
+		else if(currentCarID == 3)
+		{
+			//add 
 		}
 	}
 	

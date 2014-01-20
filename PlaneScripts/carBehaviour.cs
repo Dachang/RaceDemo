@@ -46,10 +46,6 @@ public class carBehaviour : MonoBehaviour {
 	
 	void OnMouseUp()
 	{
-		if(this.tag == "paintScene")
-			pvc.resumeRotate();
-		else
-			vc.resumeRotate();
 		isDraggingVertical = false;
 		isDraggingHorizontal = false;
 	}
