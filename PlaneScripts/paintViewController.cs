@@ -34,6 +34,7 @@ public class paintViewController : MonoBehaviour {
 	private int PREVBTN_WIDTH;
 	private int PREVBTN_HEIGHT;
 	private int NEXTBTN_MARGIN_LEFT;
+	private int RETURNBTN_MARGIN_LEFT;
 	//UI texture bitmaps
 	/*private Texture2D compTextureOne;*/
 	//whether the car should rotate or not
@@ -94,6 +95,7 @@ public class paintViewController : MonoBehaviour {
 	private Texture textureColor1,textureColor2,textureColor3,textureColor4,textureColor5,textureColor6;
 	//plane has chosen
 	private bool planeHasChosen = false;
+	private int planeID;
 	
 	void Start () 
 	{
@@ -104,6 +106,8 @@ public class paintViewController : MonoBehaviour {
 		pTransform = currentCar.transform;
 		currentCarID = 0;
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
+		
+		planeID = PlayerPrefs.GetInt("planeID",0);
 		
 		initCarList();
 		setUIPosition();
@@ -117,8 +121,8 @@ public class paintViewController : MonoBehaviour {
 	{
 		if(!planeHasChosen)
 		{
-			switchCar(5);
-			currentCarID = 5;
+			switchCar(planeID);
+			currentCarID = planeID;
 			planeHasChosen = true;
 		}
 		rotateCar();
@@ -184,12 +188,17 @@ public class paintViewController : MonoBehaviour {
 //				switchCar(currentCarID+1);
 //			}
 //		}
+				//return button
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Back"))
+		{
+			Application.LoadLevel("Scene1");
+		}
 	}
 	
 	void initCarList()
 	{
 		//car
-		carList[0] = GameObject.Find("feiji003");
+		carList[0] = GameObject.Find("feiJi003");
 		carList[1] = GameObject.Find("feiJi004");
 		carList[2] = GameObject.Find("feiJi005");
 		carList[3] = GameObject.Find("feiJi008");
@@ -440,6 +449,7 @@ public class paintViewController : MonoBehaviour {
 		PREVBTN_WIDTH = 40;
 		PREVBTN_HEIGHT = 90;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
+		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 300;
 	}
 	
 	void changeMaterial(int materialID)

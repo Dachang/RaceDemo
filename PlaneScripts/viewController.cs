@@ -36,6 +36,7 @@ public class viewController : MonoBehaviour {
 	private int PREVBTN_WIDTH;
 	private int PREVBTN_HEIGHT;
 	private int NEXTBTN_MARGIN_LEFT;
+	private int RETURNBTN_MARGIN_LEFT;
 	//UI texture bitmaps
 	/*private Texture2D compTextureOne;*/
 	//whether the car should rotate or not
@@ -91,6 +92,7 @@ public class viewController : MonoBehaviour {
 	private GameObject[] part6List = new GameObject[10];
 	//plane has chosen
 	private bool planeHasChosen = false;
+	private int planeID;
 	
 	void Start () 
 	{
@@ -101,6 +103,8 @@ public class viewController : MonoBehaviour {
 		pTransform = currentCar.transform;
 		currentCarID = 0;
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
+		
+		planeID = PlayerPrefs.GetInt("planeID",0);
 		
 		initCarList();
 		setUIPosition();
@@ -113,8 +117,8 @@ public class viewController : MonoBehaviour {
 	{
 		if(!planeHasChosen)
 		{
-			switchCar(5);
-			currentCarID = 5;
+			switchCar(planeID);
+			currentCarID = planeID;
 			planeHasChosen = true;
 		}
 		rotateCar();
@@ -136,6 +140,11 @@ public class viewController : MonoBehaviour {
 				//load next scene
 				Application.LoadLevel("Scene2");
 			}
+		}
+		//return button
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Back"))
+		{
+			Application.LoadLevel("SelectScene");
 		}
 	}
 	
@@ -321,6 +330,7 @@ public class viewController : MonoBehaviour {
 		PREVBTN_WIDTH = 40;
 		PREVBTN_HEIGHT = 90;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
+		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 300;
 	}
 	
 	void changeMaterial(int materialID)
