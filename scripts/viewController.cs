@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class viewController : MonoBehaviour {
 	
@@ -195,12 +194,12 @@ public class viewController : MonoBehaviour {
 		case 0:
 			break;
 		case 1:
-			textureColor1 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_hong_clr.jpg",typeof(Texture));
-			textureColor2 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_cheng_clr.jpg",typeof(Texture));
-			textureColor3 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_huang_clr.jpg",typeof(Texture));
-			textureColor4 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_lan_clr.jpg",typeof(Texture));
-			textureColor5 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_lv_clr.jpg",typeof(Texture));
-			textureColor6 = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Resources/che002.fbm/che002_zi_clr.jpg",typeof(Texture));
+			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr2",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("che002.fbm/che002_cheng_clr",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("che002.fbm/che002_huang_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lan_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("che002.fbm/che002_zi_clr",typeof(Texture));
 			break;
 		default:
 			break;
