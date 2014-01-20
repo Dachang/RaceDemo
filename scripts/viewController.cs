@@ -151,7 +151,7 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
 		{
 			//prev model
-			if(currentCarID > 0 && currentCarID <= 2)
+			if(currentCarID > 0 && currentCarID <= 4)
 			{
 				switchCar(currentCarID-1);
 				resumeRotate();
@@ -160,7 +160,7 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
 		{
 			//next model
-			if(currentCarID >= 0 && currentCarID < 2)
+			if(currentCarID >= 0 && currentCarID < 4)
 			{
 				switchCar(currentCarID+1);
 				resumeRotate();
@@ -174,22 +174,32 @@ public class viewController : MonoBehaviour {
 		carList[0] = GameObject.Find("che001");
 		carList[1] = GameObject.Find("che002");
 		carList[2] = GameObject.Find("che003");
+		carList[3] = GameObject.Find("che004");
+		carList[4] = GameObject.Find("che005");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		wheelList[1] = GameObject.FindGameObjectWithTag("car2wheel");
 		wheelList[2] = GameObject.FindGameObjectWithTag("car3wheel");
+		wheelList[3] = GameObject.FindGameObjectWithTag("car4wheel");
+		wheelList[4] = GameObject.FindGameObjectWithTag("car5wheel");
 		//body
 		bodyList[0] = GameObject.FindGameObjectWithTag("body");
 		bodyList[1] = GameObject.FindGameObjectWithTag("car2body");
 		bodyList[2] = GameObject.FindGameObjectWithTag("car3body");
+		bodyList[3] = GameObject.FindGameObjectWithTag("car4body");
+		bodyList[4] = GameObject.FindGameObjectWithTag("car5body");
 		//frontWheel
 		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
 		frontWheelList[1] = GameObject.FindGameObjectWithTag("car2frontWheel");
 		frontWheelList[2] = GameObject.FindGameObjectWithTag("car3frontWheel");
+		frontWheelList[3] = GameObject.FindGameObjectWithTag("car4frontWheel");
+		frontWheelList[4] = GameObject.FindGameObjectWithTag("car5frontWheel");
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
 		bottomList[1] = GameObject.FindGameObjectWithTag("car2bottom");
 		bottomList[2] = GameObject.FindGameObjectWithTag("car3bottom");
+		bottomList[3] = GameObject.FindGameObjectWithTag("car4bottom");
+		bottomList[4] = GameObject.FindGameObjectWithTag("car5bottom");
 	}
 	
 	void loadTexture(int carID)
@@ -219,6 +229,22 @@ public class viewController : MonoBehaviour {
 			textureColor4 = (Texture)Resources.Load("che003.fbm/che003_lan_clr",typeof(Texture));
 			textureColor5 = (Texture)Resources.Load("che003.fbm/che003_lv_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che003.fbm/che003_zi_clr",typeof(Texture));
+			break;
+		case 3:
+			textureColor1 = (Texture)Resources.Load("che004.fbm/che004_hong_clr",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("che004.fbm/che004_cheng_clr",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("che004.fbm/che004_huang_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che004.fbm/che004_lan_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che004.fbm/che004_lv_clr",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("che004.fbm/che004_zi_clr",typeof(Texture));
+			break;
+		case 4:
+			textureColor1 = (Texture)Resources.Load("che005.fbm/che005_hong_clr",typeof(Texture));
+			textureColor2 = (Texture)Resources.Load("che005.fbm/che005_cheng_clr",typeof(Texture));
+			textureColor3 = (Texture)Resources.Load("che005.fbm/che005_huang_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lv_clr",typeof(Texture));
+			textureColor6 = (Texture)Resources.Load("che005.fbm/che005_zi_clr",typeof(Texture));
 			break;
 		default:
 			break;
@@ -274,10 +300,19 @@ public class viewController : MonoBehaviour {
 		{
 		case 0:
 			break;
+		case 1:
+			float tempY1 = pTransform.position.y + 0.2f;
+			currentCar.transform.position = new Vector3(pTransform.position.x,tempY1,pTransform.position.z);
+			break;
 		case 2:
-			float tempY = pTransform.position.y + 0.5f;
-			currentCar.transform.position = new Vector3(pTransform.position.x,tempY,pTransform.position.z);
-			//currentCar.transform.position.y = pTransform.position.y + 100f;
+			float tempY2 = pTransform.position.y + 0.9f;
+			currentCar.transform.position = new Vector3(pTransform.position.x,tempY2,pTransform.position.z);
+			break;
+		case 3:
+			float tempY3 = pTransform.position.y + 0.7f;
+			currentCar.transform.position = new Vector3(pTransform.position.x,tempY3,pTransform.position.z);
+			break;
+		case 4:
 			break;
 		default:
 			break;
@@ -311,6 +346,22 @@ public class viewController : MonoBehaviour {
 			changeMaterials[3] = GameObject.FindGameObjectWithTag("car3changeBottom").renderer.material;
 			mainPartMaterials = GameObject.FindGameObjectWithTag("car3main").renderer.materials;
 			changeMaterials[4] = mainPartMaterials[0];
+			break;
+		case 3:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("car4changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("car4changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("car4changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("car4changeBottom").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("car4main").renderer.materials;
+			changeMaterials[4] = mainPartMaterials[1];
+			break;
+		case 4:
+			changeMaterials[0] = GameObject.FindGameObjectWithTag("car5changeWheel").renderer.material;
+			changeMaterials[1] = GameObject.FindGameObjectWithTag("car5changeBody").renderer.material;
+			changeMaterials[2] = GameObject.FindGameObjectWithTag("car5changeFrontWheel").renderer.material;
+			changeMaterials[3] = GameObject.FindGameObjectWithTag("car5changeBottom").renderer.material;
+			mainPartMaterials = GameObject.FindGameObjectWithTag("car5main").renderer.materials;
+			changeMaterials[4] = mainPartMaterials[4];
 			break;
 		default:
 			break;
@@ -447,6 +498,18 @@ public class viewController : MonoBehaviour {
 			frontWheel = GameObject.FindGameObjectWithTag("car3frontWheel");
 			bottom = GameObject.FindGameObjectWithTag("car3bottom");
 			break;
+		case 3:
+			wheel = GameObject.FindGameObjectWithTag("car4wheel");
+			body = GameObject.FindGameObjectWithTag("car4body");
+			frontWheel = GameObject.FindGameObjectWithTag("car4frontWheel");
+			bottom = GameObject.FindGameObjectWithTag("car4bottom");
+			break;
+		case 4:
+			wheel = GameObject.FindGameObjectWithTag("car5wheel");
+			body = GameObject.FindGameObjectWithTag("car5body");
+			frontWheel = GameObject.FindGameObjectWithTag("car5frontWheel");
+			bottom = GameObject.FindGameObjectWithTag("car5bottom");
+			break;
 		default:
 			break;
 		}
@@ -486,6 +549,18 @@ public class viewController : MonoBehaviour {
 			changePartsBody = GameObject.FindGameObjectsWithTag("car3changeBody");
 			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("car3changeFrontWheel");
 			changePartsBottom = GameObject.FindGameObjectsWithTag("car3changeBottom");
+			break;
+		case 3:
+			changeParts = GameObject.FindGameObjectsWithTag("car4changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("car4changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("car4changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("car4changeBottom");
+			break;
+		case 4:
+			changeParts = GameObject.FindGameObjectsWithTag("car5changeWheel");
+			changePartsBody = GameObject.FindGameObjectsWithTag("car5changeBody");
+			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("car5changeFrontWheel");
+			changePartsBottom = GameObject.FindGameObjectsWithTag("car5changeBottom");
 			break;
 		default:
 			break;

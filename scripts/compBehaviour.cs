@@ -57,19 +57,19 @@ public class compBehaviour : MonoBehaviour {
 	
 	void Update()
 	{
-		if(this.tag == "wheel" || this.tag == "car2wheel" || this.tag == "car3wheel")
+		if(this.tag == "wheel" || this.tag == "car2wheel" || this.tag == "car3wheel" || this.tag == "car4wheel" || this.tag == "car5wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
-		else if(this.tag == "body" || this.tag == "car2body" || this.tag == "car3body")
+		else if(this.tag == "body" || this.tag == "car2body" || this.tag == "car3body" || this.tag == "car4body" || this.tag == "car5body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
-		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel" || this.tag == "car3frontWheel")
+		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel" || this.tag == "car3frontWheel" || this.tag == "car4frontWheel" || this.tag == "car5frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
-		else if(this.tag == "bottom" || this.tag == "car2bottom" || this.tag == "car3bottom")
+		else if(this.tag == "bottom" || this.tag == "car2bottom" || this.tag == "car3bottom" || this.tag == "car4bottom" || this.tag == "car5bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
@@ -163,6 +163,10 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeWheel");
 			else if(currentCarID == 2)
 				changeParts = GameObject.FindGameObjectsWithTag("car3changeWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("car4changeWheel");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("car5changeWheel");
 			break;
 		case 1:
 			if(currentCarID == 0)
@@ -171,6 +175,10 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeBody");
 			else if(currentCarID == 2)
 				changeParts = GameObject.FindGameObjectsWithTag("car3changeBody");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("car4changeBody");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("car5changeBody");
 			break;
 		case 2:
 			if(currentCarID == 0)
@@ -179,6 +187,10 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeFrontWheel");
 			else if(currentCarID == 2)
 				changeParts = GameObject.FindGameObjectsWithTag("car3changeFrontWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("car4changeFrontWheel");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("car5changeFrontWheel");
 			break;
 		case 3:
 			if(currentCarID == 0)
@@ -187,6 +199,10 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car2changeBottom");
 			else if(currentCarID == 2)
 				changeParts = GameObject.FindGameObjectsWithTag("car3changeBottom");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("car4changeBottom");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("car5changeBottom");
 			break;
 		default:
 			break;
