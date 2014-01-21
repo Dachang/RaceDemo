@@ -8,6 +8,7 @@ public class selectCar : MonoBehaviour {
 	//parent transform
 	private Transform pTransform;
 	private int currentCarID = 0;
+	private int currentColorID = 0;
 	//color ID
 	private int COLOR_RED = 0;
 	private int COLOR_BLACK = 1;
@@ -48,12 +49,14 @@ public class selectCar : MonoBehaviour {
 	{
 		if(!isCarSelected)
 		{
-			switchCar(1);
+			currentCarID = PlayerPrefs.GetInt("CarID",0);
+			switchCar(currentCarID);
 			isCarSelected = true;
 		}
 		if(!isColorSelected)
 		{
-			changeMaterial(2);
+			currentColorID = PlayerPrefs.GetInt("ColorID",0);
+			changeMaterial(currentColorID);
 			isColorSelected = true;
 		}
 	}
@@ -120,20 +123,23 @@ public class selectCar : MonoBehaviour {
 	
 	void switchCar(int carID)
 	{
-		currentCar.SetActive(false);
-		currentCar = carList[carID];
-		currentCar.transform.position = pTransform.position;
-		currentCar.transform.rotation = pTransform.rotation;
-		currentCar.SetActive(true);
-		currentCarID = carID;
-
-		//fix position
-		//positionFix(carID);
-		//load
-		loadTexture(currentCarID);
-		loadChangePart(currentCarID);
-		//findComponents(currentCarID);
-		//setResume();
+		if(currentCarID != 0)
+		{
+			currentCar.SetActive(false);
+			currentCar = carList[carID];
+			currentCar.transform.position = pTransform.position;
+			currentCar.transform.rotation = pTransform.rotation;
+			currentCar.SetActive(true);
+			currentCarID = carID;
+	
+			//fix position
+			//positionFix(carID);
+			//load
+			loadTexture(currentCarID);
+			loadChangePart(currentCarID);
+			//findComponents(currentCarID);
+			//setResume();
+		}
 	}
 	
 	void positionFix(int carID)

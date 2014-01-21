@@ -69,8 +69,9 @@ public class viewController : MonoBehaviour {
 	private Transform pBodyTransform;
 	private Transform pFrontWheelTransform;
 	private Transform pBottomTransform;
-	//current car ID
+	//current car ID & color ID
 	private int currentCarID;
+	private int currentColorID;
 	//car list
 	private GameObject[] carList = new GameObject[10];
 	//component list
@@ -89,6 +90,7 @@ public class viewController : MonoBehaviour {
 		currentCar = GameObject.Find("che001");
 		pTransform = currentCar.transform;
 		currentCarID = 0;
+		currentColorID = 0;
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
 		
 		initCarList();
@@ -117,6 +119,9 @@ public class viewController : MonoBehaviour {
 		{
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
 			{
+				//Data interface
+				PlayerPrefs.SetInt("CarID",currentCarID);
+				PlayerPrefs.SetInt("ColorID",currentColorID);
 				//load next scene
 				Application.LoadLevel("RoadSelectScene");
 			}
@@ -125,26 +130,32 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
 		{
 			changeMaterial(COLOR_RED);
+			currentColorID = COLOR_RED;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
 		{
 			changeMaterial(COLOR_BLACK);
+			currentColorID = COLOR_BLACK;
 		}
 		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
 		{
 			changeMaterial(COLOR_YELLOW);
+			currentColorID = COLOR_YELLOW;
 		}
 		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
 		{
 			changeMaterial(COLOR_GREY);
+			currentColorID = COLOR_GREY;
 		}
 		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
 		{
 			changeMaterial(COLOR_MAGENTA);
+			currentColorID = COLOR_MAGENTA;
 		}
 		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
 		{
 			changeMaterial(COLOR_WHITE);
+			currentColorID = COLOR_WHITE;
 		}
 		//draw component Textures
 		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
@@ -301,16 +312,14 @@ public class viewController : MonoBehaviour {
 		case 0:
 			break;
 		case 1:
-			float tempY1 = pTransform.position.y + 0.2f;
-			currentCar.transform.position = new Vector3(pTransform.position.x,tempY1,pTransform.position.z);
+			currentCar.transform.position = new Vector3(pTransform.position.x,pTransform.position.y + 0.2f,pTransform.position.z);
 			break;
 		case 2:
-			float tempY2 = pTransform.position.y + 0.9f;
-			currentCar.transform.position = new Vector3(pTransform.position.x,tempY2,pTransform.position.z);
+			currentCar.transform.position = new Vector3(pTransform.position.x,pTransform.position.y + 0.9f,pTransform.position.z);
+			wheel.transform.position = new Vector3(pWheelTransform.position.x+0.05f,pWheelTransform.position.y+0.1f,pWheelTransform.position.z);
 			break;
 		case 3:
-			float tempY3 = pTransform.position.y + 0.7f;
-			currentCar.transform.position = new Vector3(pTransform.position.x,tempY3,pTransform.position.z);
+			currentCar.transform.position = new Vector3(pTransform.position.x,pTransform.position.y + 0.7f,pTransform.position.z);
 			break;
 		case 4:
 			break;
@@ -625,6 +634,7 @@ public class viewController : MonoBehaviour {
 		cbBody.resumeColor();
 		cbFrontWheel.resumeColor();
 		cbBottom.resumeColor();
+		resumeRotate();
 	}
 	
 	//public interfaces

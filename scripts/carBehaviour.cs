@@ -3,7 +3,7 @@ using System.Collections;
 
 public class carBehaviour : MonoBehaviour {
 	
-	private int dragSpeedX = -300;
+	private int dragSpeedX = -600;
 	private viewController vc;
 	// Use this for initialization
 	void Start () 
