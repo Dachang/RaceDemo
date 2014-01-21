@@ -81,6 +81,13 @@ public class viewController : MonoBehaviour {
 	private GameObject[] bottomList = new GameObject[10];
 	//Textures
 	private Texture textureColor1,textureColor2,textureColor3,textureColor4,textureColor5,textureColor6;
+	public Texture mainTexture;
+	public Texture confirmOnClicked;
+	public Texture resetOnClicked;
+	//on clicked
+	private GameObject uiBG;
+	private bool onClicked = false;
+	private float clickTime;
 	
 	void Start () 
 	{
@@ -92,6 +99,7 @@ public class viewController : MonoBehaviour {
 		currentCarID = 0;
 		currentColorID = 0;
 		otherParts = GameObject.FindGameObjectsWithTag("otherPart");
+		uiBG = GameObject.Find("Plane");
 		
 		initCarList();
 		setUIPosition();
@@ -104,15 +112,21 @@ public class viewController : MonoBehaviour {
 	void Update () 
 	{
 		rotateCar();
+		buttonCountDown();
 	}
 	
 	void OnGUI()
 	{
+		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
 			setResume();
 			setTransparent(currentCarID);
+			//change Done Button Texture
+			onClicked = true;
+			clickTime = Time.time;
+			uiBG.renderer.material.mainTexture = resetOnClicked;
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
@@ -125,6 +139,10 @@ public class viewController : MonoBehaviour {
 				//load next scene
 				Application.LoadLevel("RoadSelectScene");
 			}
+			//change Done Button Texture
+			onClicked = true;
+			clickTime = Time.time;
+			uiBG.renderer.material.mainTexture = confirmOnClicked;
 		}
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
@@ -157,8 +175,6 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
 		}
-		//draw component Textures
-		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
 		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
 		{
 			//prev model
@@ -175,6 +191,20 @@ public class viewController : MonoBehaviour {
 			{
 				switchCar(currentCarID+1);
 				resumeRotate();
+			}
+		}
+	}
+	
+	void buttonCountDown()
+	{
+		if(onClicked)
+		{
+			float assumeTime = Time.time - clickTime;
+			int fraction = (int)((assumeTime * 100) % 100);
+			if(fraction > 20)
+			{
+				uiBG.renderer.material.mainTexture = mainTexture;
+				onClicked = false;
 			}
 		}
 	}
@@ -221,40 +251,40 @@ public class viewController : MonoBehaviour {
 			textureColor1 = (Texture)Resources.Load("che001.fbm/che001_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che001.fbm/che001_clr_cheng",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che001.fbm/che001_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che001.fbm/che001_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che001.fbm/che001_clr_lv",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che001.fbm/che001_clr_lv",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che001.fbm/che001_clr_lan",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che001.fbm/che001_clr_zi",typeof(Texture));
 			break;
 		case 1:
 			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr2",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che002.fbm/che002_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che002.fbm/che002_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che002.fbm/che002_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che002.fbm/che002_zi_clr",typeof(Texture));
 			break;
 		case 2:
 			textureColor1 = (Texture)Resources.Load("che003.fbm/che003_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che003.fbm/che003_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che003.fbm/che003_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che003.fbm/che003_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che003.fbm/che003_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che003.fbm/che003_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che003.fbm/che003_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che003.fbm/che003_zi_clr",typeof(Texture));
 			break;
 		case 3:
 			textureColor1 = (Texture)Resources.Load("che004.fbm/che004_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che004.fbm/che004_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che004.fbm/che004_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che004.fbm/che004_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che004.fbm/che004_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che004.fbm/che004_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che004.fbm/che004_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che004.fbm/che004_zi_clr",typeof(Texture));
 			break;
 		case 4:
 			textureColor1 = (Texture)Resources.Load("che005.fbm/che005_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che005.fbm/che005_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che005.fbm/che005_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che005.fbm/che005_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che005.fbm/che005_zi_clr",typeof(Texture));
 			break;
 		default:
@@ -379,24 +409,24 @@ public class viewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 240;
-		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 160;
-		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 80;
-		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 10;
-		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 90;
-		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 170;
-		MATBTN_MARGIN_UP = screenHeight - 90;
-		BUTTON_WIDTH = 70;
-		BACKBTN_MARGIN_LEFT = 25;
-		CONFIRMBTN_MARGIN_LEFT = screenWidth - 115;
-		BACKBTN_MARGIN_UP = screenHeight - 70;
-		BACKBTN_WIDTH = 94;
-		BACKBTN_HEIGHT = 36;
-		PREVBTN_MARGIN_LEFT = screenWidth/2 - 280;
-		PREVBTN_MARGIN_UP = screenHeight/2 - 105;
-		PREVBTN_WIDTH = 40;
-		PREVBTN_HEIGHT = 90;
-		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 260;
+		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 455;
+		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 295;
+		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 135;
+		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 25;
+		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 185;
+		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 345;
+		MATBTN_MARGIN_UP = screenHeight - 170;
+		BUTTON_WIDTH = 125;
+		BACKBTN_MARGIN_LEFT = 40;
+		CONFIRMBTN_MARGIN_LEFT = screenWidth - 195;
+		BACKBTN_MARGIN_UP = screenHeight - 145;
+		BACKBTN_WIDTH = 175;
+		BACKBTN_HEIGHT = 90;
+		PREVBTN_MARGIN_LEFT = screenWidth/2 - 420;
+		PREVBTN_MARGIN_UP = screenHeight/2 - 85;
+		PREVBTN_WIDTH = 100;
+		PREVBTN_HEIGHT = 100;
+		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 335;
 	}
 	
 	void changeMaterial(int materialID)
@@ -431,7 +461,7 @@ public class viewController : MonoBehaviour {
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.blue);
+					changeMaterials[i].SetColor("_Color",Color.green);
 			}
 			changeMaterials[4].mainTexture = textureColor4;
 			break;
@@ -439,7 +469,7 @@ public class viewController : MonoBehaviour {
 			for(int i = 0; i<=3; i++)
 			{
 				if(scriptList[i].isCompSetUp)
-					changeMaterials[i].SetColor("_Color",Color.green);
+					changeMaterials[i].SetColor("_Color",Color.blue);
 			}
 			changeMaterials[4].mainTexture = textureColor5;
 			break;
@@ -620,6 +650,30 @@ public class viewController : MonoBehaviour {
 		}
 	}
 	
+	void resumeMainBodyMaterial(int carID)
+	{
+		switch(carID)
+		{
+		case 0:
+			changeMaterials[4].mainTexture = textureColor1;
+			break;
+		case 1:
+			changeMaterials[4].mainTexture = textureColor4;
+			break;
+		case 2:
+			changeMaterials[4].mainTexture = textureColor5;
+			break;
+		case 3:
+			changeMaterials[4].mainTexture = textureColor2;
+			break;
+		case 4:
+			changeMaterials[4].mainTexture = textureColor6;
+			break;
+		default:
+			break;
+		}
+	}
+	
 	void setResume()
 	{
 		cbWheel.isCompSetUp = false;
@@ -634,6 +688,7 @@ public class viewController : MonoBehaviour {
 		cbBody.resumeColor();
 		cbFrontWheel.resumeColor();
 		cbBottom.resumeColor();
+		resumeMainBodyMaterial(currentCarID);
 		resumeRotate();
 	}
 	
