@@ -137,7 +137,7 @@ public class paintViewController : MonoBehaviour {
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-			setResume(currentCarID);
+			setResume();
 			//setTransparent(currentCarID);
 		}
 		//confirm button
@@ -180,7 +180,25 @@ public class paintViewController : MonoBehaviour {
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
 		}
-		//return button
+		//draw component Textures
+		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
+//		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
+//		{
+//			//prev model
+//			if(currentCarID > 0 && currentCarID <= 1)
+//			{
+//				switchCar(currentCarID-1);
+//			}
+//		}
+//		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
+//		{
+//			//next model
+//			if(currentCarID >= 0 && currentCarID < 1)
+//			{
+//				switchCar(currentCarID+1);
+//			}
+//		}
+				//return button
 		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Back"))
 		{
 			Application.LoadLevel("Scene1");
@@ -279,29 +297,49 @@ public class paintViewController : MonoBehaviour {
 		currentCar.transform.rotation = pTransform.rotation;
 		currentCar.SetActive(true);
 		currentCarID = carID;
+		//change components
+		//wheel
+//		wheel.SetActive(false);
+//		wheel = wheelList[carID];
+//		wheel.transform.position = pWheelTransform.position;
+//		wheel.transform.rotation = pWheelTransform.rotation;
+//		wheel.SetActive(true);
+//		//body
+//		body.SetActive(false);
+//		body = bodyList[carID];
+//		body.transform.position = pBodyTransform.position;
+//		body.transform.rotation = pBodyTransform.rotation;
+//		body.SetActive(true);
+//		//frontWheel
+//		frontWheel.SetActive(false);
+//		frontWheel = frontWheelList[carID];
+//		frontWheel.transform.position = pFrontWheelTransform.position;
+//		frontWheel.transform.rotation = pFrontWheelTransform.rotation;
+//		frontWheel.SetActive(true);
+//		//bottom
+//		bottom.SetActive(false);
+//		bottom = bottomList[carID];
+//		bottom.transform.position = pBottomTransform.position;
+//		bottom.transform.rotation = pBottomTransform.rotation;
+//		bottom.SetActive(true);
+//		//part5
+//		part5.SetActive(false);
+//		part5 = part5List[carID];
+//		part5.transform.position = pPart5Transfrom.position;
+//		part5.transform.rotation = pPart5Transfrom.rotation;
+//		part5.SetActive(true);
+//		//part6
+//		part6.SetActive(false);
+//		part6 = part6List[carID];
+//		part6.transform.position = pPart6Transform.position;
+//		part6.transform.rotation = pPart6Transform.rotation;
+//		part6.SetActive(true);
 		
 		loadTexture(currentCarID);
+		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
-		setResume(currentCarID);
-		adjustColor(currentCarID);
-	}
-	
-	void adjustColor(int carID)
-	{
-		switch(carID)
-		{
-		case 2:
-			changeMaterials[6].mainTexture = textureColor1;
-			break;
-		case 3:
-			changeMaterials[6].mainTexture = textureColor3;
-			break;
-		case 4:
-			changeMaterials[6].mainTexture = textureColor1;
-			break;
-		default:
-			break;
-		}
+		//findComponents(currentCarID);
+		setResume();
 	}
 	
 	void loadChangePart(int carID)
@@ -639,41 +677,13 @@ public class paintViewController : MonoBehaviour {
 		}
 	}
 	
-	void setResume(int carID)
+	void setResume()
 	{
 		for(int i=0; i<=5; i++)
 		{
 			changeMaterials[i].color = originalColorList[i];
 		}
-		switch(carID)
-		{
-		case 0:
-			changeMaterials[6].mainTexture = textureColor4;
-			currentColorID = COLOR_GREY;
-			break;
-		case 1:
-			changeMaterials[6].mainTexture = textureColor4;
-			currentColorID = COLOR_GREY;
-			break;
-		case 2:
-			changeMaterials[6].mainTexture = textureColor1;
-			currentColorID = COLOR_RED;
-			break;
-		case 3:
-			changeMaterials[6].mainTexture = textureColor3;
-			currentColorID = COLOR_YELLOW;
-			break;
-		case 4:
-			changeMaterials[6].mainTexture = textureColor1;
-			currentColorID = COLOR_RED;
-			break;
-		case 5:
-			changeMaterials[6].mainTexture = textureColor5;
-			currentColorID = COLOR_MAGENTA;
-			break;
-		default:
-			break;
-		}
+		changeMaterials[6].mainTexture = textureColor4;
 	}
 	
 	void generateID()
