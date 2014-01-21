@@ -3,8 +3,8 @@ using System.Collections;
 
 public class carBehaviour : MonoBehaviour {
 	
-	private int dragSpeedX = -100;
-	private int dragSpeedY = -100;
+	private int dragSpeedX = -600;
+	private int dragSpeedY = -600;
 	private paintViewController pvc;
 	private viewController vc;
 	

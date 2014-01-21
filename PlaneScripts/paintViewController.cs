@@ -78,8 +78,9 @@ public class paintViewController : MonoBehaviour {
 	private Transform pBottomTransform;
 	private Transform pPart5Transfrom;
 	private Transform pPart6Transform;
-	//current car ID
+	//current car ID & color ID
 	private int currentCarID;
+	private int currentColorID;
 	//car list
 	private GameObject[] carList = new GameObject[10];
 	//component list
@@ -96,6 +97,9 @@ public class paintViewController : MonoBehaviour {
 	//plane has chosen
 	private bool planeHasChosen = false;
 	private int planeID;
+	//string deliver to the next scene
+	private string carIDString;
+	private string colorIDString;
 	
 	void Start () 
 	{
@@ -139,36 +143,42 @@ public class paintViewController : MonoBehaviour {
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
-			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
-			{
-				//load next scene
-				Application.LoadLevel("RoadSelectScene");
-			}
+			//load next scene & pass data
+			generateID();
+			PlayerPrefs.SetString("planeID",carIDString);
+			PlayerPrefs.SetString("colorID",colorIDString);
+			Application.LoadLevel("FlyScene");
 		}
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
 		{
 			changeMaterial(COLOR_RED);
+			currentColorID = COLOR_RED;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
 		{
 			changeMaterial(COLOR_BLACK);
+			currentColorID = COLOR_BLACK;
 		}
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
 		{
 			changeMaterial(COLOR_YELLOW);
+			currentColorID = COLOR_YELLOW;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
 		{
 			changeMaterial(COLOR_GREY);
+			currentColorID = COLOR_GREY;
 		}
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
 		{
 			changeMaterial(COLOR_MAGENTA);
+			currentColorID = COLOR_MAGENTA;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
 		{
 			changeMaterial(COLOR_WHITE);
+			currentColorID = COLOR_WHITE;
 		}
 		//draw component Textures
 		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
@@ -674,6 +684,56 @@ public class paintViewController : MonoBehaviour {
 			changeMaterials[i].color = originalColorList[i];
 		}
 		changeMaterials[6].mainTexture = textureColor4;
+	}
+	
+	void generateID()
+	{
+		switch(currentCarID)
+		{
+		case 0:
+			carIDString = string.Format("3");
+			break;
+		case 1:
+			carIDString = string.Format("4");
+			break;
+		case 2:
+			carIDString = string.Format("5");
+			break;
+		case 3:
+			carIDString = string.Format("8");
+			break;
+		case 4:
+			carIDString = string.Format("10");
+			break;
+		case 5:
+			carIDString = string.Format("11");
+			break;
+		default:
+			break;
+		}
+		switch(currentColorID)
+		{
+		case 0:
+			colorIDString = string.Format("hong");
+			break;
+		case 1:
+			colorIDString = string.Format("cheng");
+			break;
+		case 2:
+			colorIDString = string.Format("huang");
+			break;
+		case 3:
+			colorIDString = string.Format("lan");
+			break;
+		case 4:
+			colorIDString = string.Format("lv");
+			break;
+		case 5:
+			colorIDString = string.Format("zi");
+			break;
+		default:
+			break;
+		}
 	}
 	
 	//public interfaces
