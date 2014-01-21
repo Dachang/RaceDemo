@@ -17,6 +17,10 @@ public class Timer : MonoBehaviour {
 	
 	//car script
 	private Car carScript;
+	private selectCar scScript;
+	
+	private int currentCarID;
+	private GameObject mainCar;
 	
 	void Awake()
 	{
@@ -28,13 +32,26 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		GameObject mainCar = GameObject.Find("che001");
+		mainCar = GameObject.Find("che001");
 		carScript = (Car)mainCar.GetComponent("Car");
+		scScript = (selectCar)Camera.main.GetComponent(typeof(selectCar));
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		currentCarID = scScript.getCurrentCarID();
+		switch(currentCarID)
+		{
+		case 0:
+			break;
+		case 1:
+			mainCar = GameObject.Find("che002");
+			carScript = (Car)mainCar.GetComponent("Car");
+			break;
+		default:
+			break;
+		}
 		if(countDownHasEnded)
 		{
 			carScript.setThrottle(true);
