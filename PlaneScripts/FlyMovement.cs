@@ -35,6 +35,11 @@ public class FlyMovement : MonoBehaviour {
 	private float factorX = 0;
 	private float factorY1 = 0;
 	private float factorY2 = 0;
+	//leap control adjust factor
+	private int tempFactorX = 100;
+	private int tempFactorY = 200;
+	private float factorLeapX = 1.0f;
+	private float factorLeapY = 2.0f;
 	
     void Start()
     {
@@ -55,6 +60,7 @@ public class FlyMovement : MonoBehaviour {
 	void Update () {
         Movement();
 		switchControl();
+		adjustLeapControl();
 	}
 
     private void Movement()
@@ -87,7 +93,7 @@ public class FlyMovement : MonoBehaviour {
         //float factorY = Input.GetAxis("Mouse Y")*2;
 		if(leapIsEnabled == true)
 		{
-			factorY1 = -pxsLeapInput.GetHandAxis("Tilt") * 2.0f;
+			factorY1 = -pxsLeapInput.GetHandAxis("Tilt") * factorLeapY;
 		}
 		else
 		{
@@ -113,8 +119,8 @@ public class FlyMovement : MonoBehaviour {
         //float factorX = Input.GetAxis("Mouse X") * 2;
 		if(leapIsEnabled == true)
 		{
-			factorX = pxsLeapInput.GetHandAxis("Rotation");
-			factorY2 = -pxsLeapInput.GetHandAxis("Tilt") * 2.0f;
+			factorX = pxsLeapInput.GetHandAxis("Rotation") * factorLeapX;
+			factorY2 = -pxsLeapInput.GetHandAxis("Tilt") * factorLeapY;
 		}
 		else
 		{
@@ -243,6 +249,31 @@ public class FlyMovement : MonoBehaviour {
 		if(Input.GetButton("Fire1"))
 		{
 			leapIsEnabled = !leapIsEnabled;
+		}
+	}
+	
+	void adjustLeapControl()
+	{
+		if(leapIsEnabled)
+		{
+			if(Input.GetButton("Fire2"))
+			{
+				tempFactorX--;
+				tempFactorY--;
+			}
+			if(Input.GetButton("Fire3"))
+			{
+				tempFactorX++;
+				tempFactorY++;
+			}
+			factorLeapX = (float)tempFactorX/100;
+			factorLeapY = (float)tempFactorY/100;
+			
+			if(factorLeapX > 1.0f) factorLeapX = 1.0f;
+			else if(factorLeapX < 0.1f) factorLeapX = 0.1f;
+			
+			if(factorLeapY > 2.0f) factorLeapY = 2.0f;
+			else if(factorLeapY < 0.5f) factorLeapY = 0.5f;
 		}
 	}
 
