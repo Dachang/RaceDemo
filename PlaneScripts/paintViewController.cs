@@ -100,6 +100,9 @@ public class paintViewController : MonoBehaviour {
 	//string deliver to the next scene
 	private string carIDString;
 	private string colorIDString;
+	//sound effect
+	public AudioClip clickSound;
+	public AudioClip successSound;
 	
 	void Start () 
 	{
@@ -134,16 +137,19 @@ public class paintViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-			setResume();
+			audio.PlayOneShot(clickSound);
+			setResume(currentCarID);
 			//setTransparent(currentCarID);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
 			//load next scene & pass data
+			audio.PlayOneShot(clickSound);
 			generateID();
 			PlayerPrefs.SetString("planeID",carIDString);
 			PlayerPrefs.SetString("colorID",colorIDString);
@@ -152,55 +158,44 @@ public class paintViewController : MonoBehaviour {
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
 		{
+			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_RED);
 			currentColorID = COLOR_RED;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
 		{
-			changeMaterial(COLOR_BLACK);
-			currentColorID = COLOR_BLACK;
-		}
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
-		{
-			changeMaterial(COLOR_YELLOW);
-			currentColorID = COLOR_YELLOW;
-		}
-		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
-		{
+			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_GREY);
 			currentColorID = COLOR_GREY;
 		}
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
 		{
+			audio.PlayOneShot(successSound);
+			changeMaterial(COLOR_BLACK);
+			currentColorID = COLOR_BLACK;
+		}
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
+		{
+			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_MAGENTA);
 			currentColorID = COLOR_MAGENTA;
 		}
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
+		{
+			audio.PlayOneShot(successSound);
+			changeMaterial(COLOR_YELLOW);
+			currentColorID = COLOR_YELLOW;
+		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
 		{
+			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
 		}
-		//draw component Textures
-		//GUI.DrawTexture(new Rect(70,70,225,160), compTextureOne, ScaleMode.StretchToFill, true, 0);
-//		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
-//		{
-//			//prev model
-//			if(currentCarID > 0 && currentCarID <= 1)
-//			{
-//				switchCar(currentCarID-1);
-//			}
-//		}
-//		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
-//		{
-//			//next model
-//			if(currentCarID >= 0 && currentCarID < 1)
-//			{
-//				switchCar(currentCarID+1);
-//			}
-//		}
-				//return button
-		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Back"))
+		//return button
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Back"))
 		{
+			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("Scene1");
 		}
 	}
@@ -297,49 +292,29 @@ public class paintViewController : MonoBehaviour {
 		currentCar.transform.rotation = pTransform.rotation;
 		currentCar.SetActive(true);
 		currentCarID = carID;
-		//change components
-		//wheel
-//		wheel.SetActive(false);
-//		wheel = wheelList[carID];
-//		wheel.transform.position = pWheelTransform.position;
-//		wheel.transform.rotation = pWheelTransform.rotation;
-//		wheel.SetActive(true);
-//		//body
-//		body.SetActive(false);
-//		body = bodyList[carID];
-//		body.transform.position = pBodyTransform.position;
-//		body.transform.rotation = pBodyTransform.rotation;
-//		body.SetActive(true);
-//		//frontWheel
-//		frontWheel.SetActive(false);
-//		frontWheel = frontWheelList[carID];
-//		frontWheel.transform.position = pFrontWheelTransform.position;
-//		frontWheel.transform.rotation = pFrontWheelTransform.rotation;
-//		frontWheel.SetActive(true);
-//		//bottom
-//		bottom.SetActive(false);
-//		bottom = bottomList[carID];
-//		bottom.transform.position = pBottomTransform.position;
-//		bottom.transform.rotation = pBottomTransform.rotation;
-//		bottom.SetActive(true);
-//		//part5
-//		part5.SetActive(false);
-//		part5 = part5List[carID];
-//		part5.transform.position = pPart5Transfrom.position;
-//		part5.transform.rotation = pPart5Transfrom.rotation;
-//		part5.SetActive(true);
-//		//part6
-//		part6.SetActive(false);
-//		part6 = part6List[carID];
-//		part6.transform.position = pPart6Transform.position;
-//		part6.transform.rotation = pPart6Transform.rotation;
-//		part6.SetActive(true);
 		
 		loadTexture(currentCarID);
-		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
-		//findComponents(currentCarID);
-		setResume();
+		setResume(currentCarID);
+		adjustColor(currentCarID);
+	}
+	
+	void adjustColor(int carID)
+	{
+		switch(carID)
+		{
+		case 2:
+			changeMaterials[6].mainTexture = textureColor1;
+			break;
+		case 3:
+			changeMaterials[6].mainTexture = textureColor3;
+			break;
+		case 4:
+			changeMaterials[6].mainTexture = textureColor1;
+			break;
+		default:
+			break;
+		}
 	}
 	
 	void loadChangePart(int carID)
@@ -443,23 +418,23 @@ public class paintViewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth - 360;
-		MATBTNTWO_MARGIN_LEFT = screenWidth - 170;
-		MATBTNONE_MARGIN_UP = screenHeight/2 - 180;
-		MATBTNTWO_MARGIN_UP = screenHeight/2 - 10;
-		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 160;
-		BUTTON_WIDTH = 70;
-		BACKBTN_MARGIN_LEFT = screenWidth/2 + 300;
-		CONFIRMBTN_MARGIN_LEFT = screenWidth - 115;
-		BACKBTN_MARGIN_UP = screenHeight - 70;
-		BACKBTN_WIDTH = 94;
-		BACKBTN_HEIGHT = 36;
+		MATBTNONE_MARGIN_LEFT = screenWidth - 410;
+		MATBTNTWO_MARGIN_LEFT = screenWidth - 215;
+		MATBTNONE_MARGIN_UP = screenHeight/2 - 210;
+		MATBTNTWO_MARGIN_UP = screenHeight/2 - 50;
+		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 110;
+		BUTTON_WIDTH = 140;
+		BACKBTN_MARGIN_LEFT = screenWidth/2 + 248;
+		CONFIRMBTN_MARGIN_LEFT = screenWidth - 217;
+		BACKBTN_MARGIN_UP = screenHeight - 120;
+		BACKBTN_WIDTH = 210;
+		BACKBTN_HEIGHT = 110;
 		PREVBTN_MARGIN_LEFT = screenWidth/2 - 400;
 		PREVBTN_MARGIN_UP = screenHeight/2 - 135;
-		PREVBTN_WIDTH = 40;
-		PREVBTN_HEIGHT = 90;
+		PREVBTN_WIDTH = 200;
+		PREVBTN_HEIGHT = 85;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
-		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 300;
+		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 310;
 	}
 	
 	void changeMaterial(int materialID)
@@ -677,13 +652,42 @@ public class paintViewController : MonoBehaviour {
 		}
 	}
 	
-	void setResume()
+	void setResume(int carID)
 	{
 		for(int i=0; i<=5; i++)
 		{
 			changeMaterials[i].color = originalColorList[i];
 		}
-		changeMaterials[6].mainTexture = textureColor4;
+		switch(carID)
+		{
+		case 0:
+			changeMaterials[6].mainTexture = textureColor4;
+			currentColorID = COLOR_GREY;
+			break;
+		case 1:
+			changeMaterials[6].mainTexture = textureColor4;
+			currentColorID = COLOR_GREY;
+			break;
+		case 2:
+			changeMaterials[6].mainTexture = textureColor1;
+			currentColorID = COLOR_RED;
+			break;
+		case 3:
+			changeMaterials[6].mainTexture = textureColor3;
+			currentColorID = COLOR_YELLOW;
+			break;
+		case 4:
+			changeMaterials[6].mainTexture = textureColor1;
+			currentColorID = COLOR_RED;
+			break;
+		case 5:
+			changeMaterials[6].mainTexture = textureColor5;
+			currentColorID = COLOR_MAGENTA;
+			break;
+		default:
+			break;
+		}
+		shouldCarRotate = true;
 	}
 	
 	void generateID()

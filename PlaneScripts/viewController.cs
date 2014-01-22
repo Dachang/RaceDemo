@@ -93,6 +93,9 @@ public class viewController : MonoBehaviour {
 	//plane has chosen
 	private bool planeHasChosen = false;
 	private int planeID;
+	//sound effect
+	public AudioClip clickSound;
+	public AudioClip successSound;
 	
 	void Start () 
 	{
@@ -126,15 +129,18 @@ public class viewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
+			audio.PlayOneShot(clickSound);
 			setResume();
 			setTransparent(currentCarID);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
+			audio.PlayOneShot(clickSound);
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp && cbPart5.isCompSetUp && cbPart6.isCompSetUp)
 			{
 				//load next scene
@@ -142,8 +148,9 @@ public class viewController : MonoBehaviour {
 			}
 		}
 		//return button
-		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Back"))
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Back"))
 		{
+			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("SelectScene");
 		}
 	}
@@ -312,25 +319,23 @@ public class viewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 240;
-		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 160;
-		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 80;
-		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 10;
-		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 90;
-		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 170;
-		MATBTN_MARGIN_UP = screenHeight - 90;
-		BUTTON_WIDTH = 70;
-		BACKBTN_MARGIN_LEFT = screenWidth/2 + 300;
-		CONFIRMBTN_MARGIN_LEFT = screenWidth - 115;
-		BACKBTN_MARGIN_UP = screenHeight - 70;
-		BACKBTN_WIDTH = 94;
-		BACKBTN_HEIGHT = 36;
+		MATBTNONE_MARGIN_LEFT = screenWidth - 410;
+		MATBTNTWO_MARGIN_LEFT = screenWidth - 215;
+		//MATBTNONE_MARGIN_UP = screenHeight/2 - 210;
+		//MATBTNTWO_MARGIN_UP = screenHeight/2 - 50;
+		//MATBTNTHREE_MARGIN_UP = screenHeight/2 + 110;
+		BUTTON_WIDTH = 140;
+		BACKBTN_MARGIN_LEFT = screenWidth/2 + 248;
+		CONFIRMBTN_MARGIN_LEFT = screenWidth - 217;
+		BACKBTN_MARGIN_UP = screenHeight - 120;
+		BACKBTN_WIDTH = 210;
+		BACKBTN_HEIGHT = 110;
 		PREVBTN_MARGIN_LEFT = screenWidth/2 - 400;
 		PREVBTN_MARGIN_UP = screenHeight/2 - 135;
-		PREVBTN_WIDTH = 40;
-		PREVBTN_HEIGHT = 90;
+		PREVBTN_WIDTH = 200;
+		PREVBTN_HEIGHT = 85;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
-		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 300;
+		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 310;
 	}
 	
 	void changeMaterial(int materialID)
@@ -636,6 +641,7 @@ public class viewController : MonoBehaviour {
 		cbBottom.resumeColor();
 		cbPart5.resumeColor();
 		cbPart6.resumeColor();
+		shouldCarRotate = true;
 	}
 	
 	//public interfaces

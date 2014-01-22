@@ -40,6 +40,8 @@ public class compBehaviour : MonoBehaviour {
 	//smooth follow buffer
 	private Vector3 screenPoint;
 	private Vector3 offset;
+	//sound effect
+	public AudioClip successSound;
 	
 	void Start()
 	{
@@ -117,6 +119,7 @@ public class compBehaviour : MonoBehaviour {
 		{
 			//renderer.material.color = Color.green;
 			isAbleToDrag = false;
+			audio.PlayOneShot(successSound);
 		}
 		else
 		{

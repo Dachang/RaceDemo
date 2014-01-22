@@ -17,6 +17,8 @@ public class scoreManager : MonoBehaviour {
 	private selectCar scScript;
 	private int currentCarID;
 	
+	public AudioClip coinSound;
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -68,6 +70,7 @@ public class scoreManager : MonoBehaviour {
 	public void addScore()
 	{
 		score += 10;
+		audio.PlayOneShot(coinSound);
 	}
 	
 	public void addRoundNum()
