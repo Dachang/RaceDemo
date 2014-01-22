@@ -216,6 +216,11 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 		}
+		//exitButton
+		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
+		{
+			Application.Quit();
+		}
 	}
 	
 	void buttonCountDown()

@@ -198,6 +198,11 @@ public class paintViewController : MonoBehaviour {
 			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("Scene1");
 		}
+		//exitButton
+		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
+		{
+			Application.Quit();
+		}
 	}
 	
 	void initCarList()

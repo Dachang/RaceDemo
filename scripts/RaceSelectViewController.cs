@@ -48,6 +48,11 @@ public class RaceSelectViewController : MonoBehaviour {
 			//return
 			Application.LoadLevel(0);
 		}
+		//exitButton
+		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
+		{
+			Application.Quit();
+		}
 	}
 	
 	void initUIPosition()

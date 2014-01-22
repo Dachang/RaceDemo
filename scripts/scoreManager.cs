@@ -64,6 +64,11 @@ public class scoreManager : MonoBehaviour {
 		GUI.Label (new Rect (screenWidth-150, 25, 200, 60), textScore);
 		GUI.Label (new Rect (20,25,500,60), textRoundNum);
 		GUI.skin.label.fontSize = 30;
+		//exitButton
+		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
+		{
+			Application.Quit();
+		}
 	}
 	
 	//public interfaces

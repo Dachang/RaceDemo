@@ -75,6 +75,11 @@ public class planeSelectViewController : MonoBehaviour {
 			PlayerPrefs.SetInt("planeID",5);
 			Application.LoadLevel("Scene1");
 		}
+		//exitButton
+		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-60,50,50),"ESC"))
+		{
+			Application.Quit();
+		}
 	}
 	
 	void initUIPosition()
