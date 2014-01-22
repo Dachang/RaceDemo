@@ -110,4 +110,10 @@ public class Timer : MonoBehaviour {
 			}
 		}
 	}
+	
+	//public interfaces
+	public string getTimeString()
+	{
+		return textTime;
+	}
 }
