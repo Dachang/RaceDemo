@@ -8,18 +8,18 @@ public class RaceSelectViewController : MonoBehaviour {
 	
 	private int RACEBTN_ONE_MARGIN_LEFT;
 	private int RACEBTN_ONE_MARGIN_UP;
-	private int RACEBTN_ONE_WIDTH = 120;
-	private int RACEBTN_ONE_HEIGHT = 120;
+	private int RACEBTN_ONE_WIDTH = 560;
+	private int RACEBTN_ONE_HEIGHT = 400;
 	
 	private int RACEBTN_TWO_MARGIN_LEFT;
 	private int RACEBTN_TWO_MARGIN_UP;
-    private int RACEBTN_TWO_WIDTH = 120;
-	private int RACEBTN_TWO_HEIGHT = 120;
+    private int RACEBTN_TWO_WIDTH = 560;
+	private int RACEBTN_TWO_HEIGHT = 400;
 	
 	private int RETURN_MARGIN_LEFT;
 	private int RETURN_MARGIN_UP;
-    private int RETURN_WIDTH = 90;
-	private int RETURN_HEIGHT = 40;
+    private int RETURN_WIDTH = 200;
+	private int RETURN_HEIGHT = 90;
 	
 	// Use this for initialization
 	void Start () 
@@ -34,6 +34,7 @@ public class RaceSelectViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Race1"))
 		{
 			//load Race 1
@@ -60,10 +61,10 @@ public class RaceSelectViewController : MonoBehaviour {
 		screenWidth = Screen.width;
 		screenHeight = Screen.height;
 		
-		RACEBTN_ONE_MARGIN_LEFT = screenWidth/2 - RACEBTN_ONE_WIDTH - 20;
+		RACEBTN_ONE_MARGIN_LEFT = 70;
 		RACEBTN_ONE_MARGIN_UP = screenHeight/2 - RACEBTN_ONE_HEIGHT/2;
 		
-		RACEBTN_TWO_MARGIN_LEFT = screenWidth/2 + 20;
+		RACEBTN_TWO_MARGIN_LEFT = screenWidth/2 + 90;
 		RACEBTN_TWO_MARGIN_UP = screenHeight/2 - RACEBTN_ONE_HEIGHT/2;
 		
 		RETURN_MARGIN_LEFT = screenWidth/2 - RETURN_WIDTH/2;

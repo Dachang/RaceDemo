@@ -130,7 +130,6 @@ public class viewController : MonoBehaviour {
 			onClicked = true;
 			clickTime = Time.time;
 			uiBG.renderer.material.mainTexture = resetOnClicked;
-			//play sound
 			audio.PlayOneShot(clickSound);
 		}
 		//confirm button
@@ -138,6 +137,7 @@ public class viewController : MonoBehaviour {
 		{
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
 			{
+				audio.PlayOneShot(clickSound);
 				//Data interface
 				PlayerPrefs.SetInt("CarID",currentCarID);
 				PlayerPrefs.SetInt("ColorID",currentColorID);
@@ -148,8 +148,6 @@ public class viewController : MonoBehaviour {
 			onClicked = true;
 			clickTime = Time.time;
 			uiBG.renderer.material.mainTexture = confirmOnClicked;
-			//play sound
-			audio.PlayOneShot(clickSound);
 		}
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
@@ -157,6 +155,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_RED);
 			currentColorID = COLOR_RED;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
@@ -164,6 +163,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_BLACK);
 			currentColorID = COLOR_BLACK;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
@@ -171,6 +171,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_YELLOW);
 			currentColorID = COLOR_YELLOW;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
@@ -178,6 +179,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_GREY);
 			currentColorID = COLOR_GREY;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
@@ -185,6 +187,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_MAGENTA);
 			currentColorID = COLOR_MAGENTA;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
@@ -192,6 +195,7 @@ public class viewController : MonoBehaviour {
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
 			//play sound
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
 		}
 		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
@@ -202,7 +206,6 @@ public class viewController : MonoBehaviour {
 				switchCar(currentCarID-1);
 				resumeRotate();
 			}
-			//play sound
 			audio.PlayOneShot(clickSound);
 		}
 		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
@@ -213,7 +216,6 @@ public class viewController : MonoBehaviour {
 				switchCar(currentCarID+1);
 				resumeRotate();
 			}
-			//play sound
 			audio.PlayOneShot(clickSound);
 		}
 		//exitButton

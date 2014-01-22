@@ -141,9 +141,9 @@ public class paintViewController : MonoBehaviour {
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-			audio.PlayOneShot(clickSound);
 			setResume(currentCarID);
 			//setTransparent(currentCarID);
+			audio.PlayOneShot(clickSound);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
@@ -158,36 +158,42 @@ public class paintViewController : MonoBehaviour {
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_RED);
 			currentColorID = COLOR_RED;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_GREY);
 			currentColorID = COLOR_GREY;
 		}
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_BLACK);
 			currentColorID = COLOR_BLACK;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_MAGENTA);
 			currentColorID = COLOR_MAGENTA;
 		}
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_YELLOW);
 			currentColorID = COLOR_YELLOW;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
@@ -195,6 +201,7 @@ public class paintViewController : MonoBehaviour {
 		//return button
 		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Back"))
 		{
+			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("Scene1");
 		}

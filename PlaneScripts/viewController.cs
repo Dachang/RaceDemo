@@ -133,9 +133,9 @@ public class viewController : MonoBehaviour {
 		//reset button
 		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
 		{
-			audio.PlayOneShot(clickSound);
 			setResume();
 			setTransparent(currentCarID);
+			audio.PlayOneShot(clickSound);
 		}
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
