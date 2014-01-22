@@ -19,7 +19,7 @@ public class bonusBehaviour : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if(!hasTriggered)
+		if(!hasTriggered && other.tag == "raceCar")
 		{
 			Destroy(gameObject);
 			sMgr.addScore();
