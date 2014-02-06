@@ -34,6 +34,7 @@ public class scoreManager : MonoBehaviour {
 	private int buttonListWidth = 450;
 	//gameover?
 	private bool gameIsOver = false;
+	private int gameOverCount = 0;
 	
 	// Use this for initialization
 	void Start ()
@@ -63,7 +64,10 @@ public class scoreManager : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = mySkin;
-		textScore = string.Format(score.ToString());
+		if(!gameIsOver)
+		{
+			textScore = string.Format(score.ToString());
+		}
 		switch(currentCarID)
 		{
 		case 0:
@@ -109,10 +113,13 @@ public class scoreManager : MonoBehaviour {
 		GUI.Label(new Rect (screenWidth/2 - resultTexture.width/2 + 330, screenHeight/2, 200, 60), resultScoreLabel);
 		if(gameIsOver)
 		{
-			GUILayout.BeginArea(new Rect(screenWidth/2 - buttonListWidth/2,screenHeight/2 + 100,
+			textRoundNum = string.Format(" ");
+			textScore = string.Format(" ");
+			tScript.clearTimeString();
+			GUILayout.BeginArea(new Rect(screenWidth/2,screenHeight/2 + 100,
 				buttonListWidth,buttonListHeight));
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button("BACK",GUILayout.Height(100)))
+			if(GUILayout.Button(" ",GUILayout.Height(64),GUILayout.Width(128)))
 			{
 				scScript.setIsCarSelected(false);
 				scScript.setIsColorSelected(false);
@@ -130,6 +137,7 @@ public class scoreManager : MonoBehaviour {
 			gameIsOver = true;
 			textRoundNum = string.Format(" ");
 			textScore = string.Format(" ");
+			//tScript.clearTimeString();
 			resultScoreLabel = string.Format(score.ToString());
 			resultTimeLabel = tScript.getTimeString();
 			//invisible UI
@@ -137,6 +145,7 @@ public class scoreManager : MonoBehaviour {
 			scoreTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
 			roundNumTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
 			resultTexture = (Texture)Resources.Load("LabelResult",typeof(Texture));
+			gameOverCount++;
 			Time.timeScale = 0;
 		}
 	}
@@ -151,5 +160,10 @@ public class scoreManager : MonoBehaviour {
 	public void addRoundNum()
 	{
 		roundNum++;
+	}
+	
+	public bool getGameOver()
+	{
+		return gameIsOver;
 	}
 }

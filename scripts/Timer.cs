@@ -12,12 +12,14 @@ public class Timer : MonoBehaviour {
 	
 	private string countDownText;
 	public string textTime;
+	public string timeStringToPass;
 	
 	public bool countDownHasEnded = false;
 	
 	//car script
 	private Car carScript;
 	private selectCar scScript;
+	private scoreManager smScript;
 	
 	private int currentCarID;
 	private GameObject mainCar;
@@ -25,6 +27,9 @@ public class Timer : MonoBehaviour {
 	private Texture countDownTexture;
 	
 	public GUISkin mySkin;
+	
+	//gameover?
+	private bool gameOver = false;
 	
 	void Awake()
 	{
@@ -39,6 +44,7 @@ public class Timer : MonoBehaviour {
 		mainCar = GameObject.Find("che001");
 		carScript = (Car)mainCar.GetComponent("Car");
 		scScript = (selectCar)Camera.main.GetComponent(typeof(selectCar));
+		smScript = (scoreManager)Camera.main.GetComponent(typeof(scoreManager));
 		countDownTexture = (Texture)Resources.Load("LabelThree",typeof(Texture));
 	}
 	
@@ -70,6 +76,7 @@ public class Timer : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.skin = mySkin;
+		gameOver = smScript.getGameOver();
 		countDownToStart();
 		if(countDownHasEnded)
 		{
@@ -80,7 +87,15 @@ public class Timer : MonoBehaviour {
 			int minutes = (int)(guiTime / 60);
 			int seconds = (int)(guiTime % 60);
 			int fraction = (int)((guiTime * 100) % 100);
-			textTime = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, fraction);
+			if(!gameOver)
+			{
+				textTime = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, fraction);
+				timeStringToPass = textTime;
+			}
+			else
+			{
+				textTime = string.Format(" ");
+			}
 			GUI.Label (new Rect (screenWidth/2+10, 16, 350, 60), textTime);
 			GUI.skin.label.fontSize = 62;
 		}
@@ -117,6 +132,11 @@ public class Timer : MonoBehaviour {
 	//public interfaces
 	public string getTimeString()
 	{
-		return textTime;
+		return timeStringToPass;
+	}
+	
+	public void clearTimeString()
+	{
+		textTime = string.Format(" ");
 	}
 }
