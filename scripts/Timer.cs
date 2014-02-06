@@ -24,6 +24,8 @@ public class Timer : MonoBehaviour {
 	
 	private Texture countDownTexture;
 	
+	public GUISkin mySkin;
+	
 	void Awake()
 	{
 		startTime = Time.time;
@@ -67,6 +69,7 @@ public class Timer : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.skin = mySkin;
 		countDownToStart();
 		if(countDownHasEnded)
 		{
@@ -78,8 +81,8 @@ public class Timer : MonoBehaviour {
 			int seconds = (int)(guiTime % 60);
 			int fraction = (int)((guiTime * 100) % 100);
 			textTime = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, fraction);
-			GUI.Label (new Rect (screenWidth/2+10, 25, 200, 60), textTime);
-			GUI.skin.label.fontSize = 30;
+			GUI.Label (new Rect (screenWidth/2+10, 16, 350, 60), textTime);
+			GUI.skin.label.fontSize = 62;
 		}
 		else
 		{
@@ -88,7 +91,7 @@ public class Timer : MonoBehaviour {
 			else if(countDownSeconds == 1) countDownTexture = (Texture)Resources.Load("LabelTwo",typeof(Texture));
 			else if(countDownSeconds == 2) countDownTexture = (Texture)Resources.Load("LabelOne",typeof(Texture));
 			else countDownTexture = countDownTexture = (Texture)Resources.Load("LabelStart",typeof(Texture));
-			GUI.skin.label.fontSize = 50;
+			GUI.skin.label.fontSize = 62;
 		}
 		//GUI.Label (new Rect (screenWidth/2 - 100, 150, 200, 60),countDownText);
 		//count Down UI

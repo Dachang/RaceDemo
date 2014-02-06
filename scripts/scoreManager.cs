@@ -25,9 +25,15 @@ public class scoreManager : MonoBehaviour {
 	public Texture scoreTexture;
 	public Texture timeTexture;
 	public Texture resultTexture;
+	public Texture roundNumTexture;
 	//result Label
 	private string resultTimeLabel;
 	private string resultScoreLabel;
+	//button area
+	private int buttonListHeight = 150;
+	private int buttonListWidth = 450;
+	//gameover?
+	private bool gameIsOver = false;
 	
 	// Use this for initialization
 	void Start ()
@@ -35,6 +41,7 @@ public class scoreManager : MonoBehaviour {
 		score = 0;
 		roundCount = 0;
 		roundNum = 1;
+		gameIsOver = false;
 		screenWidth = Screen.width;
 		screenHeight = Screen.height;
 		scScript = (selectCar)Camera.main.GetComponent(typeof(selectCar));
@@ -47,24 +54,27 @@ public class scoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		if(!gameIsOver)
+			Time.timeScale = 1.0f;
 		currentCarID = scScript.getCurrentCarID();
 		updateGameState();
 	}
 	
 	void OnGUI()
 	{
+		GUI.skin = mySkin;
 		textScore = string.Format(score.ToString());
 		switch(currentCarID)
 		{
 		case 0:
 			if(roundNum == 1)
 			{
-				textRoundNum = string.Format("Round: 1 / 2");
+				textRoundNum = string.Format("1 / 2");
 				roundCount = 1;
 			}
 			else if(roundNum == 7)
 			{
-				textRoundNum = string.Format("Round: 2 / 2");
+				textRoundNum = string.Format("2 / 2");
 				roundCount = 2;
 			}
 			else if(roundNum == 13)
@@ -74,34 +84,50 @@ public class scoreManager : MonoBehaviour {
 			}
 			break;
 		case 1:
-			textRoundNum = string.Format("Round: " + roundNum.ToString() + " / 2");
+			textRoundNum = string.Format(roundNum.ToString() + " / 2");
 			if(roundNum == 3) roundCount = 3;
 			break;
 		default:
 			break;
 		}
 		Debug.Log(roundNum);
-		GUI.Label (new Rect (screenWidth - 90, 25, 200, 60), textScore);
-		GUI.Label (new Rect (20,25,500,60), textRoundNum);
-		GUI.skin.label.fontSize = 50;
+		GUI.Label (new Rect (screenWidth - 170, 20, 200, 60), textScore);
+		GUI.Label (new Rect (180,20,500,60), textRoundNum);
+		GUI.skin.label.fontSize = 62;
 		//exitButton
 		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
 		{
 			Application.Quit();
 		}
 		//static UI
-		GUI.DrawTexture(new Rect(screenWidth/2 - timeTexture.width/2 - 40,20,timeTexture.width*2/3,timeTexture.height), timeTexture, ScaleMode.StretchToFill, true, 0);
-		GUI.DrawTexture(new Rect(screenWidth - scoreTexture.width,20,scoreTexture.width*2/3,scoreTexture.height), scoreTexture, ScaleMode.StretchToFill, true, 0);
+		GUI.DrawTexture(new Rect(screenWidth/2 - timeTexture.width/2 - 40,20,timeTexture.width*2/3,timeTexture.height*2/3), timeTexture, ScaleMode.StretchToFill, true, 0);
+		GUI.DrawTexture(new Rect(screenWidth - scoreTexture.width - 80,20,scoreTexture.width*2/3,scoreTexture.height), scoreTexture, ScaleMode.StretchToFill, true, 0);
+		GUI.DrawTexture(new Rect(20,20,roundNumTexture.width*2/3,roundNumTexture.height), roundNumTexture, ScaleMode.StretchToFill, true, 0);
 		//Dynamic UI
-		GUI.DrawTexture(new Rect(screenWidth/2 - resultTexture.width/2 - 100,screenHeight/2 - resultTexture.height/2,resultTexture.width,resultTexture.height), resultTexture, ScaleMode.StretchToFill, true, 0);
-		GUI.Label(new Rect (screenWidth/2 - resultTexture.width/2 + 420, screenHeight/2 - 100, 200, 60), resultTimeLabel);
-		GUI.Label(new Rect (screenWidth/2 - resultTexture.width/2 + 420, screenHeight/2 + 40, 200, 60), resultScoreLabel);
+		GUI.DrawTexture(new Rect(screenWidth/2 - resultTexture.width/2 - 100,screenHeight/2 - resultTexture.height/2,resultTexture.width*4/5,resultTexture.height*4/5), resultTexture, ScaleMode.StretchToFill, true, 0);
+		GUI.Label(new Rect (screenWidth/2 - resultTexture.width/2 + 330, screenHeight/2 - 120, 350, 60), resultTimeLabel);
+		GUI.Label(new Rect (screenWidth/2 - resultTexture.width/2 + 330, screenHeight/2, 200, 60), resultScoreLabel);
+		if(gameIsOver)
+		{
+			GUILayout.BeginArea(new Rect(screenWidth/2 - buttonListWidth/2,screenHeight/2 + 100,
+				buttonListWidth,buttonListHeight));
+			GUILayout.BeginHorizontal();
+			if(GUILayout.Button("BACK",GUILayout.Height(100)))
+			{
+				scScript.setIsCarSelected(false);
+				scScript.setIsColorSelected(false);
+				Application.LoadLevel(0);
+			}
+			GUILayout.EndHorizontal();
+			GUILayout.EndArea();
+		}
 	}
 	
 	void updateGameState()
 	{
 		if(roundCount == 3)
 		{
+			gameIsOver = true;
 			textRoundNum = string.Format(" ");
 			textScore = string.Format(" ");
 			resultScoreLabel = string.Format(score.ToString());
@@ -109,6 +135,7 @@ public class scoreManager : MonoBehaviour {
 			//invisible UI
 			timeTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
 			scoreTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
+			roundNumTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
 			resultTexture = (Texture)Resources.Load("LabelResult",typeof(Texture));
 			Time.timeScale = 0;
 		}

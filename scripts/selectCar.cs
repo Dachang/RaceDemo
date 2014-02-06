@@ -80,40 +80,40 @@ public class selectCar : MonoBehaviour {
 			textureColor1 = (Texture)Resources.Load("che001.fbm/che001_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che001.fbm/che001_clr_cheng",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che001.fbm/che001_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che001.fbm/che001_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che001.fbm/che001_clr_lv",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che001.fbm/che001_clr_lv",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che001.fbm/che001_clr_lan",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che001.fbm/che001_clr_zi",typeof(Texture));
 			break;
 		case 1:
-			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr2",typeof(Texture));
+			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr3",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che002.fbm/che002_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che002.fbm/che002_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che002.fbm/che002_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che002.fbm/che002_zi_clr",typeof(Texture));
 			break;
 		case 2:
 			textureColor1 = (Texture)Resources.Load("che003.fbm/che003_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che003.fbm/che003_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che003.fbm/che003_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che003.fbm/che003_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che003.fbm/che003_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che003.fbm/che003_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che003.fbm/che003_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che003.fbm/che003_zi_clr",typeof(Texture));
 			break;
 		case 3:
 			textureColor1 = (Texture)Resources.Load("che004.fbm/che004_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che004.fbm/che004_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che004.fbm/che004_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che004.fbm/che004_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che004.fbm/che004_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che004.fbm/che004_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che004.fbm/che004_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che004.fbm/che004_zi_clr",typeof(Texture));
 			break;
 		case 4:
 			textureColor1 = (Texture)Resources.Load("che005.fbm/che005_hong_clr",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che005.fbm/che005_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che005.fbm/che005_huang_clr",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lv_clr",typeof(Texture));
+			textureColor4 = (Texture)Resources.Load("che005.fbm/che005_lv_clr",typeof(Texture));
+			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che005.fbm/che005_zi_clr",typeof(Texture));
 			break;
 		default:
@@ -244,14 +244,14 @@ public class selectCar : MonoBehaviour {
 		case 3:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.blue);
+				changeMaterials[i].SetColor("_Color",Color.green);
 			}
 			changeMaterials[4].mainTexture = textureColor4;
 			break;
 		case 4:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.green);
+				changeMaterials[i].SetColor("_Color",Color.blue);
 			}
 			changeMaterials[4].mainTexture = textureColor5;
 			break;
@@ -271,5 +271,15 @@ public class selectCar : MonoBehaviour {
 	public int getCurrentCarID()
 	{
 		return currentCarID;
+	}
+	
+	public void setIsCarSelected(bool isSelected)
+	{
+		isCarSelected = isSelected;
+	}
+	
+	public void setIsColorSelected(bool isSelected)
+	{
+		isColorSelected = isSelected;
 	}
 }

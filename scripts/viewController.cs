@@ -110,10 +110,13 @@ public class viewController : MonoBehaviour {
 		setTransparent(currentCarID);
 		loadChangePart(currentCarID);
 		findComponents(currentCarID);
+		
+		setResume();
 	}
 	
 	void Update () 
 	{
+		Time.timeScale = 1.0f;
 		rotateCar();
 		buttonCountDown();
 	}
@@ -135,7 +138,8 @@ public class viewController : MonoBehaviour {
 		//confirm button
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
-			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp)
+			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp
+				&& (currentCarID == 0 || currentCarID == 1))
 			{
 				audio.PlayOneShot(clickSound);
 				//Data interface
@@ -219,7 +223,7 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(clickSound);
 		}
 		//exitButton
-		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
+		if(GUI.Button(new Rect(screenWidth - 85,screenHeight-70,60,60),"ESC"))
 		{
 			Application.Quit();
 		}
@@ -286,7 +290,7 @@ public class viewController : MonoBehaviour {
 			textureColor6 = (Texture)Resources.Load("che001.fbm/che001_clr_zi",typeof(Texture));
 			break;
 		case 1:
-			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr2",typeof(Texture));
+			textureColor1 = (Texture)Resources.Load("che002.fbm/che002_hong_clr3",typeof(Texture));
 			textureColor2 = (Texture)Resources.Load("che002.fbm/che002_cheng_clr",typeof(Texture));
 			textureColor3 = (Texture)Resources.Load("che002.fbm/che002_huang_clr",typeof(Texture));
 			textureColor4 = (Texture)Resources.Load("che002.fbm/che002_lv_clr",typeof(Texture));
@@ -375,7 +379,7 @@ public class viewController : MonoBehaviour {
 			currentCar.transform.position = new Vector3(pTransform.position.x,pTransform.position.y + 0.2f,pTransform.position.z);
 			break;
 		case 2:
-			currentCar.transform.position = new Vector3(pTransform.position.x,pTransform.position.y + 0.9f,pTransform.position.z);
+			currentCar.transform.position = new Vector3(pTransform.position.x - 0.3f,pTransform.position.y + 0.9f,pTransform.position.z);
 			wheel.transform.position = new Vector3(pWheelTransform.position.x+0.05f,pWheelTransform.position.y+0.1f,pWheelTransform.position.z);
 			break;
 		case 3:
@@ -439,24 +443,24 @@ public class viewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 455;
-		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 295;
-		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 135;
-		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 25;
-		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 185;
-		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 345;
-		MATBTN_MARGIN_UP = screenHeight - 170;
+		MATBTNONE_MARGIN_LEFT = screenWidth/2 - 585;
+		MATBTNTWO_MARGIN_LEFT = screenWidth/2 - 375;
+		MATBTNTHREE_MARGIN_LEFT = screenWidth/2 - 155;
+		MATBTNFOUR_MARGIN_LEFT = screenWidth/2 + 55;
+		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 265;
+		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 475;
+		MATBTN_MARGIN_UP = screenHeight - 200;
 		BUTTON_WIDTH = 125;
-		BACKBTN_MARGIN_LEFT = 40;
-		CONFIRMBTN_MARGIN_LEFT = screenWidth - 195;
-		BACKBTN_MARGIN_UP = screenHeight - 145;
+		BACKBTN_MARGIN_LEFT = 80;
+		CONFIRMBTN_MARGIN_LEFT = screenWidth - 235;
+		BACKBTN_MARGIN_UP = screenHeight - 185;
 		BACKBTN_WIDTH = 175;
 		BACKBTN_HEIGHT = 90;
-		PREVBTN_MARGIN_LEFT = screenWidth/2 - 420;
-		PREVBTN_MARGIN_UP = screenHeight/2 - 85;
+		PREVBTN_MARGIN_LEFT = screenWidth/2 - 540;
+		PREVBTN_MARGIN_UP = screenHeight/2 - 95;
 		PREVBTN_WIDTH = 100;
 		PREVBTN_HEIGHT = 100;
-		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 335;
+		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 465;
 	}
 	
 	void changeMaterial(int materialID)
