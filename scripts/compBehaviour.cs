@@ -59,19 +59,23 @@ public class compBehaviour : MonoBehaviour {
 	
 	void Update()
 	{
-		if(this.tag == "wheel" || this.tag == "car2wheel" || this.tag == "car3wheel" || this.tag == "car4wheel" || this.tag == "car5wheel")
+		if(this.tag == "wheel" || this.tag == "car2wheel" || this.tag == "car3wheel" || this.tag == "car4wheel" 
+			|| this.tag == "car5wheel" || this.tag == "car6wheel"  || this.tag == "car7wheel" || this.tag == "car8wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
-		else if(this.tag == "body" || this.tag == "car2body" || this.tag == "car3body" || this.tag == "car4body" || this.tag == "car5body")
+		else if(this.tag == "body" || this.tag == "car2body" || this.tag == "car3body" || this.tag == "car4body"
+			|| this.tag == "car5body" || this.tag == "car6body" || this.tag == "car7body" || this.tag == "car8body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
-		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel" || this.tag == "car3frontWheel" || this.tag == "car4frontWheel" || this.tag == "car5frontWheel")
+		else if(this.tag == "frontWheel" || this.tag == "car2frontWheel" || this.tag == "car3frontWheel" || this.tag == "car4frontWheel"
+			|| this.tag == "car5frontWheel" || this.tag == "car6frontWheel" || this.tag == "car7frontWheel" || this.tag == "car8frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
-		else if(this.tag == "bottom" || this.tag == "car2bottom" || this.tag == "car3bottom" || this.tag == "car4bottom" || this.tag == "car5bottom")
+		else if(this.tag == "bottom" || this.tag == "car2bottom" || this.tag == "car3bottom" || this.tag == "car4bottom"
+			|| this.tag == "car5bottom" || this.tag == "car6bottom"  || this.tag == "car7bottom"  || this.tag == "car8bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
@@ -170,6 +174,12 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car4changeWheel");
 			else if(currentCarID == 4)
 				changeParts = GameObject.FindGameObjectsWithTag("car5changeWheel");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("car6changeWheel");
+			else if(currentCarID == 6)
+				changeParts = GameObject.FindGameObjectsWithTag("car7changeWheel");
+			else if(currentCarID == 7)
+				changeParts = GameObject.FindGameObjectsWithTag("car8changeWheel");
 			break;
 		case 1:
 			if(currentCarID == 0)
@@ -182,6 +192,12 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car4changeBody");
 			else if(currentCarID == 4)
 				changeParts = GameObject.FindGameObjectsWithTag("car5changeBody");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("car6changeBody");
+			else if(currentCarID == 6)
+				changeParts = GameObject.FindGameObjectsWithTag("car7changeBody");
+			else if(currentCarID == 7)
+				changeParts = GameObject.FindGameObjectsWithTag("car8changeBody");
 			break;
 		case 2:
 			if(currentCarID == 0)
@@ -194,6 +210,12 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car4changeFrontWheel");
 			else if(currentCarID == 4)
 				changeParts = GameObject.FindGameObjectsWithTag("car5changeFrontWheel");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("car6changeFrontWheel");
+			else if(currentCarID == 6)
+				changeParts = GameObject.FindGameObjectsWithTag("car7changeFrontWheel");
+			else if(currentCarID == 7)
+				changeParts = GameObject.FindGameObjectsWithTag("car8changeFrontWheel");
 			break;
 		case 3:
 			if(currentCarID == 0)
@@ -206,6 +228,12 @@ public class compBehaviour : MonoBehaviour {
 				changeParts = GameObject.FindGameObjectsWithTag("car4changeBottom");
 			else if(currentCarID == 4)
 				changeParts = GameObject.FindGameObjectsWithTag("car5changeBottom");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("car6changeBottom");
+			else if(currentCarID == 6)
+				changeParts = GameObject.FindGameObjectsWithTag("car7changeBottom");
+			else if(currentCarID == 7)
+				changeParts = GameObject.FindGameObjectsWithTag("car8changeBottom");
 			break;
 		default:
 			break;

@@ -38,6 +38,7 @@ public class RaceSelectViewController : MonoBehaviour {
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Race1"))
 		{
 			//load Race 1
+			Application.LoadLevel("RoadCourse");
 		}
 		if(GUI.Button(new Rect(RACEBTN_TWO_MARGIN_LEFT, RACEBTN_TWO_MARGIN_UP,RACEBTN_TWO_WIDTH,RACEBTN_TWO_HEIGHT), "Race2"))
 		{
