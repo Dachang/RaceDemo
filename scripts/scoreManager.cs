@@ -35,6 +35,8 @@ public class scoreManager : MonoBehaviour {
 	//gameover?
 	private bool gameIsOver = false;
 	private int gameOverCount = 0;
+	//startTrigger
+	private GameObject startTrigger;
 	
 	// Use this for initialization
 	void Start ()
@@ -50,6 +52,7 @@ public class scoreManager : MonoBehaviour {
 		resultTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
 		resultTimeLabel = string.Format("");
 		resultScoreLabel = string.Format("");
+		startTrigger = GameObject.Find("startTrigger");
 	}
 	
 	// Update is called once per frame
@@ -67,34 +70,41 @@ public class scoreManager : MonoBehaviour {
 		if(!gameIsOver)
 		{
 			textScore = string.Format(score.ToString());
+			switch(currentCarID)
+			{
+			case 0:
+				if(startTrigger.tag == "raceOne")
+				{
+					textRoundNum = string.Format(roundNum.ToString() + " / 2");
+					if(roundNum == 3) roundCount = 3;
+				}
+				else
+				{
+					if(roundNum == 1)
+					{
+						textRoundNum = string.Format("1 / 2");
+						roundCount = 1;
+					}
+					else if(roundNum == 7)
+					{
+						textRoundNum = string.Format("2 / 2");
+						roundCount = 2;
+					}
+					else if(roundNum == 13)
+					{
+						//load Result Scene
+						roundCount = 3;
+					}
+				}
+				break;
+			case 1:
+				textRoundNum = string.Format(roundNum.ToString() + " / 2");
+				if(roundNum == 3) roundCount = 3;
+				break;
+			default:
+				break;
+			}
 		}
-		switch(currentCarID)
-		{
-		case 0:
-			if(roundNum == 1)
-			{
-				textRoundNum = string.Format("1 / 2");
-				roundCount = 1;
-			}
-			else if(roundNum == 7)
-			{
-				textRoundNum = string.Format("2 / 2");
-				roundCount = 2;
-			}
-			else if(roundNum == 13)
-			{
-				//load Result Scene
-				roundCount = 3;
-			}
-			break;
-		case 1:
-			textRoundNum = string.Format(roundNum.ToString() + " / 2");
-			if(roundNum == 3) roundCount = 3;
-			break;
-		default:
-			break;
-		}
-		Debug.Log(roundNum);
 		GUI.Label (new Rect (screenWidth - 170, 20, 200, 60), textScore);
 		GUI.Label (new Rect (180,20,500,60), textRoundNum);
 		GUI.skin.label.fontSize = 62;
