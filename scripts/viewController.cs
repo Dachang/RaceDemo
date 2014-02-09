@@ -599,207 +599,63 @@ public class viewController : MonoBehaviour {
 	
 	void changeComponentMaterial(int materialID)
 	{
+		switch(currentCarID)
+			{
+			case 2:
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			case 3:
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			case 4:
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[7].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			case 5:
+				changeMaterials[1].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			case 6:
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			case 7:
+				changeMaterials[5].mainTexture = convertMaterialIDtoTexture(materialID);
+				changeMaterials[6].mainTexture = convertMaterialIDtoTexture(materialID);
+				break;
+			default:
+				break;
+			}
+	}
+	
+	private Texture convertMaterialIDtoTexture(int materialID)
+	{
 		switch(materialID)
 		{
 		case 0:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				changeMaterials[7].mainTexture = textureColor1;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor1;
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor1;
-				changeMaterials[6].mainTexture = textureColor1;
-				break;
-			default:
-				break;
-			}
+			return textureColor1;
 			break;
 		case 1:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				changeMaterials[7].mainTexture = textureColor2;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor2;
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor2;
-				changeMaterials[6].mainTexture = textureColor2;
-				break;
-			default:
-				break;
-			}
+			return textureColor2;
 			break;
 		case 2:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				changeMaterials[7].mainTexture = textureColor3;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor3;
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor3;
-				changeMaterials[6].mainTexture = textureColor3;
-				break;
-			default:
-				break;
-			}
+			return textureColor3;
 			break;
 		case 3:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				changeMaterials[7].mainTexture = textureColor4;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor4;
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor4;
-				changeMaterials[6].mainTexture = textureColor4;
-				break;
-			default:
-				break;
-			}
+			return textureColor4;
 			break;
 		case 4:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				changeMaterials[7].mainTexture = textureColor5;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor5;
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor5;
-				changeMaterials[6].mainTexture = textureColor5;
-				break;
-			default:
-				break;
-			}
+			return textureColor5;
 			break;
 		case 5:
-			switch(currentCarID)
-			{
-			case 2:
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				break;
-			case 3:
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				break;
-			case 4:
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				changeMaterials[7].mainTexture = textureColor6;
-				break;
-			case 5:
-				changeMaterials[1].mainTexture = textureColor6;
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				break;
-			case 6:
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				break;
-			case 7:
-				changeMaterials[5].mainTexture = textureColor6;
-				changeMaterials[6].mainTexture = textureColor6;
-				break;
-			default:
-				break;
-			}
+			return textureColor6;
 			break;
 		default:
+			return textureColor1;
 			break;
 		}
 	}
