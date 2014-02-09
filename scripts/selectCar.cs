@@ -223,42 +223,42 @@ public class selectCar : MonoBehaviour {
 		case 0:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.red);
+				//changeMaterials[i].SetColor("_Color",Color.red);
 			}
 			changeMaterials[4].mainTexture = textureColor1;
 			break;
 		case 1:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.white);
+				//changeMaterials[i].SetColor("_Color",Color.white);
 			}
 			changeMaterials[4].mainTexture = textureColor2;
 			break;
 		case 2:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.yellow);
+				//changeMaterials[i].SetColor("_Color",Color.yellow);
 			}
 			changeMaterials[4].mainTexture = textureColor3;
 			break;
 		case 3:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.green);
+				//changeMaterials[i].SetColor("_Color",Color.green);
 			}
 			changeMaterials[4].mainTexture = textureColor4;
 			break;
 		case 4:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.blue);
+				//changeMaterials[i].SetColor("_Color",Color.blue);
 			}
 			changeMaterials[4].mainTexture = textureColor5;
 			break;
 		case 5:
 			for(int i = 0; i<=3; i++)
 			{
-				changeMaterials[i].SetColor("_Color",Color.magenta);
+				//changeMaterials[i].SetColor("_Color",Color.magenta);
 			}
 			changeMaterials[4].mainTexture = textureColor6;
 			break;
