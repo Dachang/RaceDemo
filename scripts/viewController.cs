@@ -105,6 +105,8 @@ public class viewController : MonoBehaviour {
 	private Material[] car7changeBottomMats = new Material[10];
 	private Material[] car8changeBodyMats = new Material[10];
 	private Material[] car8changeBottomMats = new Material[10];
+    //color has painted
+    bool colorHasPainted = false;
 	
 	void Start () 
 	{
@@ -153,9 +155,12 @@ public class viewController : MonoBehaviour {
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp
-				&& (currentCarID == 0 || currentCarID == 1))
+				&& (currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4
+                || currentCarID == 5 || currentCarID == 6 || currentCarID == 7))
 			{
 				audio.PlayOneShot(clickSound);
+                //has color painted?
+                if (!colorHasPainted) currentColorID = generateDefaultColorID(currentCarID);
 				//Data interface
 				PlayerPrefs.SetInt("CarID",currentCarID);
 				PlayerPrefs.SetInt("ColorID",currentColorID);
@@ -175,6 +180,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
 		{
@@ -183,6 +189,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
 		{
@@ -191,6 +198,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
 		{
@@ -199,6 +207,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
 		{
@@ -207,6 +216,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
 		{
@@ -215,6 +225,7 @@ public class viewController : MonoBehaviour {
 			//play sound
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(paintSound);
+            colorHasPainted = true;
 		}
 		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
 		{
@@ -305,6 +316,40 @@ public class viewController : MonoBehaviour {
 		bottomList[6] = GameObject.FindGameObjectWithTag("car7bottom");
 		bottomList[7] = GameObject.FindGameObjectWithTag("car8bottom");
 	}
+
+    int generateDefaultColorID(int carID)
+    {
+        switch (carID)
+        {
+            case 0:
+                return 0;
+                break;
+            case 1:
+                return 3;
+                break;
+            case 2:
+                return 4;
+                break;
+            case 3:
+                return 1;
+                break;
+            case 4:
+                return 5;
+                break;
+            case 5:
+                return 3;
+                break;
+            case 6:
+                return 2;
+                break;
+            case 7:
+                return 1;
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
 	
 	void loadTexture(int carID)
 	{
@@ -923,6 +968,7 @@ public class viewController : MonoBehaviour {
 		cbBottom.resumeColor();
 		resumeMainBodyMaterial(currentCarID);
 		resumeRotate();
+        colorHasPainted = false;
 	}
 	
 	//public interfaces

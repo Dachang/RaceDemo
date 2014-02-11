@@ -60,6 +60,30 @@ public class Timer : MonoBehaviour {
 			mainCar = GameObject.Find("che002");
 			carScript = (Car)mainCar.GetComponent("Car");
 			break;
+        case 2:
+            mainCar = GameObject.Find("che003");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
+        case 3:
+            mainCar = GameObject.Find("che004");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
+        case 4:
+            mainCar = GameObject.Find("che005");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
+        case 5:
+            mainCar = GameObject.Find("che006");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
+        case 6:
+            mainCar = GameObject.Find("che007");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
+        case 7:
+            mainCar = GameObject.Find("che008");
+            carScript = (Car)mainCar.GetComponent("Car");
+            break;
 		default:
 			break;
 		}
