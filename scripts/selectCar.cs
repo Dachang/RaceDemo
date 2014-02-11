@@ -84,6 +84,9 @@ public class selectCar : MonoBehaviour {
 		carList[2] = GameObject.Find("che003");
 		carList[3] = GameObject.Find("che004");
 		carList[4] = GameObject.Find("che005");
+        carList[5] = GameObject.Find("che006");
+        carList[6] = GameObject.Find("che007");
+        carList[7] = GameObject.Find("che008");
 	}
 	
 	void loadTexture(int carID)
@@ -130,6 +133,30 @@ public class selectCar : MonoBehaviour {
 			textureColor5 = (Texture)Resources.Load("che005.fbm/che005_lan_clr",typeof(Texture));
 			textureColor6 = (Texture)Resources.Load("che005.fbm/che005_zi_clr",typeof(Texture));
 			break;
+        case 5:
+            textureColor1 = (Texture)Resources.Load("che006.fbm/che006_hong_clr", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("che006.fbm/che006_cheng_clr", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("che006.fbm/che006_huang_clr", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("che006.fbm/che006_lv_clr", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("che006.fbm/che006_lan_clr", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("che006.fbm/che006_zi_clr", typeof(Texture));
+            break;
+        case 6:
+            textureColor1 = (Texture)Resources.Load("che007.fbm/che007_hong_clr", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("che007.fbm/che007_cheng_clr", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("che007.fbm/che007_huang_clr", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("che007.fbm/che007_lv_clr", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("che007.fbm/che007_lan_clr", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("che007.fbm/che007_zi_clr", typeof(Texture));
+            break;
+        case 7:
+            textureColor1 = (Texture)Resources.Load("che008.fbm/che008_hong_clr", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("che008.fbm/che008_cheng_clr", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("che008.fbm/che008_huang_clr", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("che008.fbm/che008_lv_clr", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("che008.fbm/che008_lan_clr", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("che008.fbm/che008_zi_clr", typeof(Texture));
+            break;
 		default:
 			break;
 		}
@@ -144,6 +171,7 @@ public class selectCar : MonoBehaviour {
 			currentCar.transform.position = pTransform.position;
 			currentCar.transform.rotation = pTransform.rotation;
 			currentCar.SetActive(true);
+            //setOtherCarFalse(currentCarID);
 			currentCarID = carID;
 	
 			//fix position
@@ -155,6 +183,19 @@ public class selectCar : MonoBehaviour {
 			//setResume();
 		}
 	}
+
+    void setOtherCarFalse(int carID)
+    {
+        switch (carID)
+        {
+            case 3:
+                GameObject.Find("che002").SetActive(false);
+                GameObject.Find("che003").SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
 	
 	void positionFix(int carID)
 	{
