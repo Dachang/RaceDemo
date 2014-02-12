@@ -103,6 +103,10 @@ public class paintViewController : MonoBehaviour {
 	//sound effect
 	public AudioClip clickSound;
 	public AudioClip successSound;
+    //original color array
+    private int[] originalColorArray = new int[30];
+    //original plane ID
+    private int[] realIDArray = new int[30];
 	
 	void Start () 
 	{
@@ -117,6 +121,8 @@ public class paintViewController : MonoBehaviour {
 		planeID = PlayerPrefs.GetInt("planeID",0);
 		
 		initCarList();
+        initOriginalColorArray();
+        initRealIDList();
 		setUIPosition();
 		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
@@ -225,6 +231,7 @@ public class paintViewController : MonoBehaviour {
 		carList[3] = GameObject.Find("feiJi008");
 		carList[4] = GameObject.Find("feiJi010");
 		carList[5] = GameObject.Find("feiJi011");
+        carList[6] = GameObject.Find("feiJi001");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		//body
@@ -241,67 +248,36 @@ public class paintViewController : MonoBehaviour {
 	
 	void loadTexture(int carID)
 	{
-		switch(carID)
-		{
-		case 0:
-			textureColor1 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi003.fbm/feiJi003_clr_zi",typeof(Texture));
-			break;
-		case 1:
-			textureColor1 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi004.fbm/feiJi004_clr_zi",typeof(Texture));
-			break;
-		case 2:
-			textureColor1 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi005.fbm/feiJi005_clr_zi",typeof(Texture));
-			break;
-		case 3:
-			textureColor1 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi008.fbm/feiJi008_clr_zi",typeof(Texture));
-			break;
-		case 4:
-			textureColor1 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi010.fbm/feiJi010_clr_zi",typeof(Texture));
-			break;
-		case 5:
-			textureColor1 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_hong",typeof(Texture));
-			textureColor2 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_cheng",typeof(Texture));
-			textureColor3 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_huang",typeof(Texture));
-			textureColor4 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_lan",typeof(Texture));
-			textureColor5 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_lv",typeof(Texture));
-			textureColor6 = (Texture)Resources.Load("feiJi011.fbm/feiJi011_clr_zi",typeof(Texture));
-			break;
-        case 6:
-            textureColor1 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_hong", typeof(Texture));
-            textureColor2 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_cheng", typeof(Texture));
-            textureColor3 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_huang", typeof(Texture));
-            textureColor4 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_lan", typeof(Texture));
-            textureColor5 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_lv", typeof(Texture));
-            textureColor6 = (Texture)Resources.Load("feiJi001.fbm/feiJi001_clr_zi", typeof(Texture));
-            break;
-		default:
-			break;
-		}
+        if (realIDArray[carID] < 10)
+        {
+            textureColor1 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_hong", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_cheng", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_huang", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_lan", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_lv", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_zi", typeof(Texture));
+        }
+        else
+        {
+            textureColor1 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+               realIDArray[carID].ToString() + "_clr_hong", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_cheng", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_huang", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_lan", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_lv", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_zi", typeof(Texture));
+        }
 	}
 	
 	void switchCar(int carID)
@@ -368,6 +344,28 @@ public class paintViewController : MonoBehaviour {
             originalColorList[i] = new Color(changeMaterials[i].color.r, changeMaterials[i].color.g, changeMaterials[i].color.b, 1.0f);
         }
 	}
+
+    void initOriginalColorArray()
+    {
+        originalColorArray[0] = 3;
+        originalColorArray[1] = 3;
+        originalColorArray[2] = 0;
+        originalColorArray[3] = 2;
+        originalColorArray[4] = 0;
+        originalColorArray[5] = 4;
+        originalColorArray[6] = 3;
+    }
+
+    void initRealIDList()
+    {
+        realIDArray[0] = 3;
+        realIDArray[1] = 4;
+        realIDArray[2] = 5;
+        realIDArray[3] = 8;
+        realIDArray[4] = 10;
+        realIDArray[5] = 11;
+        realIDArray[6] = 1;
+    }
 	
 	void setUIPosition()
 	{
@@ -617,61 +615,69 @@ public class paintViewController : MonoBehaviour {
 		{
 			changeMaterials[i].color = originalColorList[i];
 		}
-		switch(carID)
-		{
-		case 0:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor4;
-            }
-			changeMaterials[6].mainTexture = textureColor4;
-			currentColorID = COLOR_GREY;
-			break;
-		case 1:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor4;
-            }
-			changeMaterials[6].mainTexture = textureColor4;
-			currentColorID = COLOR_GREY;
-			break;
-		case 2:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor1;
-            }
-			changeMaterials[6].mainTexture = textureColor1;
-			currentColorID = COLOR_RED;
-			break;
-		case 3:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor3;
-            }
-			changeMaterials[6].mainTexture = textureColor3;
-			currentColorID = COLOR_YELLOW;
-			break;
-		case 4:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor1;
-            }
-			changeMaterials[6].mainTexture = textureColor1;
-			currentColorID = COLOR_RED;
-			break;
-		case 5:
-            for (int i = 0; i <= 5; i++)
-            {
-                changeMaterials[i].mainTexture = textureColor5;
-            }
-			changeMaterials[6].mainTexture = textureColor5;
-			currentColorID = COLOR_MAGENTA;
-			break;
-		default:
-			break;
-		}
+        for (int i = 0; i <= 6; i++)
+        {
+            changeMaterials[i].mainTexture = convertCarIDToTexture(carID);
+        }
+        currentColorID = convertCarIDToColorID(carID);
 		shouldCarRotate = true;
 	}
+
+    Texture convertCarIDToTexture(int carID)
+    {
+        switch (originalColorArray[carID])
+        {
+            case 0:
+                return textureColor1;
+                break;
+            case 1:
+                return textureColor2;
+                break;
+            case 2:
+                return textureColor3;
+                break;
+            case 3:
+                return textureColor4;
+                break;
+            case 4:
+                return textureColor5;
+                break;
+            case 5:
+                return textureColor6;
+                break;
+            default:
+                return textureColor1;
+                break;
+        }
+    }
+
+    int convertCarIDToColorID(int carID)
+    {
+        switch (originalColorArray[carID])
+        {
+            case 0:
+                return COLOR_RED;
+                break;
+            case 1:
+                return COLOR_BLACK;
+                break;
+            case 2:
+                return COLOR_YELLOW;
+                break;
+            case 3:
+                return COLOR_GREY;
+                break;
+            case 4:
+                return COLOR_MAGENTA;
+                break;
+            case 5:
+                return COLOR_WHITE;
+                break;
+            default:
+                return COLOR_RED;
+                break;
+        }
+    }
 	
 	void generateID()
 	{
@@ -695,6 +701,9 @@ public class paintViewController : MonoBehaviour {
 		case 5:
 			carIDString = string.Format("11");
 			break;
+        case 6:
+            carIDString = string.Format("1");
+            break;
 		default:
 			break;
 		}

@@ -45,7 +45,7 @@ public class planeSelectViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		//GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
+		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Plane1"))
 		{
 			audio.PlayOneShot(clickSound);
