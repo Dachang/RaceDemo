@@ -620,26 +620,50 @@ public class paintViewController : MonoBehaviour {
 		switch(carID)
 		{
 		case 0:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor4;
+            }
 			changeMaterials[6].mainTexture = textureColor4;
 			currentColorID = COLOR_GREY;
 			break;
 		case 1:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor4;
+            }
 			changeMaterials[6].mainTexture = textureColor4;
 			currentColorID = COLOR_GREY;
 			break;
 		case 2:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor1;
+            }
 			changeMaterials[6].mainTexture = textureColor1;
 			currentColorID = COLOR_RED;
 			break;
 		case 3:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor3;
+            }
 			changeMaterials[6].mainTexture = textureColor3;
 			currentColorID = COLOR_YELLOW;
 			break;
 		case 4:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor1;
+            }
 			changeMaterials[6].mainTexture = textureColor1;
 			currentColorID = COLOR_RED;
 			break;
 		case 5:
+            for (int i = 0; i <= 5; i++)
+            {
+                changeMaterials[i].mainTexture = textureColor5;
+            }
 			changeMaterials[6].mainTexture = textureColor5;
 			currentColorID = COLOR_MAGENTA;
 			break;
