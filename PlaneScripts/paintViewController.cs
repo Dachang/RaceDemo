@@ -126,6 +126,7 @@ public class paintViewController : MonoBehaviour {
 	
 	void Update () 
 	{
+		Time.timeScale = 1.0f;
 		if(!planeHasChosen)
 		{
 			switchCar(planeID);
@@ -150,10 +151,13 @@ public class paintViewController : MonoBehaviour {
 		{
 			//load next scene & pass data
 			audio.PlayOneShot(clickSound);
-			generateID();
-			PlayerPrefs.SetString("planeID",carIDString);
-			PlayerPrefs.SetString("colorID",colorIDString);
-			Application.LoadLevel("FlyScene");
+			if(currentCarID == 0 || currentCarID == 1)
+			{
+				generateID();
+				PlayerPrefs.SetString("planeID",carIDString);
+				PlayerPrefs.SetString("colorID",colorIDString);
+				Application.LoadLevel("Mail");
+			}
 		}
 		//Material buttons
 		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
@@ -211,6 +215,12 @@ public class paintViewController : MonoBehaviour {
 			Application.Quit();
 		}
 	}
+	
+//	void OnApplicationQuit()
+//	{
+//		Application.CancelQuit();
+//		System.Diagnostics.Process.GetCurrentProcess().Kill();
+//	}
 	
 	void initCarList()
 	{
@@ -430,23 +440,23 @@ public class paintViewController : MonoBehaviour {
 	
 	void setUIPosition()
 	{
-		MATBTNONE_MARGIN_LEFT = screenWidth - 410;
-		MATBTNTWO_MARGIN_LEFT = screenWidth - 215;
-		MATBTNONE_MARGIN_UP = screenHeight/2 - 210;
+		MATBTNONE_MARGIN_LEFT = screenWidth - 510;
+		MATBTNTWO_MARGIN_LEFT = screenWidth - 255;
+		MATBTNONE_MARGIN_UP = screenHeight/2 - 260;
 		MATBTNTWO_MARGIN_UP = screenHeight/2 - 50;
-		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 110;
+		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 170;
 		BUTTON_WIDTH = 140;
-		BACKBTN_MARGIN_LEFT = screenWidth/2 + 248;
-		CONFIRMBTN_MARGIN_LEFT = screenWidth - 217;
-		BACKBTN_MARGIN_UP = screenHeight - 120;
+		BACKBTN_MARGIN_LEFT = screenWidth/2 + 368;
+		CONFIRMBTN_MARGIN_LEFT = screenWidth - 247;
+		BACKBTN_MARGIN_UP = screenHeight - 150;
 		BACKBTN_WIDTH = 210;
 		BACKBTN_HEIGHT = 110;
 		PREVBTN_MARGIN_LEFT = screenWidth/2 - 400;
 		PREVBTN_MARGIN_UP = screenHeight/2 - 135;
-		PREVBTN_WIDTH = 200;
-		PREVBTN_HEIGHT = 85;
+		PREVBTN_WIDTH = 250;
+		PREVBTN_HEIGHT = 105;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 360;
-		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 310;
+		RETURNBTN_MARGIN_LEFT = screenWidth/2 - 400;
 	}
 	
 	void changeMaterial(int materialID)

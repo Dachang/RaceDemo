@@ -3,6 +3,11 @@ using System.Collections;
 
 public class keyboard : MonoBehaviour {
 	
+	public GUISkin mySkin;
+	
+	private int screenWidth;
+	private int screenHeight;
+	
 	private int FIRST_ROW_START_POS_X = 506;
 	private int FIRST_ROW_START_POS_Y = 612;
 	private int SECOND_ROW_START_POS_Y = 682;
@@ -25,6 +30,9 @@ public class keyboard : MonoBehaviour {
 	
 	void Start () 
 	{
+		screenWidth = Screen.width;
+		screenHeight = Screen.height;
+		
 		secondRowLetters[0] = string.Format("Q");
 		secondRowLetters[1] = string.Format("W");
 		secondRowLetters[2] = string.Format("E");
@@ -85,11 +93,14 @@ public class keyboard : MonoBehaviour {
 	
 	void Update () 
 	{
-		
+		Time.timeScale = 1.0f;
 	}
 	
 	void OnGUI()
 	{
+		GUI.skin = mySkin;
+		GUI.skin.label.fontSize = 40;
+		GUI.skin.button.fontSize = 30;
 		//First Row NUMBER
 		for(int i = 1; i <= 9; i++)
 		{
@@ -141,19 +152,19 @@ public class keyboard : MonoBehaviour {
 		}
 		//Backspace
 		if(GUI.Button(new Rect(FIRST_ROW_START_POS_X + 11*KEY_LEAK + KEY_BUTTON_WIDTH*10,SECOND_ROW_START_POS_Y-2,
-				KEY_BUTTON_WIDTH,KEY_BUTTON_HEIGHT),"Back"))
+				KEY_BUTTON_WIDTH,KEY_BUTTON_HEIGHT),"退格"))
 		{
 			userInputString = userInputString.Substring(0,userInputString.Length-1);
 		}
 		//Enter
 		if(GUI.Button(new Rect(THIRD_ROW_START_POS_X + 10*KEY_LEAK + KEY_BUTTON_WIDTH*9,THIRD_ROW_START_POS_Y,
-				ENTER_BUTTON_WIDTH,KEY_BUTTON_HEIGHT),"Enter"))
+				ENTER_BUTTON_WIDTH,KEY_BUTTON_HEIGHT),"回车"))
 		{
 			//enter
 		}
 		//Capslock
 		if(GUI.Button(new Rect(FIRST_ROW_START_POS_X+8,FOURTH_ROW_START_POS_Y,
-				KEY_BUTTON_WIDTH-2,KEY_BUTTON_HEIGHT),"CAPS"))
+				KEY_BUTTON_WIDTH-2,KEY_BUTTON_HEIGHT),"大写"))
 		{
 			capsTag = !capsTag;
 		}
@@ -163,6 +174,29 @@ public class keyboard : MonoBehaviour {
 		{
 			userInputString += string.Format("@");
 		}
-		GUI.Label(new Rect(200,200,1000,200),userInputString);
+		GUI.Label(new Rect(screenWidth/2-300,500,1000,200),userInputString);
+		//Done Button
+		//confirm button
+//		if(GUI.Button(new Rect(screenWidth - 247, screenHeight - 150,210,110), "Done"))
+//		{
+//			Application.LoadLevel("FlyScene");
+//		}
+		//exitButton
+		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
+		{
+			Application.Quit();
+		}
+	}
+	
+//	void OnApplicationQuit()
+//	{
+//		Application.CancelQuit();
+//		System.Diagnostics.Process.GetCurrentProcess().Kill();
+//	}
+	
+	//public interface
+	public string getInputAddress()
+	{
+		return userInputString;
 	}
 }
