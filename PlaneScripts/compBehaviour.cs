@@ -177,40 +177,100 @@ public class compBehaviour : MonoBehaviour {
 		switch(comp_id)
 		{
 		case 0:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID+1).ToString() + "changeWheel");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeWheel");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changeWheel");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changeWheel");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changeWheel");
 			break;
 		case 1:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changeBody");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID+1).ToString() + "changeBody");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changeBody");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeBody");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeBody");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeBody");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changeBody");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changeBody");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changeBody");
 			break;
 		case 2:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID + 1).ToString() + "changeFrontWheel");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeFrontWheel");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeFrontWheel");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeFrontWheel");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changeFrontWheel");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changeFrontWheel");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changeFrontWheel");
 			break;
 		case 3:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID + 1).ToString() + "changeBottom");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changeBottom");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changeBottom");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changeBottom");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changeBottom");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changeBottom");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changeBottom");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changeBottom");
 			break;
 		case 4:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changePart5");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID + 1).ToString() + "changePart5");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changePart5");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changePart5");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changePart5");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changePart5");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changePart5");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changePart5");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changePart5");
 			break;
 		case 5:
-            if (currentCarID == 0)
-                changeParts = GameObject.FindGameObjectsWithTag("changePart6");
-            else
-                changeParts = GameObject.FindGameObjectsWithTag("f" + (currentCarID + 1).ToString() + "changePart6");
+			if(currentCarID == 0)
+				changeParts = GameObject.FindGameObjectsWithTag("changePart6");
+			else if(currentCarID == 1)
+				changeParts = GameObject.FindGameObjectsWithTag("f2changePart6");
+			else if(currentCarID == 2)
+				changeParts = GameObject.FindGameObjectsWithTag("f3changePart6");
+			else if(currentCarID == 3)
+				changeParts = GameObject.FindGameObjectsWithTag("f4changePart6");
+			else if(currentCarID == 4)
+				changeParts = GameObject.FindGameObjectsWithTag("f5changePart6");
+			else if(currentCarID == 5)
+				changeParts = GameObject.FindGameObjectsWithTag("f6changePart6");
+            else if (currentCarID == 6)
+                changeParts = GameObject.FindGameObjectsWithTag("f7changePart6");
 			break;
 		default:
 			break;
