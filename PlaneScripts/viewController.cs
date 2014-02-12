@@ -161,12 +161,6 @@ public class viewController : MonoBehaviour {
 		}
 	}
 	
-//	void OnApplicationQuit()
-//	{
-//		Application.CancelQuit();
-//		System.Diagnostics.Process.GetCurrentProcess().Kill();
-//	}
-	
 	void initCarList()
 	{
 		//car
@@ -179,52 +173,40 @@ public class viewController : MonoBehaviour {
         carList[6] = GameObject.Find("feiJi001");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
-		wheelList[1] = GameObject.FindGameObjectWithTag("f2wheel");
-		wheelList[2] = GameObject.FindGameObjectWithTag("f3wheel");
-		wheelList[3] = GameObject.FindGameObjectWithTag("f4wheel");
-		wheelList[4] = GameObject.FindGameObjectWithTag("f5wheel");
-		wheelList[5] = GameObject.FindGameObjectWithTag("f6wheel");
-        wheelList[6] = GameObject.FindGameObjectWithTag("f7wheel");
-		//body
-		bodyList[0] = GameObject.FindGameObjectWithTag("body");
-		bodyList[1] = GameObject.FindGameObjectWithTag("f2body");
-		bodyList[2] = GameObject.FindGameObjectWithTag("f3body");
-		bodyList[3] = GameObject.FindGameObjectWithTag("f4body");
-		bodyList[4] = GameObject.FindGameObjectWithTag("f5body");
-		bodyList[5] = GameObject.FindGameObjectWithTag("f6body");
-        bodyList[6] = GameObject.FindGameObjectWithTag("f7body");
+        for (int i = 1; i <= 6; i++)
+        {
+            wheelList[i] = GameObject.FindGameObjectWithTag("f"+(i+1).ToString()+"wheel");
+        }
+        //body
+        bodyList[0] = GameObject.FindGameObjectWithTag("body");
+        for (int i = 1; i <= 6; i++)
+        {
+            bodyList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "body");
+        }
 		//frontWheel
 		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
-		frontWheelList[1] = GameObject.FindGameObjectWithTag("f2frontWheel");
-		frontWheelList[2] = GameObject.FindGameObjectWithTag("f3frontWheel");
-		frontWheelList[3] = GameObject.FindGameObjectWithTag("f4frontWheel");
-		frontWheelList[4] = GameObject.FindGameObjectWithTag("f5frontWheel");
-		frontWheelList[5] = GameObject.FindGameObjectWithTag("f6frontWheel");
-        frontWheelList[6] = GameObject.FindGameObjectWithTag("f7frontWheel");
+        for (int i = 1; i <= 6; i++)
+        {
+            frontWheelList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "frontWheel");
+        }
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
-		bottomList[1] = GameObject.FindGameObjectWithTag("f2bottom");
-		bottomList[2] = GameObject.FindGameObjectWithTag("f3bottom");
-		bottomList[3] = GameObject.FindGameObjectWithTag("f4bottom");
-		bottomList[4] = GameObject.FindGameObjectWithTag("f5bottom");
-		bottomList[5] = GameObject.FindGameObjectWithTag("f6bottom");
-        bottomList[6] = GameObject.FindGameObjectWithTag("f7bottom");
+        for (int i = 1; i <= 6; i++)
+        {
+            bottomList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "bottom");
+        }
 		//part5
 		part5List[0] = GameObject.FindGameObjectWithTag("part5");
-		part5List[1] = GameObject.FindGameObjectWithTag("f2part5");
-		part5List[2] = GameObject.FindGameObjectWithTag("f3part5");
-		part5List[3] = GameObject.FindGameObjectWithTag("f4part5");
-		part5List[4] = GameObject.FindGameObjectWithTag("f5part5");
-		part5List[5] = GameObject.FindGameObjectWithTag("f6part5");
-        part5List[6] = GameObject.FindGameObjectWithTag("f7part5");
+        for (int i = 1; i <= 6; i++)
+        {
+            part5List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part5");
+        }
 		//part6
 		part6List[0] = GameObject.FindGameObjectWithTag("part6");
-		part6List[1] = GameObject.FindGameObjectWithTag("f2part6");
-		part6List[2] = GameObject.FindGameObjectWithTag("f3part6");
-		part6List[3] = GameObject.FindGameObjectWithTag("f4part6");
-		part6List[4] = GameObject.FindGameObjectWithTag("f5part6");
-		part6List[5] = GameObject.FindGameObjectWithTag("f6part6");
-        part6List[6] = GameObject.FindGameObjectWithTag("f7part6");
+        for (int i = 1; i <= 6; i++)
+        {
+            part6List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part6");
+        }
 	}
 		
 	void switchCar(int carID)
@@ -281,67 +263,24 @@ public class viewController : MonoBehaviour {
 	
 	void loadChangePart(int carID)
 	{
-		switch(carID)
-		{
-		case 0:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("changePart6").renderer.material;
-			break;
-		case 1:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("f2changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("f2changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("f2changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("f2changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("f2changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("f2changePart6").renderer.material;
-			break;
-		case 2:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("f3changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("f3changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("f3changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("f3changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("f3changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("f3changePart6").renderer.material;
-			break;
-		case 3:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("f4changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("f4changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("f4changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("f4changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("f4changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("f4changePart6").renderer.material;
-			break;
-		case 4:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("f5changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("f5changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("f5changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("f5changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("f5changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("f5changePart6").renderer.material;
-			break;
-		case 5:
-			changeMaterials[0] = GameObject.FindGameObjectWithTag("f6changeWheel").renderer.material;
-			changeMaterials[1] = GameObject.FindGameObjectWithTag("f6changeBody").renderer.material;
-			changeMaterials[2] = GameObject.FindGameObjectWithTag("f6changeFrontWheel").renderer.material;
-			changeMaterials[3] = GameObject.FindGameObjectWithTag("f6changeBottom").renderer.material;
-			changeMaterials[4] = GameObject.FindGameObjectWithTag("f6changePart5").renderer.material;
-			changeMaterials[5] = GameObject.FindGameObjectWithTag("f6changePart6").renderer.material;
-			break;
-        case 6:
-            changeMaterials[0] = GameObject.FindGameObjectWithTag("f7changeWheel").renderer.material;
-            changeMaterials[1] = GameObject.FindGameObjectWithTag("f7changeBody").renderer.material;
-            changeMaterials[2] = GameObject.FindGameObjectWithTag("f7changeFrontWheel").renderer.material;
-            changeMaterials[3] = GameObject.FindGameObjectWithTag("f7changeBottom").renderer.material;
-            changeMaterials[4] = GameObject.FindGameObjectWithTag("f7changePart5").renderer.material;
-            changeMaterials[5] = GameObject.FindGameObjectWithTag("f7changePart6").renderer.material;
-            break;
-		default:
-			break;
-		}
+        if (carID == 0)
+        {
+            changeMaterials[0] = GameObject.FindGameObjectWithTag("changeWheel").renderer.material;
+            changeMaterials[1] = GameObject.FindGameObjectWithTag("changeBody").renderer.material;
+            changeMaterials[2] = GameObject.FindGameObjectWithTag("changeFrontWheel").renderer.material;
+            changeMaterials[3] = GameObject.FindGameObjectWithTag("changeBottom").renderer.material;
+            changeMaterials[4] = GameObject.FindGameObjectWithTag("changePart5").renderer.material;
+            changeMaterials[5] = GameObject.FindGameObjectWithTag("changePart6").renderer.material;
+        }
+        else
+        {
+            changeMaterials[0] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changeWheel").renderer.material;
+            changeMaterials[1] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changeBody").renderer.material;
+            changeMaterials[2] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changeFrontWheel").renderer.material;
+            changeMaterials[3] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changeBottom").renderer.material;
+            changeMaterials[4] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changePart5").renderer.material;
+            changeMaterials[5] = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "changePart6").renderer.material;
+        }
 	}
 	
 	void setUIPosition()
@@ -442,75 +381,31 @@ public class viewController : MonoBehaviour {
 	
 	void findComponents(int carID)
 	{
-		//components
-		switch(carID)
-		{
-		case 0:
-			wheel = GameObject.FindGameObjectWithTag("wheel");
-			body = GameObject.FindGameObjectWithTag("body");
-			frontWheel = GameObject.FindGameObjectWithTag("frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("bottom");
-			part5 = GameObject.FindGameObjectWithTag("part5");
-			part6 = GameObject.FindGameObjectWithTag("part6");
-			//transforms
-			pWheelTransform = wheel.transform;
-			pBodyTransform = body.transform;
-			pFrontWheelTransform = frontWheel.transform;
-			pBottomTransform = bottom.transform;
-			pPart5Transfrom = part5.transform;
-			pPart6Transform = part6.transform;
-			break;
-		case 1:
-			wheel = GameObject.FindGameObjectWithTag("f2wheel");
-			body = GameObject.FindGameObjectWithTag("f2body");
-			frontWheel = GameObject.FindGameObjectWithTag("f2frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("f2bottom");
-			part5 = GameObject.FindGameObjectWithTag("f2part5");
-			part6 = GameObject.FindGameObjectWithTag("f2part6");
-			break;
-		case 2:
-			wheel = GameObject.FindGameObjectWithTag("f3wheel");
-			body = GameObject.FindGameObjectWithTag("f3body");
-			frontWheel = GameObject.FindGameObjectWithTag("f3frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("f3bottom");
-			part5 = GameObject.FindGameObjectWithTag("f3part5");
-			part6 = GameObject.FindGameObjectWithTag("f3part6");
-			break;
-		case 3:
-			wheel = GameObject.FindGameObjectWithTag("f4wheel");
-			body = GameObject.FindGameObjectWithTag("f4body");
-			frontWheel = GameObject.FindGameObjectWithTag("f4frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("f4bottom");
-			part5 = GameObject.FindGameObjectWithTag("f4part5");
-			part6 = GameObject.FindGameObjectWithTag("f4part6");
-			break;
-		case 4:
-			wheel = GameObject.FindGameObjectWithTag("f5wheel");
-			body = GameObject.FindGameObjectWithTag("f5body");
-			frontWheel = GameObject.FindGameObjectWithTag("f5frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("f5bottom");
-			part5 = GameObject.FindGameObjectWithTag("f5part5");
-			part6 = GameObject.FindGameObjectWithTag("f5part6");
-			break;
-		case 5:
-			wheel = GameObject.FindGameObjectWithTag("f6wheel");
-			body = GameObject.FindGameObjectWithTag("f6body");
-			frontWheel = GameObject.FindGameObjectWithTag("f6frontWheel");
-			bottom = GameObject.FindGameObjectWithTag("f6bottom");
-			part5 = GameObject.FindGameObjectWithTag("f6part5");
-			part6 = GameObject.FindGameObjectWithTag("f6part6");
-			break;
-        case 6:
-            wheel = GameObject.FindGameObjectWithTag("f7wheel");
-            body = GameObject.FindGameObjectWithTag("f7body");
-            frontWheel = GameObject.FindGameObjectWithTag("f7frontWheel");
-            bottom = GameObject.FindGameObjectWithTag("f7bottom");
-            part5 = GameObject.FindGameObjectWithTag("f7part5");
-            part6 = GameObject.FindGameObjectWithTag("f7part6");
-            break;
-		default:
-			break;
-		}
+        if (carID == 0)
+        {
+            wheel = GameObject.FindGameObjectWithTag("wheel");
+            body = GameObject.FindGameObjectWithTag("body");
+            frontWheel = GameObject.FindGameObjectWithTag("frontWheel");
+            bottom = GameObject.FindGameObjectWithTag("bottom");
+            part5 = GameObject.FindGameObjectWithTag("part5");
+            part6 = GameObject.FindGameObjectWithTag("part6");
+            //transforms
+            pWheelTransform = wheel.transform;
+            pBodyTransform = body.transform;
+            pFrontWheelTransform = frontWheel.transform;
+            pBottomTransform = bottom.transform;
+            pPart5Transfrom = part5.transform;
+            pPart6Transform = part6.transform;
+        }
+        else
+        {
+            wheel = GameObject.FindGameObjectWithTag("f"+(carID+1).ToString()+"wheel");
+            body = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "body");
+            frontWheel = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "frontWheel");
+            bottom = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "bottom");
+            part5 = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "part5");
+            part6 = GameObject.FindGameObjectWithTag("f" + (carID + 1).ToString() + "part6");
+        }
 		//scripts
 		cbWheel = (compBehaviour)wheel.GetComponent(typeof(compBehaviour));
 		cbBody = (compBehaviour)body.GetComponent(typeof(compBehaviour));
@@ -535,67 +430,24 @@ public class viewController : MonoBehaviour {
 
 	void setTransparent(int carID)
 	{
-		switch(carID)
-		{
-		case 0:
-			changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("changePart6");
-			break;
-		case 1:
-			changeParts = GameObject.FindGameObjectsWithTag("f2changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("f2changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f2changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("f2changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("f2changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("f2changePart6");
-			break;
-		case 2:
-			changeParts = GameObject.FindGameObjectsWithTag("f3changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("f3changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f3changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("f3changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("f3changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("f3changePart6");
-			break;
-		case 3:
-			changeParts = GameObject.FindGameObjectsWithTag("f4changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("f4changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f4changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("f4changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("f4changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("f4changePart6");
-			break;
-		case 4:
-			changeParts = GameObject.FindGameObjectsWithTag("f5changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("f5changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f5changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("f5changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("f5changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("f5changePart6");
-			break;
-		case 5:
-			changeParts = GameObject.FindGameObjectsWithTag("f6changeWheel");
-			changePartsBody = GameObject.FindGameObjectsWithTag("f6changeBody");
-			changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f6changeFrontWheel");
-			changePartsBottom = GameObject.FindGameObjectsWithTag("f6changeBottom");
-			changePartsPart5 = GameObject.FindGameObjectsWithTag("f6changePart5");
-			changePartsPart6 = GameObject.FindGameObjectsWithTag("f6changePart6");
-			break;
-        case 6:
-            changeParts = GameObject.FindGameObjectsWithTag("f7changeWheel");
-            changePartsBody = GameObject.FindGameObjectsWithTag("f7changeBody");
-            changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f7changeFrontWheel");
-            changePartsBottom = GameObject.FindGameObjectsWithTag("f7changeBottom");
-            changePartsPart5 = GameObject.FindGameObjectsWithTag("f7changePart5");
-            changePartsPart6 = GameObject.FindGameObjectsWithTag("f7changePart6");
-            break;
-		default:
-			break;
-		}
+        if (carID == 0)
+        {
+            changeParts = GameObject.FindGameObjectsWithTag("changeWheel");
+            changePartsBody = GameObject.FindGameObjectsWithTag("changeBody");
+            changePartsFrontWheel = GameObject.FindGameObjectsWithTag("changeFrontWheel");
+            changePartsBottom = GameObject.FindGameObjectsWithTag("changeBottom");
+            changePartsPart5 = GameObject.FindGameObjectsWithTag("changePart5");
+            changePartsPart6 = GameObject.FindGameObjectsWithTag("changePart6");
+        }
+        else
+        {
+            changeParts = GameObject.FindGameObjectsWithTag("f"+(carID+1).ToString()+"changeWheel");
+            changePartsBody = GameObject.FindGameObjectsWithTag("f" + (carID + 1).ToString() + "changeBody");
+            changePartsFrontWheel = GameObject.FindGameObjectsWithTag("f" + (carID + 1).ToString() + "changeFrontWheel");
+            changePartsBottom = GameObject.FindGameObjectsWithTag("f" + (carID + 1).ToString() + "changeBottom");
+            changePartsPart5 = GameObject.FindGameObjectsWithTag("f" + (carID + 1).ToString() + "changePart5");
+            changePartsPart6 = GameObject.FindGameObjectsWithTag("f" + (carID + 1).ToString() + "changePart6");
+        }
 		foreach(GameObject changePart in changeParts)
 		{
 			wheelMaterials = changePart.renderer.materials;
