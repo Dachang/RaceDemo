@@ -123,6 +123,7 @@ public class paintViewController : MonoBehaviour {
 		initCarList();
         initOriginalColorArray();
         initRealIDList();
+        planePositionFix(planeID);
 		setUIPosition();
 		//setTransparent(currentCarID);
 		loadChangePart(currentCarID);
@@ -232,6 +233,9 @@ public class paintViewController : MonoBehaviour {
 		carList[4] = GameObject.Find("feiJi010");
 		carList[5] = GameObject.Find("feiJi011");
         carList[6] = GameObject.Find("feiJi001");
+        carList[7] = GameObject.Find("feiJi002");
+        carList[8] = GameObject.Find("feiJi006");
+        carList[9] = GameObject.Find("feiJi007");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		//body
@@ -294,6 +298,21 @@ public class paintViewController : MonoBehaviour {
 		setResume(currentCarID);
 		adjustColor(currentCarID);
 	}
+
+    void planePositionFix(int carID)
+    {
+        switch (carID)
+        {
+            case 8:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 9:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
+                break;
+            default:
+                break;
+        }
+    }
 	
 	void adjustColor(int carID)
 	{
@@ -354,6 +373,9 @@ public class paintViewController : MonoBehaviour {
         originalColorArray[4] = 0;
         originalColorArray[5] = 4;
         originalColorArray[6] = 3;
+        originalColorArray[7] = 1;
+        originalColorArray[8] = 4;
+        originalColorArray[9] = 3;
     }
 
     void initRealIDList()
@@ -365,6 +387,9 @@ public class paintViewController : MonoBehaviour {
         realIDArray[4] = 10;
         realIDArray[5] = 11;
         realIDArray[6] = 1;
+        realIDArray[7] = 2;
+        realIDArray[8] = 6;
+        realIDArray[9] = 7;
     }
 	
 	void setUIPosition()
@@ -703,6 +728,15 @@ public class paintViewController : MonoBehaviour {
 			break;
         case 6:
             carIDString = string.Format("1");
+            break;
+       case 7:
+            carIDString = string.Format("2");
+            break;
+            case 8:
+            carIDString = string.Format("6");
+            break;
+            case 9:
+            carIDString = string.Format("7");
             break;
 		default:
 			break;

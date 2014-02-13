@@ -111,6 +111,7 @@ public class viewController : MonoBehaviour {
 		
 		initCarList();
 		setUIPosition();
+        planePositionFix(planeID);
 		setTransparent(currentCarID);
 		loadChangePart(currentCarID);
 		findComponents(currentCarID);
@@ -171,39 +172,42 @@ public class viewController : MonoBehaviour {
 		carList[4] = GameObject.Find("feiJi010");
 		carList[5] = GameObject.Find("feiJi011");
         carList[6] = GameObject.Find("feiJi001");
+        carList[7] = GameObject.Find("feiJi002");
+        carList[8] = GameObject.Find("feiJi006");
+        carList[9] = GameObject.Find("feiJi007");
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             wheelList[i] = GameObject.FindGameObjectWithTag("f"+(i+1).ToString()+"wheel");
         }
         //body
         bodyList[0] = GameObject.FindGameObjectWithTag("body");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             bodyList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "body");
         }
 		//frontWheel
 		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             frontWheelList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "frontWheel");
         }
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             bottomList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "bottom");
         }
 		//part5
 		part5List[0] = GameObject.FindGameObjectWithTag("part5");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             part5List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part5");
         }
 		//part6
 		part6List[0] = GameObject.FindGameObjectWithTag("part6");
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 9; i++)
         {
             part6List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part6");
         }
@@ -260,7 +264,22 @@ public class viewController : MonoBehaviour {
 		findComponents(currentCarID);
 		setResume();
 	}
-	
+
+    void planePositionFix(int carID)
+    {
+        switch (carID)
+        {
+            case 8:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 9:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
+                break;
+            default:
+                break;
+        }
+    }
+
 	void loadChangePart(int carID)
 	{
         if (carID == 0)

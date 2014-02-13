@@ -62,32 +62,38 @@ public class compBehaviour : MonoBehaviour {
 	void Update()
 	{
 		if(this.tag == "wheel" || this.tag == "f2wheel" || this.tag == "f3wheel" 
-			|| this.tag == "f4wheel" || this.tag == "f5wheel" || this.tag == "f6wheel" || this.tag == "f7wheel")
+			|| this.tag == "f4wheel" || this.tag == "f5wheel" || this.tag == "f6wheel" || this.tag == "f7wheel" || this.tag == "f8wheel"
+            || this.tag == "f9wheel" || this.tag == "f10wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
-		else if(this.tag == "body" || this.tag == "f2body" || this.tag == "f3body" 
-			|| this.tag == "f4body" || this.tag == "f5body" || this.tag == "f6body" || this.tag == "f7body")
+		else if(this.tag == "body" || this.tag == "f2body" || this.tag == "f3body"
+            || this.tag == "f4body" || this.tag == "f5body" || this.tag == "f6body" || this.tag == "f7body" || this.tag == "f8body"
+             || this.tag == "f9body" || this.tag == "f10body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
 		else if(this.tag == "frontWheel" || this.tag == "f2frontWheel" || this.tag == "f3frontWheel" 
-			|| this.tag == "f4frontWheel" || this.tag == "f5frontWheel" || this.tag == "f6frontWheel" || this.tag == "f7frontWheel")
+			|| this.tag == "f4frontWheel" || this.tag == "f5frontWheel" || this.tag == "f6frontWheel" || this.tag == "f7frontWheel"
+             || this.tag == "f8frontWheel" || this.tag == "f9frontWheel" || this.tag == "f10frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
-		else if(this.tag == "bottom" || this.tag == "f2bottom" || this.tag == "f3bottom" 
-			|| this.tag == "f4bottom" || this.tag == "f5bottom" || this.tag == "f6bottom" || this.tag == "f7bottom")
+		else if(this.tag == "bottom" || this.tag == "f2bottom" || this.tag == "f3bottom"
+            || this.tag == "f4bottom" || this.tag == "f5bottom" || this.tag == "f6bottom" || this.tag == "f7bottom" || this.tag == "f8bottom"
+             || this.tag == "f9bottom" || this.tag == "f10bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
-		else if(this.tag == "part5" || this.tag == "f2part5" || this.tag == "f3part5" 
-			|| this.tag == "f4part5" || this.tag == "f5part5" || this.tag == "f6part5" || this.tag == "f7part5")
+		else if(this.tag == "part5" || this.tag == "f2part5" || this.tag == "f3part5"
+            || this.tag == "f4part5" || this.tag == "f5part5" || this.tag == "f6part5" || this.tag == "f7part5" || this.tag == "f8part5"
+             || this.tag == "f9part5" || this.tag == "f10part5")
 		{
 			COMP_ID = TYPE_PART5;
 		}
-		else if(this.tag == "part6" || this.tag == "f2part6" || this.tag == "f3part6" 
-			|| this.tag == "f4part6" || this.tag == "f5part6" || this.tag == "f6part6" || this.tag == "f7part6")
+		else if(this.tag == "part6" || this.tag == "f2part6" || this.tag == "f3part6"
+            || this.tag == "f4part6" || this.tag == "f5part6" || this.tag == "f6part6" || this.tag == "f7part6" || this.tag == "f8part6"
+             || this.tag == "f9part6" || this.tag == "f10part6")
 		{
 			COMP_ID = TYPE_PART6;
 		}

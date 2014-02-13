@@ -182,10 +182,10 @@ public class keyboard : MonoBehaviour {
 //			Application.LoadLevel("FlyScene");
 //		}
 		//exitButton
-		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
-		{
-			Application.Quit();
-		}
+        //if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
+        //{
+        //    Application.Quit();
+        //}
 	}
 	
 //	void OnApplicationQuit()
