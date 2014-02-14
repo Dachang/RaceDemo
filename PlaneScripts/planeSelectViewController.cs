@@ -49,7 +49,7 @@ public class planeSelectViewController : MonoBehaviour {
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Plane1"))
 		{
 			audio.PlayOneShot(clickSound);
-			PlayerPrefs.SetInt("planeID",9);
+			PlayerPrefs.SetInt("planeID",22);
 			Application.LoadLevel("Scene1");
 		}
 		if(GUI.Button(new Rect(RACEBTN_TWO_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_TWO_WIDTH,RACEBTN_TWO_HEIGHT), "Plane2"))

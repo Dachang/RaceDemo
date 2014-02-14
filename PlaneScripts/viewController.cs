@@ -96,6 +96,8 @@ public class viewController : MonoBehaviour {
 	//sound effect
 	public AudioClip clickSound;
 	public AudioClip successSound;
+    //plane total num
+    private int PLANE_TOTAL_NUM = 22;
 	
 	void Start () 
 	{
@@ -175,39 +177,45 @@ public class viewController : MonoBehaviour {
         carList[7] = GameObject.Find("feiJi002");
         carList[8] = GameObject.Find("feiJi006");
         carList[9] = GameObject.Find("feiJi007");
-		//wheel
-		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
-        for (int i = 1; i <= 9; i++)
+        carList[10] = GameObject.Find("feiJi009");
+        //carList[11] = GameObject.Find("feiJi012");
+        for (int i = 11; i <= 23; i++)
+        {
+            carList[i] = GameObject.Find("feiJi0" + (i+1).ToString());
+        }
+        //wheel
+        wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             wheelList[i] = GameObject.FindGameObjectWithTag("f"+(i+1).ToString()+"wheel");
         }
         //body
         bodyList[0] = GameObject.FindGameObjectWithTag("body");
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             bodyList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "body");
         }
 		//frontWheel
 		frontWheelList[0] = GameObject.FindGameObjectWithTag("frontWheel");
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             frontWheelList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "frontWheel");
         }
 		//bottom
 		bottomList[0] = GameObject.FindGameObjectWithTag("bottom");
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             bottomList[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "bottom");
         }
 		//part5
 		part5List[0] = GameObject.FindGameObjectWithTag("part5");
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             part5List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part5");
         }
 		//part6
 		part6List[0] = GameObject.FindGameObjectWithTag("part6");
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <= PLANE_TOTAL_NUM; i++)
         {
             part6List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part6");
         }
@@ -274,6 +282,36 @@ public class viewController : MonoBehaviour {
                 break;
             case 9:
                 pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
+                break;
+            case 12:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 8, pTransform.position.z);
+                break;
+            case 13:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 14:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
+                break;
+            case 15:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 16:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 17:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 18:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 19:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 20:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 22:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
                 break;
             default:
                 break;

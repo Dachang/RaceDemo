@@ -236,6 +236,11 @@ public class paintViewController : MonoBehaviour {
         carList[7] = GameObject.Find("feiJi002");
         carList[8] = GameObject.Find("feiJi006");
         carList[9] = GameObject.Find("feiJi007");
+        carList[10] = GameObject.Find("feiJi009");
+        for (int i = 11; i <= 23; i++)
+        {
+            carList[i] = GameObject.Find("feiJi0" + (i + 1).ToString());
+        }
 		//wheel
 		wheelList[0] = GameObject.FindGameObjectWithTag("wheel");
 		//body
@@ -309,6 +314,36 @@ public class paintViewController : MonoBehaviour {
             case 9:
                 pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
                 break;
+            case 12:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 8, pTransform.position.z);
+                break;
+            case 13:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 14:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 20, pTransform.position.z);
+                break;
+            case 15:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 16:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 10, pTransform.position.z);
+                break;
+            case 17:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 18:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 19:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 20:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 22:
+                pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
             default:
                 break;
         }
@@ -357,6 +392,8 @@ public class paintViewController : MonoBehaviour {
             changeMaterials[6] = mainPartMaterials[0];
         }
         if (carID == 3) changeMaterials[6] = mainPartMaterials[1];
+        else if (carID == 15) changeMaterials[6] = mainPartMaterials[1];
+        else if (carID == 22) changeMaterials[6] = mainPartMaterials[1];
         //mark original color
         for (int i = 0; i <= 5; i++)
         {
@@ -376,6 +413,19 @@ public class paintViewController : MonoBehaviour {
         originalColorArray[7] = 1;
         originalColorArray[8] = 4;
         originalColorArray[9] = 3;
+        originalColorArray[10] = 5;
+        originalColorArray[11] = 0;
+        originalColorArray[12] = 2;
+        originalColorArray[13] = 1;
+        originalColorArray[14] = 4;
+        originalColorArray[15] = 3;
+        originalColorArray[16] = 3;
+        originalColorArray[17] = 0;
+        originalColorArray[18] = 1;
+        originalColorArray[19] = 5;
+        originalColorArray[20] = 4;
+        originalColorArray[21] = 2;
+        originalColorArray[22] = 3;
     }
 
     void initRealIDList()
@@ -390,6 +440,12 @@ public class paintViewController : MonoBehaviour {
         realIDArray[7] = 2;
         realIDArray[8] = 6;
         realIDArray[9] = 7;
+        realIDArray[10] = 9;
+        //realIDArray[11] = 12;
+        for (int i = 11; i <= 23; i++)
+        {
+            realIDArray[i] = i + 1;
+        }
     }
 	
 	void setUIPosition()
@@ -738,7 +794,11 @@ public class paintViewController : MonoBehaviour {
             case 9:
             carIDString = string.Format("7");
             break;
+            case 10:
+            carIDString = string.Format("9");
+            break;
 		default:
+            carIDString = string.Format((currentCarID+1).ToString());
 			break;
 		}
 		switch(currentColorID)

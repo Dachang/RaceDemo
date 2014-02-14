@@ -63,37 +63,50 @@ public class compBehaviour : MonoBehaviour {
 	{
 		if(this.tag == "wheel" || this.tag == "f2wheel" || this.tag == "f3wheel" 
 			|| this.tag == "f4wheel" || this.tag == "f5wheel" || this.tag == "f6wheel" || this.tag == "f7wheel" || this.tag == "f8wheel"
-            || this.tag == "f9wheel" || this.tag == "f10wheel")
+            || this.tag == "f9wheel" || this.tag == "f10wheel" || this.tag == "f11wheel" || this.tag == "f12wheel" || this.tag == "f13wheel"
+             || this.tag == "f14wheel" || this.tag == "f15wheel" || this.tag == "f16wheel" || this.tag == "f17wheel" || this.tag == "f18wheel"
+             || this.tag == "f19wheel" || this.tag == "f20wheel" || this.tag == "f21wheel" || this.tag == "f22wheel" || this.tag == "f23wheel")
 		{
 			COMP_ID = TYPE_WHEEL;
 		}
 		else if(this.tag == "body" || this.tag == "f2body" || this.tag == "f3body"
             || this.tag == "f4body" || this.tag == "f5body" || this.tag == "f6body" || this.tag == "f7body" || this.tag == "f8body"
-             || this.tag == "f9body" || this.tag == "f10body")
+             || this.tag == "f9body" || this.tag == "f10body" || this.tag == "f11body" || this.tag == "f12body" || this.tag == "f13body"
+             || this.tag == "f14body" || this.tag == "f15body" || this.tag == "f16body" || this.tag == "f17body" || this.tag == "f18body"
+             || this.tag == "f19body" || this.tag == "f20body" || this.tag == "f21body" || this.tag == "f22body" || this.tag == "f23body")
 		{
 			COMP_ID = TYPE_BODY;
 		}
 		else if(this.tag == "frontWheel" || this.tag == "f2frontWheel" || this.tag == "f3frontWheel" 
 			|| this.tag == "f4frontWheel" || this.tag == "f5frontWheel" || this.tag == "f6frontWheel" || this.tag == "f7frontWheel"
-             || this.tag == "f8frontWheel" || this.tag == "f9frontWheel" || this.tag == "f10frontWheel")
+             || this.tag == "f8frontWheel" || this.tag == "f9frontWheel" || this.tag == "f10frontWheel" || this.tag == "f11frontWheel"
+             || this.tag == "f12frontWheel" || this.tag == "f13frontWheel" || this.tag == "f14frontWheel" || this.tag == "f15frontWheel"
+             || this.tag == "f16frontWheel" || this.tag == "f17frontWheel" || this.tag == "f18frontWheel" || this.tag == "f19frontWheel"
+            || this.tag == "f20frontWheel" || this.tag == "f21frontWheel" || this.tag == "f22frontWheel" || this.tag == "f23frontWheel")
 		{
 			COMP_ID = TYPE_FRONT_WHEEL;
 		}
 		else if(this.tag == "bottom" || this.tag == "f2bottom" || this.tag == "f3bottom"
             || this.tag == "f4bottom" || this.tag == "f5bottom" || this.tag == "f6bottom" || this.tag == "f7bottom" || this.tag == "f8bottom"
-             || this.tag == "f9bottom" || this.tag == "f10bottom")
+             || this.tag == "f9bottom" || this.tag == "f10bottom" || this.tag == "f11bottom" || this.tag == "f12bottom" || this.tag == "f13bottom"
+             || this.tag == "f14bottom" || this.tag == "f15bottom" || this.tag == "f16bottom" || this.tag == "f17bottom" || this.tag == "f18bottom"
+             || this.tag == "f19bottom" || this.tag == "f20bottom" || this.tag == "f21bottom" || this.tag == "f22bottom" || this.tag == "f23bottom")
 		{
 			COMP_ID = TYPE_BOTTOM;
 		}
 		else if(this.tag == "part5" || this.tag == "f2part5" || this.tag == "f3part5"
             || this.tag == "f4part5" || this.tag == "f5part5" || this.tag == "f6part5" || this.tag == "f7part5" || this.tag == "f8part5"
-             || this.tag == "f9part5" || this.tag == "f10part5")
+             || this.tag == "f9part5" || this.tag == "f10part5" || this.tag == "f11part5" || this.tag == "f12part5" || this.tag == "f13part5"
+             || this.tag == "f14part5" || this.tag == "f15part5" || this.tag == "f16part5" || this.tag == "f17part5" || this.tag == "f18part5"
+             || this.tag == "f19part5" || this.tag == "f20part5" || this.tag == "f21part5" || this.tag == "f22part5" || this.tag == "f23part5")
 		{
 			COMP_ID = TYPE_PART5;
 		}
 		else if(this.tag == "part6" || this.tag == "f2part6" || this.tag == "f3part6"
             || this.tag == "f4part6" || this.tag == "f5part6" || this.tag == "f6part6" || this.tag == "f7part6" || this.tag == "f8part6"
-             || this.tag == "f9part6" || this.tag == "f10part6")
+             || this.tag == "f9part6" || this.tag == "f10part6" || this.tag == "f11part6" || this.tag == "f12part6" || this.tag == "f13part6"
+             || this.tag == "f14part6" || this.tag == "f15part6" || this.tag == "f16part6" || this.tag == "f17part6" || this.tag == "f18part6"
+             || this.tag == "f19part6" || this.tag == "f20part6" || this.tag == "f21part6" || this.tag == "f22part6" || this.tag == "f23part6")
 		{
 			COMP_ID = TYPE_PART6;
 		}
