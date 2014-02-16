@@ -27,23 +27,29 @@ public class planeSelectViewController : MonoBehaviour {
     private int SWITCH_BUTTON_WIDTH;
     private int SWITCH_BUTTON_HEIGHT;
     private int SWITCH_BUTTON_MARGIN_HEIGHT;
-	
 	//sound effect
 	public AudioClip clickSound;
-
     //page tag
     private int pageTag = 0;
+    //UI BG
+    private GameObject UIBG;
+    public Texture pageOneTexture;
+    public Texture pageTwoTexture;
+    public Texture pageThreeTexture;
+    public Texture pageFourTexture;
 	
 	// Use this for initialization
 	void Start () 
 	{
 		initUIPosition();
+        UIBG = GameObject.Find("Plane");
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		Time.timeScale = 1.0f;
+        UIBG.renderer.material.mainTexture = changeUIBG(pageTag);
 	}
 	
 	void OnGUI()
@@ -150,6 +156,28 @@ public class planeSelectViewController : MonoBehaviour {
 			Application.Quit();
 		}
 	}
+
+    Texture changeUIBG(int pageNum)
+    {
+        switch (pageNum)
+        {
+            case 0:
+                return pageOneTexture;
+                break;
+            case 1:
+                return pageTwoTexture;
+                break;
+            case 2:
+                return pageThreeTexture;
+                break;
+            case 3:
+                return pageFourTexture;
+                break;
+            default:
+                return pageOneTexture;
+                break;
+        }
+    }
 	
 	void initUIPosition()
 	{

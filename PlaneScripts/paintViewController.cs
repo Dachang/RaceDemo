@@ -158,7 +158,7 @@ public class paintViewController : MonoBehaviour {
 		{
 			//load next scene & pass data
 			audio.PlayOneShot(clickSound);
-			if(currentCarID == 0 || currentCarID == 1)
+			if(currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4 || currentCarID == 5)
 			{
 				generateID();
 				PlayerPrefs.SetString("planeID",carIDString);
