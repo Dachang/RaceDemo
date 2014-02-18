@@ -158,7 +158,11 @@ public class paintViewController : MonoBehaviour {
 		{
 			//load next scene & pass data
 			audio.PlayOneShot(clickSound);
-			if(currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4 || currentCarID == 5)
+			if(currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4
+                || currentCarID == 5 || currentCarID == 6 || currentCarID == 7 || currentCarID == 8 || currentCarID == 9
+                || currentCarID == 10 || currentCarID == 11 || currentCarID == 12 || currentCarID == 13 || currentCarID == 14
+                || currentCarID == 15 || currentCarID == 16 || currentCarID == 17 || currentCarID == 18 || currentCarID == 19
+                || currentCarID == 20 || currentCarID == 21 || currentCarID == 22)
 			{
 				generateID();
 				PlayerPrefs.SetString("planeID",carIDString);
@@ -393,6 +397,7 @@ public class paintViewController : MonoBehaviour {
         }
         if (carID == 3) changeMaterials[6] = mainPartMaterials[1];
         else if (carID == 15) changeMaterials[6] = mainPartMaterials[1];
+        else if (carID == 19) changeMaterials[6] = mainPartMaterials[1];
         else if (carID == 22) changeMaterials[6] = mainPartMaterials[1];
         //mark original color
         for (int i = 0; i <= 5; i++)
