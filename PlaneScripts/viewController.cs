@@ -480,6 +480,14 @@ public class viewController : MonoBehaviour {
 		cbBottom.originalPosition = pBottomTransform.position;
 		cbPart5.originalPosition = pPart5Transfrom.position;
 		cbPart6.originalPosition = pPart6Transform.position;
+
+        //#feiJi008 position bug fix
+        if (wheel.tag == "f4wheel")
+        {
+            wheel.transform.position = new Vector3(pWheelTransform.position.x, pWheelTransform.position.y - 10, pWheelTransform.position.z);
+            cbWheel.originalPosition = new Vector3(pWheelTransform.position.x, pWheelTransform.position.y - 10, pWheelTransform.position.z);
+        }
+
 		scriptList[0] = cbWheel;
 		scriptList[1] = cbBody;
 		scriptList[2] = cbFrontWheel;

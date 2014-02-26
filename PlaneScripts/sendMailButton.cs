@@ -8,12 +8,15 @@ public class sendMailButton : MonoBehaviour {
 
     private int screenWidth;
     private int screenHeight;
+
+    private bool sendButtonIsActive;
 	// Use this for initialization
 	void Start () 
     {
         smfScript = (SendEmailFunction)Camera.main.GetComponent(typeof(SendEmailFunction));
         screenWidth = Screen.width;
         screenHeight = Screen.height;
+        sendButtonIsActive = true;
 	}
 	
 	// Update is called once per frame
@@ -27,7 +30,17 @@ public class sendMailButton : MonoBehaviour {
 
         if (GUI.Button(new Rect(screenWidth - 260, screenHeight - 150, 210, 110), " "))
         {
-            smfScript.SendEmail();
+            if (sendButtonIsActive)
+            {
+                smfScript.SendEmail();
+                sendButtonIsActive = false;
+            }
         }
+    }
+
+    //public interface
+    public void activateSendButton()
+    {
+        sendButtonIsActive = true;
     }
 }
