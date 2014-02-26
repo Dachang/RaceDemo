@@ -97,7 +97,7 @@ public class viewController : MonoBehaviour {
 	public AudioClip clickSound;
 	public AudioClip successSound;
     //plane total num
-    private int PLANE_TOTAL_NUM = 22;
+    private int PLANE_TOTAL_NUM = 23;
 	
 	void Start () 
 	{
@@ -312,6 +312,9 @@ public class viewController : MonoBehaviour {
                 break;
             case 22:
                 pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 23:
+                pTransform.position = new Vector3(pTransform.position.x - 5, pTransform.position.y - 20, pTransform.position.z);
                 break;
             default:
                 break;

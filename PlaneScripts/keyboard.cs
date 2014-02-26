@@ -199,4 +199,9 @@ public class keyboard : MonoBehaviour {
 	{
 		return userInputString;
 	}
+
+    public void setInputStringToNil()
+    {
+        userInputString = string.Format(" ");
+    }
 }

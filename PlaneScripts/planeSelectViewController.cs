@@ -136,6 +136,7 @@ public class planeSelectViewController : MonoBehaviour {
         //switch button
         if (GUI.Button(new Rect(SWITCH_BUTTON_LEFT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), "<"))
         {
+            audio.PlayOneShot(clickSound);
             //prev
             if (pageTag > 0 && pageTag <= 3)
             {
@@ -144,6 +145,7 @@ public class planeSelectViewController : MonoBehaviour {
         }
         if (GUI.Button(new Rect(SWITCH_BUTTON_RIGHT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), ">"))
         {
+            audio.PlayOneShot(clickSound);
             //next
             if (pageTag >= 0 && pageTag < 3)
             {
@@ -195,10 +197,10 @@ public class planeSelectViewController : MonoBehaviour {
 		RETURN_MARGIN_LEFT = screenWidth/2 - RETURN_WIDTH/2;
 		RETURN_MARGIN_UP = screenHeight - RETURN_HEIGHT - 30;
 
-        SWITCH_BUTTON_WIDTH = 100;
-        SWITCH_BUTTON_HEIGHT = 200;
-        SWITCH_BUTTON_LEFT_MARGIN = 60;
-        SWITCH_BUTTON_RIGHT_MARGIN = screenWidth - SWITCH_BUTTON_WIDTH - 60;
-        SWITCH_BUTTON_MARGIN_HEIGHT = screenHeight / 2 - SWITCH_BUTTON_HEIGHT / 2;
+        SWITCH_BUTTON_WIDTH = 160;
+        SWITCH_BUTTON_HEIGHT = 160;
+        SWITCH_BUTTON_LEFT_MARGIN = 70;
+        SWITCH_BUTTON_RIGHT_MARGIN = screenWidth - SWITCH_BUTTON_WIDTH - 70;
+        SWITCH_BUTTON_MARGIN_HEIGHT = screenHeight / 2 - SWITCH_BUTTON_HEIGHT / 2 + 40;
 	}
 }

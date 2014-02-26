@@ -162,7 +162,7 @@ public class paintViewController : MonoBehaviour {
                 || currentCarID == 5 || currentCarID == 6 || currentCarID == 7 || currentCarID == 8 || currentCarID == 9
                 || currentCarID == 10 || currentCarID == 11 || currentCarID == 12 || currentCarID == 13 || currentCarID == 14
                 || currentCarID == 15 || currentCarID == 16 || currentCarID == 17 || currentCarID == 18 || currentCarID == 19
-                || currentCarID == 20 || currentCarID == 21 || currentCarID == 22)
+                || currentCarID == 20 || currentCarID == 21 || currentCarID == 22 || currentCarID == 23)
 			{
 				generateID();
 				PlayerPrefs.SetString("planeID",carIDString);
@@ -347,6 +347,9 @@ public class paintViewController : MonoBehaviour {
                 break;
             case 22:
                 pTransform.position = new Vector3(pTransform.position.x, pTransform.position.y - 15, pTransform.position.z);
+                break;
+            case 23:
+                pTransform.position = new Vector3(pTransform.position.x - 5, pTransform.position.y - 20, pTransform.position.z);
                 break;
             default:
                 break;
