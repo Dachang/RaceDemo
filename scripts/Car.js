@@ -73,6 +73,8 @@ private var brakeForce : float = 0.0;
 
 private var MIN_MASS : float = 0.00001;
 
+private var isAbleToMove : boolean = false;
+
 class Wheel
 {
 	var collider : WheelCollider;
@@ -333,7 +335,40 @@ function GetInput()
 		throttle = 0;
 		steer = 0;
 	}
-	
+
+    if (Input.GetKey (KeyCode.W))
+    {
+        isAbleToMove = true;
+    }
+    if (Input.GetKey (KeyCode.Keypad5))
+    {
+        isAbleToMove = true;
+    }
+    if (Input.GetKeyUp (KeyCode.W))
+    {
+        isAbleToMove = false;
+    }
+    if (Input.GetKeyUp (KeyCode.Keypad5))
+    {
+        isAbleToMove = false;
+    }
+    if (Input.GetKey (KeyCode.S))
+    {
+        isAbleToMove = true;
+    }
+    if (Input.GetKey (KeyCode.Keypad2))
+    {
+        isAbleToMove = true;
+    }
+    if (Input.GetKeyUp (KeyCode.S))
+    {
+        isAbleToMove = false;
+    }
+    if (Input.GetKeyUp (KeyCode.Keypad2))
+    {
+        isAbleToMove = false;
+    }
+
 	if(throttle < 0.0)
 		brakeLights.SetFloat("_Intensity", Mathf.Abs(throttle));
 	else
@@ -354,6 +389,7 @@ function CheckHandbrake()
 			handbrakeTime = Time.time;
 			dragMultiplier.x = initialDragMultiplierX * handbrakeXDragFactor;
 		}
+    
 	}
 	else if(handbrake)
 	{
@@ -599,7 +635,7 @@ function CalculateState()
 
 function ApplyThrottle(canDrive : boolean, relativeVelocity : Vector3)
 {
-	if(canDrive && raceBegin)
+	if(canDrive && raceBegin && isAbleToMove)
 	{
 		//var throttleForce : float = 0;
 		//var brakeForce : float = 0;
