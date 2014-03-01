@@ -15,6 +15,7 @@ public class Timer : MonoBehaviour {
 	public string timeStringToPass;
 	
 	public bool countDownHasEnded = false;
+    public bool fakeCountDownHasEnded = false;
 	
 	//car script
 	private Car carScript;
@@ -102,6 +103,7 @@ public class Timer : MonoBehaviour {
 		GUI.skin = mySkin;
 		gameOver = smScript.getGameOver();
 		countDownToStart();
+        fakeCountDownToStart();
 		if(countDownHasEnded)
 		{
 			//GUI
@@ -152,6 +154,19 @@ public class Timer : MonoBehaviour {
 			}
 		}
 	}
+
+    void fakeCountDownToStart()
+    {
+        if (!fakeCountDownHasEnded)
+        {
+            float assumeTime = Time.time - startTime;
+            int fakeCountDownSeconds = (int)(assumeTime % 60);
+            if (fakeCountDownSeconds >= 10)
+            {
+                fakeCountDownHasEnded = true;
+            }
+        }
+    }
 	
 	//public interfaces
 	public string getTimeString()
@@ -163,4 +178,19 @@ public class Timer : MonoBehaviour {
 	{
 		textTime = string.Format(" ");
 	}
+
+    public bool threeSecondsEnd()
+    {
+        return countDownHasEnded;
+    }
+
+    public bool hasCountDownEnded() 
+    {
+        return fakeCountDownHasEnded;
+    }
+
+    public void endFakeCountDown()
+    {
+        fakeCountDownHasEnded = true;
+    }
 }
