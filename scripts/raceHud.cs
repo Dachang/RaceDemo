@@ -19,7 +19,7 @@ public class raceHud : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.skin.label.fontSize = 18;
-        GUI.Label(new Rect(20, screenHeight - 50, 350, 30), "提示：小键盘5前进，2后退，1左转，3右转");
+        GUI.skin.label.fontSize = 24;
+        GUI.Label(new Rect(20, screenHeight - 70, 470, 50), "提示：小键盘5前进，2后退，1左转，3右转");
     }
 }
