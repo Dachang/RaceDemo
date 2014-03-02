@@ -19,7 +19,7 @@ public class flyHud : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.skin.label.fontSize = 18;
-        GUI.Label(new Rect(screenWidth - 370, screenHeight - 50, 350, 30), "提示：小键盘5下降，2爬升，1左转，3右转");
+        GUI.skin.label.fontSize = 24;
+        GUI.Label(new Rect(screenWidth - 490, screenHeight - 70, 470, 50), "提示：小键盘5下降，2爬升，1左转，3右转");
     }
 }

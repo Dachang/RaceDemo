@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class paintViewController : MonoBehaviour {
 	
@@ -157,6 +158,8 @@ public class paintViewController : MonoBehaviour {
 		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
 		{
 			//load next scene & pass data
+            captureScreenshot();
+            //Application.CaptureScreenshot("yourPlane.jpg");
 			audio.PlayOneShot(clickSound);
 			if(currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4
                 || currentCarID == 5 || currentCarID == 6 || currentCarID == 7 || currentCarID == 8 || currentCarID == 9
@@ -833,6 +836,19 @@ public class paintViewController : MonoBehaviour {
 			break;
 		}
 	}
+
+    void captureScreenshot()
+    {
+        //图片大小  
+        Texture2D cutImage = new Texture2D(1100, 800, TextureFormat.RGB24, true);  
+        //坐标左下角为0  
+        Rect rect = new Rect(140, 150, 1100, 800);
+        cutImage.ReadPixels(rect,0,0, false);  
+        cutImage.Apply();  
+        byte[] byt = cutImage.EncodeToPNG();  
+        //保存截图  
+        File.WriteAllBytes(Application.dataPath + "//yourPlane.png", byt);
+    }
 	
 	//public interfaces
 	public void pauseRotate()
