@@ -23,7 +23,7 @@ public class leapDelegate : MonoBehaviour {
             if (carScript.getRaceBegin())
             {
                 tScript.endFakeCountDown();
-                carScript.setThrottleValue(pxsLeapInput.GetHandAxis("Depth"));
+                carScript.setThrottleValue(5f);
                 carScript.setSteerValue(pxsLeapInput.GetHandAxis("Rotation"));
                 if (pxsLeapInput.GetFingerCount() > 1)
                 {
@@ -31,8 +31,8 @@ public class leapDelegate : MonoBehaviour {
                 }
                 else
                 {
-                    carScript.setThrottleValue(-5f);
-                    carScript.setAbleToMove(false);
+                    carScript.setThrottleValue(-50f);
+                    //carScript.setAbleToMove(false);
                 }
             }
         }

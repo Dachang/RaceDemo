@@ -25,12 +25,12 @@ public class FlyMovement : MonoBehaviour {
     private float divesalto=0;
     private float diveblocker=0;
 
-    private int scoreRate = 100;
+    private int scoreRate = 5;
     private int myScore = 0;
 	//sound effect
 	public AudioClip coinSound;
 	//leap enabled
-	public bool leapIsEnabled;
+    public bool leapIsEnabled;
 	//movement factors
 	private float factorX = 0;
 	private float factorY1 = 0;
@@ -52,8 +52,7 @@ public class FlyMovement : MonoBehaviour {
 
         //this.gameObject.transform.collider.ClosestPointOnBounds(boxCollider.size);
         //this.gameObject.AddComponent<BoxCollider>();
-        
-
+        //leapIsEnabled = true;
     }
 	
 	// Update is called once per frame
@@ -93,7 +92,10 @@ public class FlyMovement : MonoBehaviour {
         //float factorY = Input.GetAxis("Mouse Y")*2;
 		if(leapIsEnabled == true)
 		{
-			factorY1 = -pxsLeapInput.GetHandAxis("Tilt") * factorLeapY;
+            factorY1 = pxsLeapInput.GetHandAxis("Tilt") > 0 ?
+                -pxsLeapInput.GetHandAxis("Tilt") * 3f 
+              : -pxsLeapInput.GetHandAxis("Tilt") * 10f;
+			//factorY1 = -pxsLeapInput.GetHandAxis("Tilt") * 5f;
 		}
 		else
 		{
@@ -107,7 +109,6 @@ public class FlyMovement : MonoBehaviour {
         {
             transform.Rotate((float)(0.8 - divesalto) * (factorY1 * Time.deltaTime * 80), 0, 0);
         }
-		Debug.Log(factorY1);
         // }
     }
 
@@ -119,14 +120,12 @@ public class FlyMovement : MonoBehaviour {
         //float factorX = Input.GetAxis("Mouse X") * 2;
 		if(leapIsEnabled == true)
 		{
-			factorX = pxsLeapInput.GetHandAxis("Rotation") * factorLeapX;
-			factorY2 = -pxsLeapInput.GetHandAxis("Tilt") * factorLeapY;
+			factorX = pxsLeapInput.GetHandAxis("Rotation") * factorLeapX * 2f;
+            factorY2 = -pxsLeapInput.GetHandAxis("Tilt") * factorLeapY;
 		}
 		else
 		{
         	factorX = Input.GetAxis("Horizontal");
-
-        //float factorY = Input.GetAxis("Mouse Y") * 2;
        		factorY2 = Input.GetAxis("Vertical");
 		}
 
@@ -246,7 +245,7 @@ public class FlyMovement : MonoBehaviour {
 	
 	void switchControl()
 	{
-		if(Input.GetButton("Fire1"))
+		if(Input.GetButtonDown("Fire1"))
 		{
 			leapIsEnabled = !leapIsEnabled;
 		}
@@ -256,12 +255,12 @@ public class FlyMovement : MonoBehaviour {
 	{
 		if(leapIsEnabled)
 		{
-			if(Input.GetButton("Fire2"))
+			if(Input.GetButtonDown("Fire2"))
 			{
 				tempFactorX--;
 				tempFactorY--;
 			}
-			if(Input.GetButton("Fire3"))
+			if(Input.GetButtonDown("Fire3"))
 			{
 				tempFactorX++;
 				tempFactorY++;
