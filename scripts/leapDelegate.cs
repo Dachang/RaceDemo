@@ -31,7 +31,16 @@ public class leapDelegate : MonoBehaviour {
                 }
                 else
                 {
-                    carScript.setThrottleValue(-50f);
+                    if (pxsLeapInput.m_Frame.Hands.Count > 0)
+                    {
+                        carScript.setThrottleValue(-50f);
+                    }
+                    else
+                    {
+                        carScript.setAbleToMove(false);
+                        carScript.setLeapIsTriggered();
+                        leapIsEnabled = false;
+                    }
                     //carScript.setAbleToMove(false);
                 }
             }
@@ -39,6 +48,10 @@ public class leapDelegate : MonoBehaviour {
         else
         {
             //keyboard input
+            if (pxsLeapInput.GetFingerCount() > 1)
+            {
+                leapIsEnabled = true;
+            }
         }
 	}
 
