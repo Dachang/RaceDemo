@@ -4,6 +4,7 @@ using System.Collections;
 public class sendMailButton : MonoBehaviour {
 
     public GUISkin mySkin;
+    public GUISkin mySkin2;
     private SendEmailFunction smfScript;
 
     private int screenWidth;
@@ -35,6 +36,12 @@ public class sendMailButton : MonoBehaviour {
                 smfScript.SendEmail();
                 sendButtonIsActive = false;
             }
+        }
+
+        GUI.skin = mySkin2;
+        if (GUI.Button(new Rect(screenWidth - 260, screenHeight - 290, 210, 110), " "))
+        {
+            Application.LoadLevel("FlyScene");
         }
     }
 
