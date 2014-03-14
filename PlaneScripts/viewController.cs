@@ -98,6 +98,12 @@ public class viewController : MonoBehaviour {
 	public AudioClip successSound;
     //plane total num
     private int PLANE_TOTAL_NUM = 23;
+    //Textures
+    private Texture textureColor1, textureColor2, textureColor3, textureColor4, textureColor5, textureColor6;
+    //original plane ID
+    private int[] realIDArray = new int[30];
+    //original color array
+    private int[] originalColorArray = new int[30];
 	
 	void Start () 
 	{
@@ -117,6 +123,9 @@ public class viewController : MonoBehaviour {
 		setTransparent(currentCarID);
 		loadChangePart(currentCarID);
 		findComponents(currentCarID);
+        initRealIDList();
+        initOriginalColorArray();
+        loadTexture(planeID);
 	}
 	
 	void Update () 
@@ -220,6 +229,40 @@ public class viewController : MonoBehaviour {
             part6List[i] = GameObject.FindGameObjectWithTag("f" + (i + 1).ToString() + "part6");
         }
 	}
+
+    void loadTexture(int carID)
+    {
+        if (realIDArray[carID] < 10)
+        {
+            textureColor1 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_hong", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_cheng", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_huang", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_lan", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_lv", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("feiJi00" + realIDArray[carID].ToString() + ".fbm/feiJi00" +
+                realIDArray[carID].ToString() + "_clr_zi", typeof(Texture));
+        }
+        else
+        {
+            textureColor1 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+               realIDArray[carID].ToString() + "_clr_hong", typeof(Texture));
+            textureColor2 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_cheng", typeof(Texture));
+            textureColor3 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_huang", typeof(Texture));
+            textureColor4 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_lan", typeof(Texture));
+            textureColor5 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_lv", typeof(Texture));
+            textureColor6 = (Texture)Resources.Load("feiJi0" + realIDArray[carID].ToString() + ".fbm/feiJi0" +
+                realIDArray[carID].ToString() + "_clr_zi", typeof(Texture));
+        }
+    }
 		
 	void switchCar(int carID)
 	{
@@ -605,8 +648,94 @@ public class viewController : MonoBehaviour {
 		cbPart5.resumeColor();
 		cbPart6.resumeColor();
 		shouldCarRotate = true;
+        resumeComponentTexture();
 	}
-	
+
+    void resumeComponentTexture()
+    {
+        wheel.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+        body.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+        frontWheel.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+        bottom.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+        part5.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+        part6.renderer.material.mainTexture = convertCarIDToTexture(currentCarID);
+    }
+
+    void initRealIDList()
+    {
+        realIDArray[0] = 3;
+        realIDArray[1] = 4;
+        realIDArray[2] = 5;
+        realIDArray[3] = 8;
+        realIDArray[4] = 10;
+        realIDArray[5] = 11;
+        realIDArray[6] = 1;
+        realIDArray[7] = 2;
+        realIDArray[8] = 6;
+        realIDArray[9] = 7;
+        realIDArray[10] = 9;
+        //realIDArray[11] = 12;
+        for (int i = 11; i <= 23; i++)
+        {
+            realIDArray[i] = i + 1;
+        }
+    }
+
+    void initOriginalColorArray()
+    {
+        originalColorArray[0] = 3;
+        originalColorArray[1] = 3;
+        originalColorArray[2] = 0;
+        originalColorArray[3] = 2;
+        originalColorArray[4] = 0;
+        originalColorArray[5] = 4;
+        originalColorArray[6] = 3;
+        originalColorArray[7] = 1;
+        originalColorArray[8] = 4;
+        originalColorArray[9] = 3;
+        originalColorArray[10] = 5;
+        originalColorArray[11] = 0;
+        originalColorArray[12] = 2;
+        originalColorArray[13] = 1;
+        originalColorArray[14] = 4;
+        originalColorArray[15] = 3;
+        originalColorArray[16] = 3;
+        originalColorArray[17] = 0;
+        originalColorArray[18] = 1;
+        originalColorArray[19] = 5;
+        originalColorArray[20] = 4;
+        originalColorArray[21] = 2;
+        originalColorArray[22] = 3;
+    }
+
+    Texture convertCarIDToTexture(int carID)
+    {
+        switch (originalColorArray[carID])
+        {
+            case 0:
+                return textureColor1;
+                break;
+            case 1:
+                return textureColor2;
+                break;
+            case 2:
+                return textureColor3;
+                break;
+            case 3:
+                return textureColor4;
+                break;
+            case 4:
+                return textureColor5;
+                break;
+            case 5:
+                return textureColor6;
+                break;
+            default:
+                return textureColor1;
+                break;
+        }
+    }
+
 	//public interfaces
 	public void pauseRotate()
 	{

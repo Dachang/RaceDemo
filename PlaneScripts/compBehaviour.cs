@@ -29,6 +29,7 @@ public class compBehaviour : MonoBehaviour {
 	private float dragDistance = 80f;
 	//component has been set up?
 	public bool isCompSetUp = false;
+    public bool isSoundPlayed = false;
 	//component can be dragged?
 	public bool isAbleToDrag = true;
 	//change part materials
@@ -161,7 +162,10 @@ public class compBehaviour : MonoBehaviour {
 		{
 			//renderer.material.color = Color.green;
 			isAbleToDrag = false;
-			audio.PlayOneShot(successSound);
+            if(!isSoundPlayed) audio.PlayOneShot(successSound);
+            isSoundPlayed = true;
+            renderer.material.mainTexture = (Texture)Resources.Load("LabelTP",typeof(Texture));
+            renderer.material.color = Color.grey;
 		}
 		else
 		{
@@ -195,7 +199,7 @@ public class compBehaviour : MonoBehaviour {
      	offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3
 			(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 	}
-	
+
 	//judge which part of the car response the component
 	void judgePart(int comp_id)
 	{
@@ -372,6 +376,7 @@ public class compBehaviour : MonoBehaviour {
 	//public interface
 	public void resumeColor()
 	{
-		renderer.material.color = originalColor;
+        isSoundPlayed = false;
+        renderer.material.color = originalColor;
 	}
 }
