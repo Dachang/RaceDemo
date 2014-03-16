@@ -18,10 +18,10 @@ public class MapBehaviour : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        if (mapIsAbleToDrag)
-        {
-            this.transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * dragSpeedX);
-        }
+        //if (mapIsAbleToDrag)
+        //{
+        //    this.transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * dragSpeedX);
+        //}
     }
 
     public void setMapIsAbleToDrag(bool isAbleOrNot)

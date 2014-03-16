@@ -20,6 +20,9 @@ public class BuildingBehaviour : MonoBehaviour {
     private bool animateStart = false;
 
     private bool hasAlreadyReplaced = false;
+    private bool showBuildingUIView = false;
+
+    private bool buildingHasAppeared = false;
 	// Use this for initialization
 	void Start () 
     {
@@ -55,6 +58,23 @@ public class BuildingBehaviour : MonoBehaviour {
         }
 	}
 
+    void OnGUI()
+    {
+        if (showBuildingUIView)
+        {
+            if (GUI.Button(new Rect(Screen.width - 60, 20, 40, 40), "esc"))
+            {
+                animateStart = false;
+                showBuildingUIView = false;
+                mScript.setMapIsAbleToDrag(true);
+                foreach (Transform child in transform)
+                    child.gameObject.renderer.enabled = true;
+                this.transform.position = replaceBuilding.transform.position;
+                this.transform.rotation = replaceBuilding.transform.rotation;
+            }
+        }
+    }
+
     void OnMouseDown()
     {
         if (mbScript.getBuildingIsTriggered())
@@ -65,6 +85,7 @@ public class BuildingBehaviour : MonoBehaviour {
                 mScript.setMapIsAbleToDrag(false);
                 //animation
                 animateStart = true;
+                showBuildingUIView = true;
             }
         }
     }
@@ -72,5 +93,10 @@ public class BuildingBehaviour : MonoBehaviour {
     public bool isAnimationStart()
     {
         return animateStart;
+    }
+
+    public bool hasShowBuildingUIView()
+    {
+        return showBuildingUIView;
     }
 }
