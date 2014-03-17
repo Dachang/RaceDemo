@@ -46,6 +46,7 @@ public class BuildingBehaviour : MonoBehaviour {
     {
         if (animateStart)
         {
+            camScript.setCameraTriggered(false);
             this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.position, Time.deltaTime * smooth);
             this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetTransform.rotation, Time.deltaTime * smooth);
             if (Mathf.Abs(this.transform.position.x - targetTransform.position.x) < 0.01f)
@@ -53,7 +54,6 @@ public class BuildingBehaviour : MonoBehaviour {
                 building_B.SetActive(true);
                 foreach (Transform child in transform)
                     child.gameObject.renderer.enabled = false;
-                camScript.setCameraTriggered(false);
             }
         }
         else
@@ -72,6 +72,7 @@ public class BuildingBehaviour : MonoBehaviour {
                 showBuildingUIView = false;
                 mScript.setMapIsAbleToDrag(true);
                 camScript.setCameraTriggered(true);
+                camScript.setCameraAdjusted(false);
                 foreach (Transform child in transform)
                     child.gameObject.renderer.enabled = true;
                 this.transform.position = replaceBuilding.transform.position;

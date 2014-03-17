@@ -78,8 +78,8 @@ public class BigBuildingBehaviour : MonoBehaviour {
 
     void fixCameraPosition()
     {
-        Vector3 targetPos = new Vector3(0, 1.7f, -2.4f);
-        Quaternion targetRot = new Quaternion(0.4f, 0, 0, 0.9f);
+        Vector3 targetPos = new Vector3(0, 1.6f, -2.4f);
+        Quaternion targetRot = new Quaternion(0.3f, 0, 0, 1.0f);
         Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, targetPos,
             Time.deltaTime * smooth);
         Camera.main.transform.localRotation = Quaternion.Lerp(Camera.main.transform.localRotation, targetRot,

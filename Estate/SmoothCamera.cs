@@ -23,6 +23,8 @@ public class SmoothCamera : MonoBehaviour
     private float camScaleFactor = 3f;
 
     private bool cameraTriggered = true;
+    private bool cameraAdjusted = false;
+    private Transform originalTransform;
 
     void Start()
     {
@@ -30,7 +32,6 @@ public class SmoothCamera : MonoBehaviour
         x = angles.y;
         y = angles.x;
 
-        // Make the rigid body not change rotation
         if (rigidbody)
             rigidbody.freezeRotation = true;
 
@@ -41,6 +42,8 @@ public class SmoothCamera : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Camera.main.transform.position.ToString() + Camera.main.transform.rotation.ToString() +
+            Camera.main.fieldOfView.ToString());
         if (GameObject.Find("fake_building_B"))
         {
             targetBuilding = GameObject.Find("fake_building_B");
@@ -82,8 +85,14 @@ public class SmoothCamera : MonoBehaviour
     {
         if (bScript.isAnimationStart())
         {
+            if (!cameraAdjusted)
+            {
+                Camera.main.transform.position = new Vector3(0.0f, 1.6f, -2.4f);
+                Camera.main.transform.rotation = new Quaternion(0.3f, 0, 0, 1.0f);
+                cameraAdjusted = true;
+            }
             target = targetBuilding.transform;
-            Camera.main.fieldOfView = 60.0f;
+            Camera.main.fieldOfView = 55.0f;
             distance = 1.0f;
         }
         else
@@ -121,6 +130,11 @@ public class SmoothCamera : MonoBehaviour
     public void setCameraTriggered(bool isTriggered)
     {
         cameraTriggered = isTriggered;
+    }
+
+    public void setCameraAdjusted(bool hasAdjusted)
+    {
+        cameraAdjusted = hasAdjusted;
     }
 }
 
