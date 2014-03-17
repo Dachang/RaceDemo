@@ -22,6 +22,8 @@ public class SmoothCamera : MonoBehaviour
 
     private float camScaleFactor = 3f;
 
+    private bool cameraTriggered = true;
+
     void Start()
     {
         var angles = transform.eulerAngles;
@@ -44,7 +46,7 @@ public class SmoothCamera : MonoBehaviour
             targetBuilding = GameObject.Find("fake_building_B");
         }
 
-        if (target && Input.GetMouseButton(0))
+        if (target && Input.GetMouseButton(0) && cameraTriggered)
         {
             x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
             y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
@@ -61,7 +63,7 @@ public class SmoothCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target && Input.GetMouseButton(0))
+        if (target && Input.GetMouseButton(0) && cameraTriggered)
         {
             x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
             y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
@@ -81,6 +83,7 @@ public class SmoothCamera : MonoBehaviour
         if (bScript.isAnimationStart())
         {
             target = targetBuilding.transform;
+            Camera.main.fieldOfView = 60.0f;
             distance = 1.0f;
         }
         else
@@ -92,11 +95,11 @@ public class SmoothCamera : MonoBehaviour
 
     void checkScale()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraTriggered && Camera.main.fieldOfView <= 60.0f)
         {
             Camera.main.fieldOfView += camScaleFactor;
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && cameraTriggered && Camera.main.fieldOfView >= 30.0f)
         {
             Camera.main.fieldOfView -= camScaleFactor;
         }
@@ -113,6 +116,11 @@ public class SmoothCamera : MonoBehaviour
             angle -= 360;
         }
         return Mathf.Clamp(angle, min, max);
+    }
+
+    public void setCameraTriggered(bool isTriggered)
+    {
+        cameraTriggered = isTriggered;
     }
 }
 

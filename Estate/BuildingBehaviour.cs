@@ -13,6 +13,8 @@ public class BuildingBehaviour : MonoBehaviour {
 
     private GameObject replaceBuilding;
 
+    private SmoothCamera camScript;
+
     private Transform originalBuilingTransform;
     private Transform targetTransform;
 
@@ -33,6 +35,7 @@ public class BuildingBehaviour : MonoBehaviour {
 
         mScript = (MapBehaviour)buildingBG.GetComponent(typeof(MapBehaviour));
         mbScript = (TriggerBehaviour)buildingTrigger_B.GetComponent(typeof(TriggerBehaviour));
+        camScript = (SmoothCamera)Camera.main.GetComponent(typeof(SmoothCamera));
 
         originalBuilingTransform = this.transform;
         targetTransform = building_B.transform;
@@ -50,6 +53,7 @@ public class BuildingBehaviour : MonoBehaviour {
                 building_B.SetActive(true);
                 foreach (Transform child in transform)
                     child.gameObject.renderer.enabled = false;
+                camScript.setCameraTriggered(false);
             }
         }
         else
@@ -67,6 +71,7 @@ public class BuildingBehaviour : MonoBehaviour {
                 animateStart = false;
                 showBuildingUIView = false;
                 mScript.setMapIsAbleToDrag(true);
+                camScript.setCameraTriggered(true);
                 foreach (Transform child in transform)
                     child.gameObject.renderer.enabled = true;
                 this.transform.position = replaceBuilding.transform.position;

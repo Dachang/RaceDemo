@@ -32,57 +32,57 @@ public class BigBuildingBehaviour : MonoBehaviour {
 	
 	void Update () 
     {
-        if (isAbleToRotate)
+        //if (isAbleToRotate)
+        //{
+        //    this.transform.Rotate(Vector3.up * Time.deltaTime * autoSpeed);
+        //}
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && this.transform.localScale.x >= 0.015f)
         {
-            this.transform.Rotate(Vector3.up * Time.deltaTime * autoSpeed);
+            this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f) * resizeFactor;
         }
-        //if (Input.GetAxis("Mouse ScrollWheel") < 0 && this.transform.localScale.x >= 0.004f)
-        //{
-        //    this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f) * resizeFactor;
-        //}
-        //if (Input.GetAxis("Mouse ScrollWheel") > 0 && this.transform.localScale.x <= 0.018f)
-        //{
-        //    this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * resizeFactor;
-        //}
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && this.transform.localScale.x <= 0.018f)
+        {
+            this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * resizeFactor;
+        }
 	}
 
     void OnMouseDrag()
     {
-        //isAbleToRotate = false;
-        //if (Mathf.Abs(Input.GetAxis("Mouse X")) > Mathf.Abs(Input.GetAxis("Mouse Y")) && !isDraggingVertical)
-        //{
-        //    this.transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * dragSpeedX);
-        //    isDraggingHorizontal = true;
-        //}
-        //else if (Mathf.Abs(Input.GetAxis("Mouse X")) < Mathf.Abs(Input.GetAxis("Mouse Y")) && !isDraggingHorizontal)
-        //{
-        //    if (Mathf.Abs(Camera.main.transform.localPosition.y) > 1.3f &&
-        //        Mathf.Abs(Camera.main.transform.localPosition.y) < 1.8f)
-        //    {
-        //        Camera.main.transform.Rotate(Vector3.left * Time.deltaTime * Input.GetAxis("Mouse Y") * dragSpeedY);
-        //        Camera.main.transform.localPosition -= new Vector3(0, Input.GetAxis("Mouse Y") * cameraMoveFactor, 0);
-        //    }
-        //    else 
-        //    {
-        //        fixCameraPosition();
-        //    }
-        //    isDraggingVertical = true;
-        //}
+        isAbleToRotate = false;
+        if (Mathf.Abs(Input.GetAxis("Mouse X")) > Mathf.Abs(Input.GetAxis("Mouse Y")) && !isDraggingVertical)
+        {
+            this.transform.Rotate(Vector3.up * Time.deltaTime * Input.GetAxis("Mouse X") * dragSpeedX);
+            isDraggingHorizontal = true;
+        }
+        else if (Mathf.Abs(Input.GetAxis("Mouse X")) < Mathf.Abs(Input.GetAxis("Mouse Y")) && !isDraggingHorizontal)
+        {
+            if (Mathf.Abs(Camera.main.transform.localPosition.y) > 1.3f &&
+                Mathf.Abs(Camera.main.transform.localPosition.y) < 1.8f)
+            {
+                Camera.main.transform.Rotate(Vector3.left * Time.deltaTime * Input.GetAxis("Mouse Y") * dragSpeedY);
+                Camera.main.transform.localPosition -= new Vector3(0, Input.GetAxis("Mouse Y") * cameraMoveFactor, 0);
+            }
+            else
+            {
+                fixCameraPosition();
+            }
+            isDraggingVertical = true;
+        }
     }
 
     void OnMouseUp()
     {
-        //isDraggingHorizontal = false;
-        //isDraggingVertical = false;
+        isDraggingHorizontal = false;
+        isDraggingVertical = false;
     }
 
     void fixCameraPosition()
     {
-        //Vector3 targetPos = new Vector3(0, 1.7f, -2.4f);
-        //Quaternion targetRot = new Quaternion(0.4f, 0, 0, 0.9f);
-        //Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, targetPos,
-        //    Time.deltaTime * smooth);
-        //Camera.main.transform.localRotation = Quaternion.Lerp(Camera.main.transform.localRotation, targetRot,
-        //    Time.deltaTime * smooth);
+        Vector3 targetPos = new Vector3(0, 1.7f, -2.4f);
+        Quaternion targetRot = new Quaternion(0.4f, 0, 0, 0.9f);
+        Camera.main.transform.localPosition = Vector3.Lerp(Camera.main.transform.localPosition, targetPos,
+            Time.deltaTime * smooth);
+        Camera.main.transform.localRotation = Quaternion.Lerp(Camera.main.transform.localRotation, targetRot,
+            Time.deltaTime * smooth);
     }
 }
