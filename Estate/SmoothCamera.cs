@@ -26,6 +26,8 @@ public class SmoothCamera : MonoBehaviour
     private bool cameraAdjusted = false;
     private Transform originalTransform;
 
+    private GameObject uiBG;
+
     void Start()
     {
         var angles = transform.eulerAngles;
@@ -38,6 +40,7 @@ public class SmoothCamera : MonoBehaviour
         buildingBG = GameObject.Find("factory_area");
         currentBuilding = GameObject.Find("building_B");
         bScript = (BuildingBehaviour)currentBuilding.GetComponent(typeof(BuildingBehaviour));
+        uiBG = GameObject.Find("UIBG");
     }
 
     void Update()
@@ -87,16 +90,18 @@ public class SmoothCamera : MonoBehaviour
         {
             if (!cameraAdjusted)
             {
-                Camera.main.transform.position = new Vector3(0.0f, 1.6f, -2.4f);
-                Camera.main.transform.rotation = new Quaternion(0.3f, 0, 0, 1.0f);
+                uiBG.SetActive(true);
+                Camera.main.transform.position = new Vector3(0.0f, 2.0f, -3.3f);
+                Camera.main.transform.rotation = new Quaternion(0.2f, 0, 0, 1.0f);
                 cameraAdjusted = true;
             }
-            target = targetBuilding.transform;
-            Camera.main.fieldOfView = 55.0f;
-            distance = 1.0f;
+            //target = targetBuilding.transform;
+            Camera.main.fieldOfView = 60.0f;
+            //distance = 1.0f;
         }
         else
         {
+            uiBG.SetActive(false);
             target = buildingBG.transform;
             distance = 3.5f;
         }

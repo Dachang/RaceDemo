@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BuildingBehaviour : MonoBehaviour {
 
+    public GUISkin mySkin;
+
     private GameObject building_B;
     
     private GameObject buildingTrigger_B;
@@ -25,6 +27,14 @@ public class BuildingBehaviour : MonoBehaviour {
     private bool showBuildingUIView = false;
 
     private bool buildingHasAppeared = false;
+
+    private int pageTag = 1;
+    public Texture2D renderImageOne;
+    public Texture2D renderImageTwo;
+    public Texture2D renderImageThree;
+    public Texture2D renderImageFour;
+    public Texture2D renderImageFive;
+    public Texture2D renderImageSix;
 	// Use this for initialization
 	void Start () 
     {
@@ -64,9 +74,32 @@ public class BuildingBehaviour : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.skin = mySkin;
         if (showBuildingUIView)
         {
-            if (GUI.Button(new Rect(Screen.width - 60, 20, 40, 40), "esc"))
+            if (pageTag == 1)
+            {
+                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageOne.width - 20, Screen.height / 2 + 160, renderImageOne.width,
+                    renderImageOne.height), renderImageOne, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageTwo.width,
+                    renderImageTwo.height), renderImageTwo, ScaleMode.StretchToFill, true, 0);
+            }
+            else if (pageTag == 2)
+            {
+                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageThree.width - 20, Screen.height / 2 + 160, renderImageThree.width,
+                    renderImageThree.height), renderImageThree, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageFour.width,
+                    renderImageFour.height), renderImageFour, ScaleMode.StretchToFill, true, 0);
+            }
+            else if (pageTag == 3)
+            {
+                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageFive.width - 20, Screen.height / 2 + 160, renderImageFive.width,
+                   renderImageFive.height), renderImageFive, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageSix.width,
+                    renderImageSix.height), renderImageSix, ScaleMode.StretchToFill, true, 0);
+            }
+
+            if (GUI.Button(new Rect(Screen.width/2 + 400, 40, 80, 80), ""))
             {
                 animateStart = false;
                 showBuildingUIView = false;
@@ -77,6 +110,14 @@ public class BuildingBehaviour : MonoBehaviour {
                     child.gameObject.renderer.enabled = true;
                 this.transform.position = replaceBuilding.transform.position;
                 this.transform.rotation = replaceBuilding.transform.rotation;
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 - 470, Screen.height / 2 + 270, 80, 80), ""))
+            {
+                if (pageTag > 1) pageTag--;
+            }
+            if (GUI.Button(new Rect(Screen.width / 2 + 390, Screen.height / 2 + 270, 80, 80), ""))
+            {
+                if (pageTag < 3) pageTag++;
             }
         }
     }

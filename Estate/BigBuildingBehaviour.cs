@@ -4,8 +4,8 @@ using System.Collections;
 public class BigBuildingBehaviour : MonoBehaviour {
 
     private int autoSpeed = 10;
-    private int dragSpeedX = -50;
-    private int dragSpeedY = 50;
+    private int dragSpeedX = -150;
+    private int dragSpeedY = 150;
 
     private bool isAbleToRotate = true;
     private bool isDraggingHorizontal = false;
@@ -56,16 +56,16 @@ public class BigBuildingBehaviour : MonoBehaviour {
         }
         else if (Mathf.Abs(Input.GetAxis("Mouse X")) < Mathf.Abs(Input.GetAxis("Mouse Y")) && !isDraggingHorizontal)
         {
-            if (Mathf.Abs(Camera.main.transform.localPosition.y) > 1.3f &&
-                Mathf.Abs(Camera.main.transform.localPosition.y) < 1.8f)
-            {
-                Camera.main.transform.Rotate(Vector3.left * Time.deltaTime * Input.GetAxis("Mouse Y") * dragSpeedY);
-                Camera.main.transform.localPosition -= new Vector3(0, Input.GetAxis("Mouse Y") * cameraMoveFactor, 0);
-            }
-            else
-            {
-                fixCameraPosition();
-            }
+            //if (Mathf.Abs(Camera.main.transform.localPosition.y) > 1.3f &&
+            //    Mathf.Abs(Camera.main.transform.localPosition.y) < 1.8f)
+            //{
+            //    Camera.main.transform.Rotate(Vector3.left * Time.deltaTime * Input.GetAxis("Mouse Y") * dragSpeedY);
+            //    Camera.main.transform.localPosition -= new Vector3(0, Input.GetAxis("Mouse Y") * cameraMoveFactor, 0);
+            //}
+            //else
+            //{
+            //    fixCameraPosition();
+            //}
             isDraggingVertical = true;
         }
     }
