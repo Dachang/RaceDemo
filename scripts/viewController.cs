@@ -904,6 +904,34 @@ public class viewController : MonoBehaviour {
 			}
 		}
 	}
+
+    void setCompSolid(int carID)
+    {
+        Material[] wheelMat = wheelList[carID].renderer.materials;
+        Material[] bodyMat = bodyList[carID].renderer.materials;
+        Material[] frontWheelMat = frontWheelList[carID].renderer.materials;
+        Material[] bottomMat = bottomList[carID].renderer.materials;
+        foreach (Material mat in wheelMat)
+        {
+            mat.SetColor("_Color", new Color(mat.color.r, mat.color.g, mat.color.b, 1.0f));
+            mat.shader = Shader.Find("Diffuse");
+        }
+        foreach (Material mat in bodyMat)
+        {
+            mat.SetColor("_Color", new Color(mat.color.r, mat.color.g, mat.color.b, 1.0f));
+            mat.shader = Shader.Find("Diffuse");
+        }
+        foreach (Material mat in frontWheelMat)
+        {
+            mat.SetColor("_Color", new Color(mat.color.r, mat.color.g, mat.color.b, 1.0f));
+            mat.shader = Shader.Find("Diffuse");
+        }
+        foreach (Material mat in bottomMat)
+        {
+            mat.SetColor("_Color", new Color(mat.color.r, mat.color.g, mat.color.b, 1.0f));
+            mat.shader = Shader.Find("Diffuse");
+        }
+    }
 	
 	void resumeMainBodyMaterial(int carID)
 	{
@@ -969,6 +997,7 @@ public class viewController : MonoBehaviour {
 		resumeMainBodyMaterial(currentCarID);
 		resumeRotate();
         colorHasPainted = false;
+        setCompSolid(currentCarID);
 	}
 	
 	//public interfaces

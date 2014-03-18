@@ -42,6 +42,7 @@ public class compBehaviour : MonoBehaviour {
 	private Vector3 offset;
 	//sound effect
 	public AudioClip successSound;
+    private bool isSoundPlayed = false;
 	
 	void Start()
 	{
@@ -123,7 +124,9 @@ public class compBehaviour : MonoBehaviour {
 		{
 			//renderer.material.color = Color.green;
 			isAbleToDrag = false;
-			audio.PlayOneShot(successSound);
+            if(!isSoundPlayed) audio.PlayOneShot(successSound);
+            isSoundPlayed = true;
+            setCompTransparent();
 		}
 		else
 		{
@@ -269,6 +272,16 @@ public class compBehaviour : MonoBehaviour {
 			}
 		}
 	}
+
+    void setCompTransparent()
+    {
+        Material[] compMat = this.renderer.materials;
+        foreach (Material mat in compMat)
+        {
+            mat.SetColor("_Color", new Color(mat.color.r, mat.color.g,mat.color.b, 0.25f));
+            mat.shader = Shader.Find("Transparent/Diffuse");
+        }
+    }
 	
 	void judgeManipulation()
 	{
@@ -293,6 +306,7 @@ public class compBehaviour : MonoBehaviour {
 	//public interface
 	public void resumeColor()
 	{
+        isSoundPlayed = false;
 		renderer.material.color = originalColor;
 	}
 }
