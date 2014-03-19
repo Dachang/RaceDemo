@@ -75,31 +75,40 @@ public class BuildingBehaviour : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = mySkin;
+        float resizeFactor = Screen.width / 1920.0f;
+        Debug.Log(resizeFactor);
         if (showBuildingUIView)
         {
             if (pageTag == 1)
             {
-                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageOne.width - 20, Screen.height / 2 + 160, renderImageOne.width,
-                    renderImageOne.height), renderImageOne, ScaleMode.StretchToFill, true, 0);
-                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageTwo.width,
-                    renderImageTwo.height), renderImageTwo, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 - renderImageOne.width - 20) * resizeFactor,
+                    (float)(1080 / 2 + 160) * resizeFactor, (float)renderImageOne.width * resizeFactor,
+                    (float)renderImageOne.height * resizeFactor), renderImageOne, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 + 20) * resizeFactor, (float)(1080 / 2 + 160) * resizeFactor,
+                    (float)renderImageTwo.width * resizeFactor, (float)renderImageTwo.height * resizeFactor), 
+                    renderImageTwo, ScaleMode.StretchToFill, true, 0);
             }
             else if (pageTag == 2)
             {
-                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageThree.width - 20, Screen.height / 2 + 160, renderImageThree.width,
-                    renderImageThree.height), renderImageThree, ScaleMode.StretchToFill, true, 0);
-                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageFour.width,
-                    renderImageFour.height), renderImageFour, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 - renderImageThree.width - 20) * resizeFactor,
+                    (float)(1080 / 2 + 160) * resizeFactor, (float)renderImageThree.width * resizeFactor,
+                    (float)renderImageThree.height * resizeFactor), renderImageThree, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 + 20) * resizeFactor, (float)(1080 / 2 + 160) * resizeFactor,
+                    (float)renderImageFour.width * resizeFactor, (float)renderImageFour.height * resizeFactor), 
+                    renderImageFour, ScaleMode.StretchToFill, true, 0);
             }
             else if (pageTag == 3)
             {
-                GUI.DrawTexture(new Rect(Screen.width / 2 - renderImageFive.width - 20, Screen.height / 2 + 160, renderImageFive.width,
-                   renderImageFive.height), renderImageFive, ScaleMode.StretchToFill, true, 0);
-                GUI.DrawTexture(new Rect(Screen.width / 2 + 20, Screen.height / 2 + 160, renderImageSix.width,
-                    renderImageSix.height), renderImageSix, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 - renderImageFive.width - 20) * resizeFactor,
+                    (float)(1080 / 2 + 160) * resizeFactor, (float)renderImageFive.width * resizeFactor,
+                    (float)renderImageFive.height * resizeFactor), renderImageFive, ScaleMode.StretchToFill, true, 0);
+                GUI.DrawTexture(new Rect((float)(1920 / 2 + 20) * resizeFactor, (float)(1080 / 2 + 160) * resizeFactor,
+                    (float)renderImageSix.width * resizeFactor, (float)renderImageSix.height * resizeFactor), 
+                    renderImageSix, ScaleMode.StretchToFill, true, 0);
             }
 
-            if (GUI.Button(new Rect(Screen.width/2 + 400, 40, 80, 80), ""))
+            if (GUI.Button(new Rect((float)(1920 / 2 + 400) * resizeFactor, 40.0f * resizeFactor, 
+                80.0f * resizeFactor, 80.0f * resizeFactor), ""))
             {
                 animateStart = false;
                 showBuildingUIView = false;
@@ -110,12 +119,15 @@ public class BuildingBehaviour : MonoBehaviour {
                     child.gameObject.renderer.enabled = true;
                 this.transform.position = replaceBuilding.transform.position;
                 this.transform.rotation = replaceBuilding.transform.rotation;
+                pageTag = 1;
             }
-            if (GUI.Button(new Rect(Screen.width / 2 - 470, Screen.height / 2 + 270, 80, 80), ""))
+            if (GUI.Button(new Rect((float)(1920 / 2 - 470) * resizeFactor, (float)(1080 / 2 + 270) * resizeFactor,
+                80.0f * resizeFactor, 80.0f * resizeFactor), ""))
             {
                 if (pageTag > 1) pageTag--;
             }
-            if (GUI.Button(new Rect(Screen.width / 2 + 390, Screen.height / 2 + 270, 80, 80), ""))
+            if (GUI.Button(new Rect((float)(1920 / 2 + 390) * resizeFactor, (float)(1080 / 2 + 270) * resizeFactor,
+                80.0f * resizeFactor, 80.0f * resizeFactor), ""))
             {
                 if (pageTag < 3) pageTag++;
             }
