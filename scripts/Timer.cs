@@ -161,7 +161,7 @@ public class Timer : MonoBehaviour {
         {
             float assumeTime = Time.time - startTime;
             int fakeCountDownSeconds = (int)(assumeTime % 60);
-            if (fakeCountDownSeconds >= 10)
+            if (fakeCountDownSeconds >= 90)
             {
                 fakeCountDownHasEnded = true;
             }

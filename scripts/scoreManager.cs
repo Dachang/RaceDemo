@@ -62,7 +62,7 @@ public class scoreManager : MonoBehaviour {
 			Time.timeScale = 1.0f;
 		currentCarID = scScript.getCurrentCarID();
 		updateGameState();
-        Debug.Log(roundNum);
+        //Debug.Log(roundNum);
 	}
 	
 	void OnGUI()

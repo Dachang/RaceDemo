@@ -107,7 +107,9 @@ public class viewController : MonoBehaviour {
 	private Material[] car8changeBottomMats = new Material[10];
     //color has painted
     bool colorHasPainted = false;
-	
+	//GUI skin
+    public GUISkin resetBtnSkin, confirmBtnSkin, redPaintSkin, orangePaintSkin, yellowPaintSkin, bluePaintSkin,
+        greenPaintSkin, purplePaintSkin, leftBtnSkin, rightBtnSkin, exitBtnSkin;
 	void Start () 
 	{
 		screenWidth = Screen.width;
@@ -139,9 +141,10 @@ public class viewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
+		//GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
-		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
+        GUI.skin = resetBtnSkin;
+		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT)," "))
 		{
 			setResume();
 			setTransparent(currentCarID);
@@ -152,7 +155,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(clickSound);
 		}
 		//confirm button
-		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
+        GUI.skin = confirmBtnSkin;
+		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), " "))
 		{
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp
 				&& (currentCarID == 0 || currentCarID == 1 || currentCarID == 2 || currentCarID == 3 || currentCarID == 4
@@ -173,7 +177,8 @@ public class viewController : MonoBehaviour {
 			uiBG.renderer.material.mainTexture = confirmOnClicked;
 		}
 		//Material buttons
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
+        GUI.skin = redPaintSkin;
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_RED);
 			currentColorID = COLOR_RED;
@@ -182,7 +187,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
+        GUI.skin = orangePaintSkin;
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_BLACK);
 			currentColorID = COLOR_BLACK;
@@ -191,7 +197,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
+        GUI.skin = yellowPaintSkin;
+		if(GUI.Button(new Rect(MATBTNTHREE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_YELLOW);
 			currentColorID = COLOR_YELLOW;
@@ -200,7 +207,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
+        GUI.skin = bluePaintSkin;
+		if(GUI.Button(new Rect(MATBTNFOUR_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_GREY);
 			currentColorID = COLOR_GREY;
@@ -209,7 +217,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
+        GUI.skin = greenPaintSkin;
+		if(GUI.Button(new Rect(MATBTNFIVE_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_MAGENTA);
 			currentColorID = COLOR_MAGENTA;
@@ -218,7 +227,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
+        GUI.skin = purplePaintSkin;
+		if(GUI.Button(new Rect(MATBTNSIX_MARGIN_LEFT,MATBTN_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			changeMaterial(COLOR_WHITE);
 			currentColorID = COLOR_WHITE;
@@ -227,7 +237,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(paintSound);
             colorHasPainted = true;
 		}
-		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Prev"))
+        GUI.skin = leftBtnSkin;
+		if(GUI.Button(new Rect(PREVBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT)," "))
 		{
 			//prev model
 			if(currentCarID > 0 && currentCarID <= 7)
@@ -237,7 +248,8 @@ public class viewController : MonoBehaviour {
 			}
 			audio.PlayOneShot(clickSound);
 		}
-		if(GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT,PREVBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Next"))
+        GUI.skin = rightBtnSkin;
+        if (GUI.Button(new Rect(NEXTBTN_MARGIN_LEFT - 25, PREVBTN_MARGIN_UP, PREVBTN_WIDTH, PREVBTN_HEIGHT), " "))
 		{
 			//next model
 			if(currentCarID >= 0 && currentCarID < 7)
@@ -248,7 +260,8 @@ public class viewController : MonoBehaviour {
 			audio.PlayOneShot(clickSound);
 		}
 		//exitButton
-		if(GUI.Button(new Rect(screenWidth - 85,screenHeight-70,60,60),"ESC"))
+        GUI.skin = exitBtnSkin;
+		if(GUI.Button(new Rect(screenWidth - 80,screenHeight-80,70,70)," "))
 		{
 			Application.Quit();
 		}
@@ -601,16 +614,16 @@ public class viewController : MonoBehaviour {
 		MATBTNFIVE_MARGIN_LEFT = screenWidth/2 + 265;
 		MATBTNSIX_MARGIN_LEFT = screenWidth/2 + 475;
 		MATBTN_MARGIN_UP = screenHeight - 200;
-		BUTTON_WIDTH = 125;
+		BUTTON_WIDTH = 150;
 		BACKBTN_MARGIN_LEFT = 80;
 		CONFIRMBTN_MARGIN_LEFT = screenWidth - 235;
 		BACKBTN_MARGIN_UP = screenHeight - 185;
-		BACKBTN_WIDTH = 175;
-		BACKBTN_HEIGHT = 90;
+		BACKBTN_WIDTH = 195;
+		BACKBTN_HEIGHT = 110;
 		PREVBTN_MARGIN_LEFT = screenWidth/2 - 540;
 		PREVBTN_MARGIN_UP = screenHeight/2 - 95;
-		PREVBTN_WIDTH = 100;
-		PREVBTN_HEIGHT = 100;
+		PREVBTN_WIDTH = 120;
+		PREVBTN_HEIGHT = 120;
 		NEXTBTN_MARGIN_LEFT = screenWidth/2 + 465;
 	}
 	

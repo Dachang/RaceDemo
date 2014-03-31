@@ -22,9 +22,10 @@ public class returnButton : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = mySkin;
-        if (GUI.Button(new Rect(screenWidth - 60, screenHeight - 50, 40, 40), "ESC"))
+        if (GUI.Button(new Rect(screenWidth - 90, screenHeight - 90, 80, 80), " "))
         {
             Application.LoadLevel(0);
+            //Application.Quit();
         }
     }
 }

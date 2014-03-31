@@ -18,8 +18,10 @@ public class RaceSelectViewController : MonoBehaviour {
 	
 	private int RETURN_MARGIN_LEFT;
 	private int RETURN_MARGIN_UP;
-    private int RETURN_WIDTH = 200;
-	private int RETURN_HEIGHT = 90;
+    private int RETURN_WIDTH = 288;
+	private int RETURN_HEIGHT = 142;
+
+    public GUISkin returnBtnSkin;
 	
 	// Use this for initialization
 	void Start () 
@@ -34,6 +36,12 @@ public class RaceSelectViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
+        GUI.skin = returnBtnSkin;
+        if (GUI.Button(new Rect(RETURN_MARGIN_LEFT, RETURN_MARGIN_UP, RETURN_WIDTH, RETURN_HEIGHT), " "))
+        {
+            //return
+            Application.LoadLevel(0);
+        }
 		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Race1"))
 		{
@@ -44,11 +52,6 @@ public class RaceSelectViewController : MonoBehaviour {
 		{
 			//load Race 2
 			Application.LoadLevel("speedway");
-		}
-		if(GUI.Button(new Rect(RETURN_MARGIN_LEFT, RETURN_MARGIN_UP,RETURN_WIDTH,RETURN_HEIGHT), "Return"))
-		{
-			//return
-			Application.LoadLevel(0);
 		}
 		//exitButton
 		if(GUI.Button(new Rect(screenWidth - 60,screenHeight-50,40,40),"ESC"))
