@@ -104,6 +104,8 @@ public class viewController : MonoBehaviour {
     private int[] realIDArray = new int[30];
     //original color array
     private int[] originalColorArray = new int[30];
+    //GUI skin
+    public GUISkin confirmSkin, backSkin, resetSkin, exitSkin;
 	
 	void Start () 
 	{
@@ -142,16 +144,18 @@ public class viewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
+		//GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
-		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
+        GUI.skin = resetSkin;
+		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT + 40,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT)," "))
 		{
 			setResume();
 			setTransparent(currentCarID);
 			audio.PlayOneShot(clickSound);
 		}
 		//confirm button
-		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
+        GUI.skin = confirmSkin;
+		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), " "))
 		{
 			audio.PlayOneShot(clickSound);
 			if(cbWheel.isCompSetUp && cbBody.isCompSetUp && cbFrontWheel.isCompSetUp && cbBottom.isCompSetUp && cbPart5.isCompSetUp && cbPart6.isCompSetUp)
@@ -161,13 +165,15 @@ public class viewController : MonoBehaviour {
 			}
 		}
 		//return button
-		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Back"))
+        GUI.skin = backSkin;
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("SelectScene");
 		}
 		//exitButton
-		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
+        GUI.skin = exitSkin;
+		if(GUI.Button(new Rect(10,screenHeight-80,70,70)," "))
 		{
 			Application.Quit();
 		}

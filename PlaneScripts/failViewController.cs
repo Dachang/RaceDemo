@@ -3,6 +3,7 @@ using System.Collections;
 
 public class failViewController : MonoBehaviour {
 
+    public GUISkin refillSkin, continueSkin;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,13 +16,15 @@ public class failViewController : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.color = new Color(1.0f, 1.0f, 1.0f, .0f);
-        if (GUI.Button(new Rect(650,680,230,120), " "))
+        //GUI.color = new Color(1.0f, 1.0f, 1.0f, .0f);
+        GUI.skin = refillSkin;
+        if (GUI.Button(new Rect(630,670,303,158), " "))
         {
             //send mail again
             Application.LoadLevel("Mail");
         }
-        if (GUI.Button(new Rect(1055, 680, 230, 120), ""))
+        GUI.skin = continueSkin;
+        if (GUI.Button(new Rect(1035, 670, 303, 158), ""))
         {
             //goto fly scene
             Application.LoadLevel("FlyScene");

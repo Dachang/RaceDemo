@@ -108,7 +108,10 @@ public class paintViewController : MonoBehaviour {
     private int[] originalColorArray = new int[30];
     //original plane ID
     private int[] realIDArray = new int[30];
-	
+	//GUI skin
+    public GUISkin redSkin, orangeSkin, yellowSkin, blueSkin, greenSkin, purpleSkin, confirmSkin, resetSkin,
+        returnSkin, exitSkin;
+
 	void Start () 
 	{
 		screenWidth = Screen.width;
@@ -146,16 +149,18 @@ public class paintViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
+		//GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		//reset button
-		if(GUI.Button(new Rect(BACKBTN_MARGIN_LEFT,BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT),"Reset"))
-		{
-			setResume(currentCarID);
-			//setTransparent(currentCarID);
-			audio.PlayOneShot(clickSound);
-		}
+        GUI.skin = resetSkin;
+        if (GUI.Button(new Rect(BACKBTN_MARGIN_LEFT + 40, BACKBTN_MARGIN_UP, BACKBTN_WIDTH, BACKBTN_HEIGHT), " "))
+        {
+            setResume(currentCarID);
+            //setTransparent(currentCarID);
+            audio.PlayOneShot(clickSound);
+        }
 		//confirm button
-		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), "Done"))
+        GUI.skin = confirmSkin;
+		if(GUI.Button(new Rect(CONFIRMBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,BACKBTN_WIDTH,BACKBTN_HEIGHT), " "))
 		{
 			//load next scene & pass data
             captureScreenshot();
@@ -174,42 +179,48 @@ public class paintViewController : MonoBehaviour {
 			}
 		}
 		//Material buttons
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Red"))
+        GUI.skin = redSkin;
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_RED);
 			currentColorID = COLOR_RED;
 		}
-		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Black"))
+        GUI.skin = blueSkin;
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNONE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_GREY);
 			currentColorID = COLOR_GREY;
 		}
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Yellow"))
+        GUI.skin = orangeSkin;
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_BLACK);
 			currentColorID = COLOR_BLACK;
 		}
-		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Grey"))
+        GUI.skin = greenSkin;
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTWO_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_MAGENTA);
 			currentColorID = COLOR_MAGENTA;
 		}
-		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"Magenta"))
+        GUI.skin = yellowSkin;
+		if(GUI.Button(new Rect(MATBTNONE_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
 			changeMaterial(COLOR_YELLOW);
 			currentColorID = COLOR_YELLOW;
 		}
-		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH),"White"))
+        GUI.skin = purpleSkin;
+		if(GUI.Button(new Rect(MATBTNTWO_MARGIN_LEFT,MATBTNTHREE_MARGIN_UP, BUTTON_WIDTH, BUTTON_WIDTH)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(successSound);
@@ -217,14 +228,16 @@ public class paintViewController : MonoBehaviour {
 			currentColorID = COLOR_WHITE;
 		}
 		//return button
-		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT),"Back"))
+        GUI.skin = returnSkin;
+		if(GUI.Button(new Rect(RETURNBTN_MARGIN_LEFT, BACKBTN_MARGIN_UP,PREVBTN_WIDTH,PREVBTN_HEIGHT)," "))
 		{
 			audio.PlayOneShot(clickSound);
 			audio.PlayOneShot(clickSound);
 			Application.LoadLevel("Scene1");
 		}
 		//exitButton
-		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
+        GUI.skin = exitSkin;
+		if(GUI.Button(new Rect(2,screenHeight-92,90,90)," "))
 		{
 			Application.Quit();
 		}
@@ -466,7 +479,7 @@ public class paintViewController : MonoBehaviour {
 		MATBTNONE_MARGIN_UP = screenHeight/2 - 260;
 		MATBTNTWO_MARGIN_UP = screenHeight/2 - 50;
 		MATBTNTHREE_MARGIN_UP = screenHeight/2 + 170;
-		BUTTON_WIDTH = 140;
+		BUTTON_WIDTH = 180;
 		BACKBTN_MARGIN_LEFT = screenWidth/2 + 368;
 		CONFIRMBTN_MARGIN_LEFT = screenWidth - 247;
 		BACKBTN_MARGIN_UP = screenHeight - 150;

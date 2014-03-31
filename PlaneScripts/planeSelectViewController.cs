@@ -37,7 +37,9 @@ public class planeSelectViewController : MonoBehaviour {
     public Texture pageTwoTexture;
     public Texture pageThreeTexture;
     public Texture pageFourTexture;
-	
+	//GUI skin
+    public GUISkin leftSkin, rightSkin, exitSkin;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -54,6 +56,33 @@ public class planeSelectViewController : MonoBehaviour {
 	
 	void OnGUI()
 	{
+        //switch button
+        GUI.skin = leftSkin;
+        if (GUI.Button(new Rect(SWITCH_BUTTON_LEFT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), "<"))
+        {
+            audio.PlayOneShot(clickSound);
+            //prev
+            if (pageTag > 0 && pageTag <= 3)
+            {
+                pageTag--;
+            }
+        }
+        GUI.skin = rightSkin;
+        if (GUI.Button(new Rect(SWITCH_BUTTON_RIGHT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), ">"))
+        {
+            audio.PlayOneShot(clickSound);
+            //next
+            if (pageTag >= 0 && pageTag < 3)
+            {
+                pageTag++;
+            }
+        }
+        //exitButton
+        GUI.skin = exitSkin;
+        if (GUI.Button(new Rect(2, screenHeight - 92, 90, 90), " "))
+        {
+            Application.Quit();
+        }
 		GUI.color = new Color(1.0f,1.0f,1.0f,.0f);
 		if(GUI.Button(new Rect(RACEBTN_ONE_MARGIN_LEFT, RACEBTN_ONE_MARGIN_UP,RACEBTN_ONE_WIDTH,RACEBTN_ONE_HEIGHT), "Plane1"))
 		{
@@ -133,30 +162,6 @@ public class planeSelectViewController : MonoBehaviour {
                 PlayerPrefs.SetInt("planeID", 23);
 			Application.LoadLevel("Scene1");
 		}
-        //switch button
-        if (GUI.Button(new Rect(SWITCH_BUTTON_LEFT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), "<"))
-        {
-            audio.PlayOneShot(clickSound);
-            //prev
-            if (pageTag > 0 && pageTag <= 3)
-            {
-                pageTag--;
-            }
-        }
-        if (GUI.Button(new Rect(SWITCH_BUTTON_RIGHT_MARGIN, SWITCH_BUTTON_MARGIN_HEIGHT, SWITCH_BUTTON_WIDTH, SWITCH_BUTTON_HEIGHT), ">"))
-        {
-            audio.PlayOneShot(clickSound);
-            //next
-            if (pageTag >= 0 && pageTag < 3)
-            {
-                pageTag++;
-            }
-        }
-		//exitButton
-		if(GUI.Button(new Rect(10,screenHeight-60,50,50),"ESC"))
-		{
-			Application.Quit();
-		}
 	}
 
     Texture changeUIBG(int pageNum)
@@ -197,10 +202,10 @@ public class planeSelectViewController : MonoBehaviour {
 		RETURN_MARGIN_LEFT = screenWidth/2 - RETURN_WIDTH/2;
 		RETURN_MARGIN_UP = screenHeight - RETURN_HEIGHT - 30;
 
-        SWITCH_BUTTON_WIDTH = 160;
-        SWITCH_BUTTON_HEIGHT = 160;
+        SWITCH_BUTTON_WIDTH = 200;
+        SWITCH_BUTTON_HEIGHT = 200;
         SWITCH_BUTTON_LEFT_MARGIN = 70;
         SWITCH_BUTTON_RIGHT_MARGIN = screenWidth - SWITCH_BUTTON_WIDTH - 70;
-        SWITCH_BUTTON_MARGIN_HEIGHT = screenHeight / 2 - SWITCH_BUTTON_HEIGHT / 2 + 40;
+        SWITCH_BUTTON_MARGIN_HEIGHT = screenHeight / 2 - SWITCH_BUTTON_HEIGHT / 2 + 55;
 	}
 }
