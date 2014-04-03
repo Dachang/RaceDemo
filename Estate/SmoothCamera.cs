@@ -37,42 +37,33 @@ public class SmoothCamera : MonoBehaviour
         if (rigidbody)
             rigidbody.freezeRotation = true;
 
-        buildingBG = GameObject.Find("factory_area");
-        currentBuilding = GameObject.Find("building_B");
+        buildingBG = GameObject.Find("moxing_0402");
+        currentBuilding = GameObject.Find("buildingB");
         bScript = (BuildingBehaviour)currentBuilding.GetComponent(typeof(BuildingBehaviour));
-        uiBG = GameObject.Find("UIBG");
+        //uiBG = GameObject.Find("UIBG");
     }
 
     void Update()
     {
-        Debug.Log(Camera.main.transform.position.ToString() + Camera.main.transform.rotation.ToString() +
-            Camera.main.fieldOfView.ToString());
-        if (GameObject.Find("fake_building_B"))
+        if (target && cameraTriggered && pxsLeapInput.m_Frame.Hands.Count != 0)
         {
-            targetBuilding = GameObject.Find("fake_building_B");
-        }
-
-        if (target && Input.GetMouseButton(0) && cameraTriggered)
-        {
-            x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
-            y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
+            x += pxsLeapInput.GetHandAxisRaw("Horizontal") * xSpeed * Time.deltaTime;
+            y -= pxsLeapInput.Hand.SphereCenter.y * -0.05f * ySpeed * Time.deltaTime;
 
             y = ClampAngle(y, yMinLimit, yMaxLimit);
 
             transform.rotation = Quaternion.Euler(y, x, 0);
             transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(0.0f, 0.0f, -distance) + target.position;
         }
-
-        switchTarget();
         checkScale();
     }
 
     void LateUpdate()
     {
-        if (target && Input.GetMouseButton(0) && cameraTriggered)
+        if (target && cameraTriggered && pxsLeapInput.m_Frame.Hands.Count != 0)
         {
-            x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-            y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            x += pxsLeapInput.GetHandAxisRaw("Horizontal") * xSpeed * 0.02f;
+            y -= pxsLeapInput.GetHandAxisRaw("Vertical") * ySpeed * 0.02f;
 
             y = ClampAngle(y, yMinLimit, yMaxLimit);
 
