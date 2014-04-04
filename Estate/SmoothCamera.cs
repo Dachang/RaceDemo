@@ -28,6 +28,11 @@ public class SmoothCamera : MonoBehaviour
 
     private GameObject uiBG;
 
+    private float currentHandPosX, currentHandPosY, lastHandPosX, lastHandPosY;
+    private float MOUSE_SMOOTH_FACTOR_X = 0.5f;
+    private float MOUSE_SMOOTH_FACTOR_Y = 0.5f;
+    private float HAND_POS_SCALE = 20f;
+
     void Start()
     {
         var angles = transform.eulerAngles;
@@ -45,27 +50,35 @@ public class SmoothCamera : MonoBehaviour
 
     void Update()
     {
-        if (target && cameraTriggered && pxsLeapInput.m_Frame.Hands.Count != 0)
+        currentHandPosX = pxsLeapInput.m_Frame.Hands[0].StabilizedPalmPosition.x;
+        currentHandPosY = pxsLeapInput.m_Frame.Hands[0].StabilizedPalmPosition.y * HAND_POS_SCALE;
+        int fingerCount = pxsLeapInput.m_Frame.Fingers.Count;
+        Debug.Log(fingerCount);
+        if (target && cameraTriggered && fingerCount > 2)
         {
-            x += pxsLeapInput.GetHandAxisRaw("Horizontal") * xSpeed * Time.deltaTime;
-            y -= pxsLeapInput.Hand.SphereCenter.y * -0.05f * ySpeed * Time.deltaTime;
+            x += (currentHandPosX - lastHandPosX) * xSpeed * Time.deltaTime * MOUSE_SMOOTH_FACTOR_X;
+            y -= (currentHandPosY - lastHandPosY) * -0.05f * ySpeed * Time.deltaTime;
 
             y = ClampAngle(y, yMinLimit, yMaxLimit);
 
             transform.rotation = Quaternion.Euler(y, x, 0);
             transform.position = (Quaternion.Euler(y, x, 0)) * new Vector3(0.0f, 0.0f, -distance) + target.position;
         }
-        checkScale();
+        lastHandPosX = currentHandPosX;
+        lastHandPosY = currentHandPosY;
+        //checkScale();
     }
 
     void LateUpdate()
     {
-        if (target && cameraTriggered && pxsLeapInput.m_Frame.Hands.Count != 0)
+        float tempBufferX = 0; 
+        float tempBufferY = 0;
+        if (target && cameraTriggered)
         {
-            x += pxsLeapInput.GetHandAxisRaw("Horizontal") * xSpeed * 0.02f;
-            y -= pxsLeapInput.GetHandAxisRaw("Vertical") * ySpeed * 0.02f;
+            tempBufferX += pxsLeapInput.GetHandAxisRaw("Horizontal") * xSpeed * 0.02f;
+            tempBufferY -= pxsLeapInput.GetHandAxisRaw("Vertical") * ySpeed * 0.02f;
 
-            y = ClampAngle(y, yMinLimit, yMaxLimit);
+            tempBufferY = ClampAngle(tempBufferY, yMinLimit, yMaxLimit);
 
             var rotation = Quaternion.Euler(y, x, 0);
             var position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
