@@ -3,6 +3,7 @@ using System.Collections;
 //default resolution is 1920x1080
 public class viewController : MonoBehaviour 
 {
+    public TOD_Sky sky;
     //GUI Textures
     public Texture2D tabbarBG, screenShot1, screenShot2, screenShot3, screenShot4,
                      screenShot5, screenShot6, screenShot7, cursorImage, renderImage1, closeBtnImage;
@@ -29,6 +30,8 @@ public class viewController : MonoBehaviour
     private int SPIN_COUNT = 19;
     private bool isMouseSpinning = false;
     private int mouseState = 0;
+
+    private float CHANGE_TIME_DURATION = 0.05f;
 	
 	void Start () 
     {
@@ -54,6 +57,8 @@ public class viewController : MonoBehaviour
         lastFingerPosX = fingerPosX;
         lastFingerPosY = fingerPosY;
         calibrateMouse();
+        checkLeftHandFingerCount();
+        changeTimeThroughGesture();
 	}
 
     void OnGUI()
@@ -82,7 +87,7 @@ public class viewController : MonoBehaviour
                 closeBtnImage.height * resizeFactor), closeBtnImage, ScaleMode.StretchToFill, true, 0);
         }
         //draw mouse
-        if(fingerCount == 1 && isMouseSpinning == false) 
+        if(fingerCount == 1 && isMouseSpinning == false && pxsLeapInput.isCircling == false) 
             GUI.DrawTexture(cursorCorrdinate, cursorImage, ScaleMode.StretchToFill, true, 0);
         //draw spinning mouse
         if (isMouseSpinning)
@@ -139,6 +144,27 @@ public class viewController : MonoBehaviour
         else if (cursorCorrdinate.x > Screen.width - 50f) cursorCorrdinate.x = Screen.width - 50f;
         if (cursorCorrdinate.y < 0) cursorCorrdinate.y = 0;
         else if (cursorCorrdinate.y > Screen.height - 50f) cursorCorrdinate.y = Screen.height - 50f;
+    }
+
+    void checkLeftHandFingerCount()
+    {
+        int lhFingers = pxsLeapInput.getLeftHandFingerCount();
+        switch (lhFingers)
+        {
+            case 0:
+                break;
+            case 1:
+                renderImageTrigger = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    void changeTimeThroughGesture()
+    {
+        if (pxsLeapInput.m_Frame.Hands[0].Fingers.Count == 1)
+            sky.Cycle.Hour += pxsLeapInput.getLeapGesture() * CHANGE_TIME_DURATION;
     }
 
     // A function that helps the increase slower
