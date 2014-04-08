@@ -20,7 +20,7 @@ public class SmoothCamera : MonoBehaviour
     private GameObject currentBuilding;
     private BuildingBehaviour bScript;
 
-    private float camScaleFactor = 3f;
+    private float camScaleFactor = 0.9f;
 
     private bool cameraTriggered = true;
     private bool cameraAdjusted = false;
@@ -28,7 +28,7 @@ public class SmoothCamera : MonoBehaviour
 
     private GameObject uiBG;
 
-    private float currentHandPosX, currentHandPosY, lastHandPosX, lastHandPosY;
+    private float currentHandPosX, currentHandPosY, currentHandPosZ, lastHandPosX, lastHandPosY, lastHandPosZ;
     private float MOUSE_SMOOTH_FACTOR_X = 0.5f;
     private float MOUSE_SMOOTH_FACTOR_Y = 0.5f;
     private float HAND_POS_SCALE = 20f;
@@ -53,7 +53,6 @@ public class SmoothCamera : MonoBehaviour
         currentHandPosX = pxsLeapInput.m_Frame.Hands[0].StabilizedPalmPosition.x;
         currentHandPosY = pxsLeapInput.m_Frame.Hands[0].StabilizedPalmPosition.y * HAND_POS_SCALE;
         int fingerCount = pxsLeapInput.m_Frame.Fingers.Count;
-        Debug.Log(fingerCount);
         if (target && cameraTriggered && fingerCount > 2)
         {
             x += (currentHandPosX - lastHandPosX) * xSpeed * Time.deltaTime * MOUSE_SMOOTH_FACTOR_X;
@@ -66,7 +65,7 @@ public class SmoothCamera : MonoBehaviour
         }
         lastHandPosX = currentHandPosX;
         lastHandPosY = currentHandPosY;
-        //checkScale();
+        checkScale();
     }
 
     void LateUpdate()
@@ -113,14 +112,17 @@ public class SmoothCamera : MonoBehaviour
 
     void checkScale()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraTriggered && Camera.main.fieldOfView <= 60.0f)
+        currentHandPosZ = pxsLeapInput.m_Frame.Hands[0].SphereCenter.z;
+        float deltaValue = currentHandPosZ - lastHandPosZ;
+        if (deltaValue < -4f && cameraTriggered && Camera.main.fieldOfView <= 60.0f)
         {
             Camera.main.fieldOfView += camScaleFactor;
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && cameraTriggered && Camera.main.fieldOfView >= 30.0f)
+        if (deltaValue > 4f && cameraTriggered && Camera.main.fieldOfView >= 30.0f)
         {
             Camera.main.fieldOfView -= camScaleFactor;
         }
+        lastHandPosZ = currentHandPosZ;
     }
 
     static float ClampAngle(float angle, float min, float max)
